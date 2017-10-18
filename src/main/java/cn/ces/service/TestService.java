@@ -15,7 +15,7 @@ public class TestService {
         this.coursewareMapper = coursewareMapper;
     }
 
-    public Courseware SelectAll(Integer id){
-        return coursewareMapper.selectByPrimaryKey(id);
+    public Courseware selectByPrimaryKey(Integer cwid){
+        return coursewareMapper.selectByPrimaryKey(cwid);
     }
 }

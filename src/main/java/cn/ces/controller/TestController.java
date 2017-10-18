@@ -20,7 +20,7 @@ public class TestController {
 
     @GetMapping(value = "/test")
     public String Test(ModelMap map){
-        Courseware courseware = testService.SelectAll(14);
+        Courseware courseware = testService.selectByPrimaryKey(14);
         map.addAttribute("test",courseware);
         return "demo";
     }
