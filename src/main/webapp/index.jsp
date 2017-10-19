@@ -12,7 +12,7 @@
 </head>
 <body>
 <h2>Hello World!</h2>
-<form action="/test">
+<form action="/ComprehensiveEvaluationSystem/test">
     <button type="submit" >跳转</button>
 </form>
 </body>
