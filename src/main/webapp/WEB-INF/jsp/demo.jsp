@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<h1>${test.cwid}</h1>
+<h1>${test.name}</h1>
 </body>
 </html>

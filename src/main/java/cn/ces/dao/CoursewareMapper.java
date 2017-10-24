@@ -1,6 +1,7 @@
 package cn.ces.dao;
 
 import cn.ces.entity.Courseware;
+import org.apache.ibatis.annotations.Select;
 
 public interface CoursewareMapper {
     int deleteByPrimaryKey(Integer cwid);
@@ -14,4 +15,5 @@ public interface CoursewareMapper {
     int updateByPrimaryKeySelective(Courseware record);
 
     int updateByPrimaryKey(Courseware record);
+
 }
