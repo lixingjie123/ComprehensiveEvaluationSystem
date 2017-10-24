@@ -286,5 +286,6 @@
         </plugin>
       </plugins>
     <finalName>ComprehensiveEvaluationSystem</finalName>
+    <defaultGoal>compile</defaultGoal>
   </build>
 </project>
