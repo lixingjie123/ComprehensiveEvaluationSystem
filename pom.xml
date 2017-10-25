@@ -258,5 +258,6 @@
         </resource>
       </resources>
     <finalName>ComprehensiveEvaluationSystem</finalName>
+    <defaultGoal>compile</defaultGoal>
   </build>
 </project>
