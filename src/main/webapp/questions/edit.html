@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/style.css" />
+    <script type="text/javascript" src="../Js/jquery.js"></script>
+    <script type="text/javascript" src="../Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="../Js/bootstrap.js"></script>
+    <script type="text/javascript" src="../Js/ckform.js"></script>
+    <script type="text/javascript" src="../Js/common.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../css/icon.css">
+    <link rel="stylesheet" type="text/css" href="../css/demo.css">
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<form action="index.html" method="post" class="definewidth m20">
+<input type="hidden" name="id" value="{$menu.id}" />
+<table class="table table-bordered table-hover m10">
+    <table id="tt" style="width:600px;height:400px"></table>
+</table>
+</form>
+</body>
+</html>
+<script>
+    $(function () {       
+		$('#backid').click(function(){
+				window.location.href="index.html";
+		 });
+
+    });
+    $('#tt').treegrid({
+        url:'../data/treegrid_data1.json',
+        idField:'id',
+        treeField:'name',
+        checked:"true",
+        selectOnCheck:true,
+        pagination:true,
+        columns:[[
+            {title:'id',field:'id',width:180},
+            {title:'指标名',field:'name',width:180},
+            {field:'size',title:'权重',width:60,align:'right'},
+            {field:'type',title:'状态',width:80}
+        ]]
+    });
+    function show(checkid){
+        var s = '#check_'+checkid;
+        //alert( $(s).attr("id"));
+        // alert($(s)[0].checked);
+        /*选子节点*/
+        var nodes = $("#test").treegrid("getChildren",checkid);
+        for(i=0;i<nodes.length;i++){
+            $(('#check_'+nodes[i].id))[0].checked = $(s)[0].checked;
+
+        }
+        //选上级节点
+        if(!$(s)[0].checked){
+            var parent = $("#test").treegrid("getParent",checkid);
+            $(('#check_'+parent.id))[0].checked  = false;
+            while(parent){
+                parent = $("#test").treegrid("getParent",parent.id);
+                $(('#check_'+parent.id))[0].checked  = false;
+            }
+        }else{
+            var parent = $("#test").treegrid("getParent",checkid);
+            var flag= true;
+            var sons = parent.sondata.split(',');
+            for(j=0;j<sons.length;j++){
+                if(!$(('#check_'+sons[j]))[0].checked){
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag)
+                $(('#check_'+parent.id))[0].checked  = true;
+            while(flag){
+                parent = $("#test").treegrid("getParent",parent.id);
+                if(parent){
+                    sons = parent.sondata.split(',');
+                    for(j=0;j<sons.length;j++){
+                        if(!$(('#check_'+sons[j]))[0].checked){
+                            flag = false;
+                            break;
+                        }
+                    }
+                }
+                if(flag)
+                    $(('#check_'+parent.id))[0].checked  = true;
+            }
+        }
+    }
+
+    function formatcheckbox(val,row){
+
+        return "<input type='checkbox' onclick=show('"+row.id+"')id='check_"+row.id+"' "+(row.checked?'checked':'')+"/>" + row.name;
+    }
+    function init(){
+        //去掉结点前面的文件及文件夹小图标
+        $(".tree-icon,.tree-file").removeClass("tree-icon tree-file");
+        $(".tree-icon,.tree-folder").removeClass("tree-icon tree-folder tree-folder-open tree-folder-closed");
+    }
+
+    //获取选中的结点
+    function getSelected(){
+        var idList = "";
+        $("input:checked").each(function(){
+            var id = $(this).attr("id");
+
+            if(id.indexOf('check_type')== -1 && id.indexOf("check_")>-1)
+                idList += id.replace("check_",'')+',';
+
+        })
+        alert(idList);
+    }
+
+
+</script>
