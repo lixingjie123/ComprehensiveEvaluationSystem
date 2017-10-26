@@ -7,7 +7,7 @@ import com.mybatis.enhance.store.constants.MySqlTypeConstant;
 
 import java.util.Date;
 
-@Table(name = "Test")
+@Table(name = "test")
 public class Test extends BaseModel {
 
     private static final long serialVersionUID = 5199200306752426433L;
@@ -15,8 +15,11 @@ public class Test extends BaseModel {
     @Column(name = "id",type = MySqlTypeConstant.INT,length = 11,isKey = true,isAutoIncrement = true)
     private Integer	id;
 
-    @Column(name = "name",type = MySqlTypeConstant.VARCHAR,length = 111)
+    @Column(name = "name", type = MySqlTypeConstant.VARCHAR, length = 111)
     private String	name;
+
+    @Column(name = "cid",type = MySqlTypeConstant.INT,length = 111)
+    private Integer	cid;
 
     @Column(name = "description",type = MySqlTypeConstant.TEXT)
     private String	description;
@@ -73,6 +76,14 @@ public class Test extends BaseModel {
         return update_time;
     }
 
+    public Integer getCid() {
+        return cid;
+    }
+
+    public void setCid(Integer cid) {
+        this.cid = cid;
+    }
+
     public void setUpdate_time(Date update_time) {
         this.update_time = update_time;
     }
@@ -100,4 +111,6 @@ public class Test extends BaseModel {
     public void setDekes(Double dekes) {
         this.dekes = dekes;
     }*/
+
+
 }

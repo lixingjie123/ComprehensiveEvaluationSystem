@@ -1,16 +1,49 @@
 package cn.ces.entity;
 
+import cn.ces.dao.UsersDao;
 import com.mybatis.enhance.store.annotation.Column;
 import com.mybatis.enhance.store.annotation.Table;
 import com.mybatis.enhance.store.command.BaseModel;
 import com.mybatis.enhance.store.constants.MySqlTypeConstant;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@Table(name="role")
-public class role extends BaseModel{
-	@Column(name = "role_id",type = MySqlTypeConstant.INT,length = 11,isKey = true,isAutoIncrement = true)
-    private Integer	role_id;
+import java.util.List;
 
-    @Column(name = "role_name",type = MySqlTypeConstant.VARCHAR,length = 50)
-    private String	role_name;
+@Table(name="Role")
+public class Role extends BaseModel{
+	@Column(name = "rid",type = MySqlTypeConstant.INT,length = 11,isKey = true,isAutoIncrement = true)
+    private Integer	rid;
 
+    @Column(name = "rname",type = MySqlTypeConstant.VARCHAR,length = 50)
+    private String rname;
+
+    private List<Users> usersList;
+
+    private final UsersDao usersDao;
+
+    @Autowired
+    public Role(UsersDao usersDao) {
+        this.usersDao = usersDao;
+    }
+
+    public List<Users> getUsersList() {
+        usersList = usersDao.selectUsersByrid(rid);
+        return usersList;
+    }
+
+    public Integer getRid() {
+        return rid;
+    }
+
+    public void setRid(Integer rid) {
+        this.rid = rid;
+    }
+
+    public String getRname() {
+        return rname;
+    }
+
+    public void setRname(String rname) {
+        this.rname = rname;
+    }
 }

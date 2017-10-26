@@ -10,17 +10,15 @@ import com.mybatis.enhance.store.constants.MySqlTypeConstant;
 
 @Table(name="users")
 public class Users extends BaseModel {
-	
 
+		@Column(name = "uid",type = MySqlTypeConstant.INT,length = 11,isKey = true,isAutoIncrement = true)
+	    private Integer	uid;
 
-		@Column(name = "user_id",type = MySqlTypeConstant.INT,length = 11,isKey = true,isAutoIncrement = true)
-	    private Integer	user_id;
-
-	    @Column(name = "user_name",type = MySqlTypeConstant.VARCHAR,length = 50)
-	    private String	user_name;
+	    @Column(name = "uname",type = MySqlTypeConstant.VARCHAR,length = 50)
+	    private String	uname;
 	    
-	    @Column(name = "password",type = MySqlTypeConstant.VARCHAR,length = 50)
-	    private String	password;
+	    @Column(name = "pwd",type = MySqlTypeConstant.VARCHAR,length = 50)
+	    private String	pwd;
 
 	    @Column(name = "sex",type = MySqlTypeConstant.VARCHAR,length = 50)
 	    private String	sex; 
@@ -28,58 +26,54 @@ public class Users extends BaseModel {
 	    @Column(name = "phone",type = MySqlTypeConstant.VARCHAR,length = 50)
 	    private String	phone; 
 	    
-	    @Column(name = "role_id",type = MySqlTypeConstant.VARCHAR,length = 50)
-	    private String	role_id;
+	    @Column(name = "rid",type = MySqlTypeConstant.VARCHAR,length = 50)
+	    private String	rid;
 
-		public Integer getUser_id() {
-			return user_id;
-		}
+	public Integer getUid() {
+		return uid;
+	}
 
-		public void setUser_id(Integer user_id) {
-			this.user_id = user_id;
-		}
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
 
-		public String getUser_name() {
-			return user_name;
-		}
+	public String getUname() {
+		return uname;
+	}
 
-		public void setUser_name(String user_name) {
-			this.user_name = user_name;
-		}
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
 
+	public String getPwd() {
+		return pwd;
+	}
 
-		public String getPassword() {
-			return password;
-		}
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
 
-		public void setPassword(String password) {
-			this.password = password;
-		}
+	public String getSex() {
+		return sex;
+	}
 
-		public String getSex() {
-			return sex;
-		}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 
-		public void setSex(String sex) {
-			this.sex = sex;
-		}
+	public String getPhone() {
+		return phone;
+	}
 
-		public String getPhone() {
-			return phone;
-		}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-		public void setPhone(String phone) {
-			this.phone = phone;
-		}
+	public String getRid() {
+		return rid;
+	}
 
-		public String getRole_id() {
-			return role_id;
-		}
-
-		public void setRole_id(String role_id) {
-			this.role_id = role_id;
-		}
-
-		 
-
+	public void setRid(String rid) {
+		this.rid = rid;
+	}
 }

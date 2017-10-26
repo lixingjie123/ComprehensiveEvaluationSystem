@@ -1,5 +1,5 @@
 package cn.ces.controller;
-import cn.ces.entity.Courseware;
+import cn.ces.entity.Department;
 import cn.ces.entity.Test;
 import cn.ces.service.TestService;
 import com.mybatis.enhance.store.manager.common.BaseMysqlCRUDManager;
@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import java.util.List;
 
 @Controller
 @SessionAttributes({"Test"})
@@ -29,10 +31,18 @@ public class TestController {
         return "demo";
     }
 */
-    @GetMapping(value = "/test2")
+  /*  @GetMapping(value = "/test2")
     public String Test2(ModelMap map){
         Test test = testService.selectAll();
         map.addAttribute("test",test);
+        return "demo";
+    }
+    */
+
+    @GetMapping(value = "/test2")
+    public String Test2(ModelMap map){
+        List<Department> departments = testService.selectDeptAll();
+        map.addAttribute("tests",departments.get(0).getLeaderList());
         return "demo";
     }
 }

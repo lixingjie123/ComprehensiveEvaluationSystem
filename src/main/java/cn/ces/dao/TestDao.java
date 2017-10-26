@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Select;
 /**
  * Created with IntelliJ IDEA.
  * Description:
- * User: lixingjie
+ * Users: lixingjie
  * Date: 2017-10-23
  * Time: 21:55
  */

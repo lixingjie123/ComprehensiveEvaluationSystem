@@ -1,33 +1,33 @@
 package cn.ces.service;
 
-import cn.ces.dao.CoursewareMapper;
+import cn.ces.dao.DepartmentDao;
 import cn.ces.dao.TestDao;
-import cn.ces.entity.Courseware;
+import cn.ces.entity.Department;
 import cn.ces.entity.Test;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
 public class TestService {
-    private final CoursewareMapper coursewareMapper;
     private final TestDao testDao;
+    private final DepartmentDao departmentDao;
+
 
     @Autowired
-    public TestService(CoursewareMapper coursewareMapper, TestDao testDao) {
-        this.coursewareMapper = coursewareMapper;
+    public TestService(TestDao testDao, DepartmentDao departmentDao) {
         this.testDao = testDao;
-    }
-
-    public Courseware selectByPrimaryKey(Integer cwid){
-        return coursewareMapper.selectByPrimaryKey(cwid);
-    }
-
-    public Courseware selectByCid(Integer cwid){
-        return coursewareMapper.selectByPrimaryKey(cwid);
+        this.departmentDao = departmentDao;
     }
 
     public Test selectAll(){
         return testDao.selectAll();
+    }
+
+    public List<Department> selectDeptAll(){
+        return departmentDao.selectDeptAll();
     }
 }
