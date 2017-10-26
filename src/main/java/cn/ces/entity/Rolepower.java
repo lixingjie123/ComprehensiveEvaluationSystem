@@ -5,7 +5,7 @@ import com.mybatis.enhance.store.annotation.Table;
 import com.mybatis.enhance.store.command.BaseModel;
 import com.mybatis.enhance.store.constants.MySqlTypeConstant;
 
-@Table(name="Rolepower")
+@Table(name="rolepower")
 public class Rolepower extends BaseModel {
 
 	@Column(name = "rpid",type = MySqlTypeConstant.INT,length = 11,isKey = true,isAutoIncrement = true)

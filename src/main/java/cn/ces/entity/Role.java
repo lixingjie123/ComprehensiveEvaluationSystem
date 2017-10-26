@@ -9,8 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@Table(name="Role")
+@Table(name="role")
 public class Role extends BaseModel{
+
 	@Column(name = "rid",type = MySqlTypeConstant.INT,length = 11,isKey = true,isAutoIncrement = true)
     private Integer	rid;
 
@@ -19,16 +20,12 @@ public class Role extends BaseModel{
 
     private List<Users> usersList;
 
-    private final UsersDao usersDao;
-
-    @Autowired
-    public Role(UsersDao usersDao) {
-        this.usersDao = usersDao;
+    public List<Users> getUsersList() {
+        return usersList;
     }
 
-    public List<Users> getUsersList() {
-        usersList = usersDao.selectUsersByrid(rid);
-        return usersList;
+    public void setUsersList(List<Users> usersList) {
+        this.usersList = usersList;
     }
 
     public Integer getRid() {

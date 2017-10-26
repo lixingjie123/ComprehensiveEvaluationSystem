@@ -16,5 +16,5 @@ import java.util.List;
 public interface DepartmentDao {
 
     @Select("select * from department")
-    List<Department> selectDeptAll();
+    Department selectDeptAll();
 }

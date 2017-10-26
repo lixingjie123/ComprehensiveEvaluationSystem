@@ -27,7 +27,7 @@ public class TestService {
         return testDao.selectAll();
     }
 
-    public List<Department> selectDeptAll(){
+    public Department selectDeptAll(){
         return departmentDao.selectDeptAll();
     }
 }

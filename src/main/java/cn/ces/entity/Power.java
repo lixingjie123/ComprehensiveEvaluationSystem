@@ -4,7 +4,7 @@ import com.mybatis.enhance.store.annotation.Column;
 import com.mybatis.enhance.store.annotation.Table;
 import com.mybatis.enhance.store.command.BaseModel;
 import com.mybatis.enhance.store.constants.MySqlTypeConstant;
-@Table(name="Power")
+@Table(name="power")
 public class Power extends BaseModel{
 	@Column(name = "pid",type = MySqlTypeConstant.INT,length = 11,isKey = true,isAutoIncrement = true)
     private Integer	pid;

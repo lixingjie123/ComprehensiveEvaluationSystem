@@ -41,8 +41,8 @@ public class TestController {
 
     @GetMapping(value = "/test2")
     public String Test2(ModelMap map){
-        List<Department> departments = testService.selectDeptAll();
-        map.addAttribute("tests",departments.get(0).getLeaderList());
+       Department departments = testService.selectDeptAll();
+        map.addAttribute("tests",departments);
         return "demo";
     }
 }
