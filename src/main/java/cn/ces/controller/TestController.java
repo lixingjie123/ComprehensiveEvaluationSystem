@@ -41,7 +41,7 @@ public class TestController {
 
     @GetMapping(value = "/test2")
     public String Test2(ModelMap map){
-       Department departments = testService.selectDeptAll();
+       Department departments = testService.selectDeptAll(1);
         map.addAttribute("tests",departments);
         return "demo";
     }

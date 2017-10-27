@@ -1,6 +1,7 @@
 package cn.ces.dao;
 
 import cn.ces.entity.Department;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,6 +16,6 @@ import java.util.List;
  */
 public interface DepartmentDao {
 
-    @Select("select * from department")
-    Department selectDeptAll();
+    @Select("select * from department where dept_id = #{deptId}")
+    Department selectDeptAll(@Param("deptId")Integer deptId);
 }
