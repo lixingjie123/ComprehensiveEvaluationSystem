@@ -5,6 +5,8 @@ import com.mybatis.enhance.store.annotation.Table;
 import com.mybatis.enhance.store.command.BaseModel;
 import com.mybatis.enhance.store.constants.MySqlTypeConstant;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * Description:
@@ -24,6 +26,16 @@ public class Questionnaire extends BaseModel{
 
     @Column(name = "type" ,type = MySqlTypeConstant.VARCHAR,length = 50)
     private String type;
+
+    private List<Index> indexList;
+
+    public List<Index> getIndexList() {
+        return indexList;
+    }
+
+    public void setIndexList(List<Index> indexList) {
+        this.indexList = indexList;
+    }
 
     public Integer getQid() {
         return qid;

@@ -5,6 +5,8 @@ import com.mybatis.enhance.store.annotation.Table;
 import com.mybatis.enhance.store.command.BaseModel;
 import com.mybatis.enhance.store.constants.MySqlTypeConstant;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * Description:
@@ -30,6 +32,16 @@ public class Index extends BaseModel {
 
     @Column(name = "weight",type = MySqlTypeConstant.DOUBLE,length = 10,decimalLength = 2)
     private Double weight;
+
+    private List<Option> optionList;
+
+    public List<Option> getOptionList() {
+        return optionList;
+    }
+
+    public void setOptionList(List<Option> optionList) {
+        this.optionList = optionList;
+    }
 
     public Double getWeight() {
         return weight;
