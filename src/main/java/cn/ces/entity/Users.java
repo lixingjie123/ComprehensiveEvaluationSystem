@@ -20,10 +20,10 @@ public class Users extends BaseModel {
 	    @Column(name = "pwd",type = MySqlTypeConstant.VARCHAR,length = 50)
 	    private String	pwd;
 
-	    @Column(name = "sex",type = MySqlTypeConstant.VARCHAR,length = 50)
+	    @Column(name = "sex",type = MySqlTypeConstant.VARCHAR,length = 50,isNull = true)
 	    private String	sex; 
 	    
-	    @Column(name = "phone",type = MySqlTypeConstant.VARCHAR,length = 50)
+	    @Column(name = "phone",type = MySqlTypeConstant.VARCHAR,length = 50,isNull = true)
 	    private String	phone; 
 	    
 	    @Column(name = "rid",type = MySqlTypeConstant.VARCHAR,length = 50)

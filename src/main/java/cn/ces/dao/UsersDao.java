@@ -17,4 +17,7 @@ public interface UsersDao {
 
     @Select("select * from users where rid = #{rid}")
     List<Users> selectUsersByrid(@Param("rid")Integer rid);
+
+    @Select("select * from users")
+    List<Users> selectAll();
 }

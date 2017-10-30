@@ -21,7 +21,7 @@ public class Teachers extends BaseModel{
     @Column(name = "tid",type = MySqlTypeConstant.INT,length = 11,isKey = true,isAutoIncrement = true)
     private Integer tid;
 
-    @Column(name = "dept_id",type = MySqlTypeConstant.INT,length = 11)
+    @Column(name = "dept_id",type = MySqlTypeConstant.INT,length = 11,isNull = true)
     private Integer dept_id;
 
     private List<Score> scoreList;

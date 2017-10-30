@@ -31,11 +31,11 @@
     </bean>
 
 
-    <!-- 配置视图解析器: 如何把 handler方法返回值解析为实际的物理视图 -->
+<!--    &lt;!&ndash; 配置视图解析器: 如何把 handler方法返回值解析为实际的物理视图 &ndash;&gt;
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="prefix" value="/WEB-INF/" />
         <property name="suffix" value=".jsp" />
-    </bean>
+    </bean>-->
 
         <!-- 默认的注解映射的支持 , 在实际开发中通常都需配置 -->
         <mvc:annotation-driven/>
