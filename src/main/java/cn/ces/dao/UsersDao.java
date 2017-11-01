@@ -20,4 +20,10 @@ public interface UsersDao {
 
     @Select("select * from users")
     List<Users> selectAll();
+
+    @Select("select count(*) from users")
+    int selectCount();
+
+    @Select("select * from users limit #{pageIndex},#{pageSize}")
+    List<Users> selectPageList(@Param("pageIndex")int pageIndex,@Param("pageSize")int pageSize);
 }

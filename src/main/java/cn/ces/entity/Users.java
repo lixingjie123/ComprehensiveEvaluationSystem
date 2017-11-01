@@ -26,8 +26,8 @@ public class Users extends BaseModel {
 	    @Column(name = "phone",type = MySqlTypeConstant.VARCHAR,length = 50,isNull = true)
 	    private String	phone; 
 	    
-	    @Column(name = "rid",type = MySqlTypeConstant.VARCHAR,length = 50)
-	    private String	rid;
+	    @Column(name = "rid",type = MySqlTypeConstant.INT,length = 50)
+	    private Integer	rid;
 
 	public Integer getUid() {
 		return uid;
@@ -69,11 +69,11 @@ public class Users extends BaseModel {
 		this.phone = phone;
 	}
 
-	public String getRid() {
+	public Integer getRid() {
 		return rid;
 	}
 
-	public void setRid(String rid) {
+	public void setRid(Integer rid) {
 		this.rid = rid;
 	}
 }
