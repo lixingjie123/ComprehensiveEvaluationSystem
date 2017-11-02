@@ -59,6 +59,8 @@ public class UserController {
         return  usersService.getPageUsers(offset,limit);
     }
 
+
+
     @PostMapping(value = "/addUsersByExcel",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String addUsersByExcel(MultipartFile file, HttpServletRequest request) throws IOException{
@@ -88,7 +90,7 @@ public class UserController {
                 users.setSex(row.getCell(3).getStringCellValue());
                 users.setPhone(String.valueOf((int)row.getCell(4).getNumericCellValue()));
                 users.setRid((int)(row.getCell(5).getNumericCellValue()));
-                System.out.println(users.getUid()+"  "+users.getUname());
+                users.setOther_id((int)(row.getCell(6).getNumericCellValue()));
                 usersList.add(users);
             }
             List<Users> usersList1 = usersService.insertUsers(usersList);

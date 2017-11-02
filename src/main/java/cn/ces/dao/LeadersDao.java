@@ -1,6 +1,7 @@
 package cn.ces.dao;
 
 import cn.ces.entity.Leaders;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -17,4 +18,8 @@ public interface LeadersDao {
 
     @Select("select * from leaders where dept_id=#{deptId}")
     List<Leaders> selectLeadersByDept(@Param("deptId") Integer dept_id);
+
+    @Insert("INSERT INTO leaders (lid,dept_id) " +
+            " VALUES (#{lid},#{deptId})")
+    int insertLeader(@Param("lid")Integer lid, @Param("deptId")Integer dept_id);
 }

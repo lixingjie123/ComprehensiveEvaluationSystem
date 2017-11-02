@@ -1,5 +1,8 @@
 package cn.ces.service;
 
+import cn.ces.dao.LeadersDao;
+import cn.ces.dao.StudentDao;
+import cn.ces.dao.TeachersDao;
 import cn.ces.dao.UsersDao;
 import cn.ces.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +23,19 @@ import java.util.Map;
 
 @Service
 public class UsersService {
+
+    private final UsersDao usersDao;
+    private final TeachersDao teachersDao;
+    private final StudentDao studentDao;
+    private final LeadersDao leadersDao;
+
     @Autowired
-    private UsersDao usersDao;
+    public UsersService(TeachersDao teachersDao, UsersDao usersDao, StudentDao studentDao, LeadersDao leadersDao) {
+        this.teachersDao = teachersDao;
+        this.usersDao = usersDao;
+        this.studentDao = studentDao;
+        this.leadersDao = leadersDao;
+    }
 
     public Map<String,Object> getPageUsers(int pageIndex, int pageSiz){
         Map<String,Object> result = new HashMap<String,Object>();
@@ -46,6 +60,12 @@ public class UsersService {
             t = usersDao.insertUser(users);
             if (t==0){
                 usersList1.add(users);
+            }else {
+                switch (users.getRid()) {
+                    case 0: teachersDao.insertTeachers(users.getUid(),users.getOther_id());break;
+                    case 1: studentDao.insertStudent(users.getUid(),users.getOther_id());break;
+                    case 2: leadersDao.insertLeader(users.getUid(),users.getOther_id());break;
+                }
             }
         }
         return usersList1;

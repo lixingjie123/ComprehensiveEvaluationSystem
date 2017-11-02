@@ -29,6 +29,16 @@ public class Users extends BaseModel {
 	    @Column(name = "rid",type = MySqlTypeConstant.INT,length = 50)
 	    private Integer	rid;
 
+	    private Integer other_id;
+
+	public Integer getOther_id() {
+		return other_id;
+	}
+
+	public void setOther_id(Integer other_id) {
+		this.other_id = other_id;
+	}
+
 	public Integer getUid() {
 		return uid;
 	}

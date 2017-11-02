@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
     <link rel="stylesheet" type="text/css" href="../Css/style.css" />
     <script type="text/javascript" src="../Js/jquery.js"></script>
-    <script type="text/javascript" src="../Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="../Js/jquery.form.js"></script>
     <script type="text/javascript" src="../Js/bootstrap.js"></script>
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
@@ -37,35 +37,51 @@
     </script>
 </head>
 <body>
-<form action="/addUsersByExcel" method="post" id="addUsers" enctype="multipart/form-data" class="definewidth m20">
 <table class="table table-bordered table-hover definewidth m10">
+    <form  method="post" id="addUsers" action="/addUsersByExcel" enctype="multipart/form-data"  class="definewidth m20">
     <tr>
         <td>选择用户表格</td>
         <td><input type="file" name="file"></td>
     </tr>
-
-    <tr>
-
-        <td>选择角色：</td>
-        <td>
-           <select id="role">
-            <option value="0">教师</option>
-            <option value="1">学生</option>
-            <option value="1">领导</option>
-           </select>
-        </td>
-    </tr>
+    </form>
     <tr>
         <td class="tableleft"></td>
         <td>
-            <button id="addUserBtn" type="submit" class="btn btn-primary" >保存</button> &nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid"><a href="index.jsp">返回列表</a>></button>
+            <button id="addUserBtn" type="button" class="btn btn-primary" >保存</button> &nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid"><a href="index.jsp">返回列表</a></button>
         </td>
     </tr>
 </table>
-</form>
+
 </body>
 </html>
 <script>
+
+    $(function () {
+
+        $("#addUserBtn").click(function () {
+
+            $("#addUsers").ajaxSubmit(function(data){
+                alert(data);
+            });
+           /* $.ajax({
+                url:"/addUsersByExcel",
+                type:"post",
+                data:form,
+                processData:false,
+                contentType:false,
+                success:function(data){
+                  alert(data);
+                },
+                error:function(e){
+                    alert("错误！！");
+                }
+            });*/
+        })
+
+//        $("#addUserBtn").click(function () {
+//            $("#addUsers").submit();
+//        })
+    })
 /*    function test(){
 
         var form = new FormData(document.getElementById("addUsers"));
@@ -88,7 +104,5 @@
             }
         });
         get();//此处为上传文件的进度条
-
-
     };*/
 </script>
