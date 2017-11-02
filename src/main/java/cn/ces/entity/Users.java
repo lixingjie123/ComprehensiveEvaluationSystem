@@ -11,7 +11,7 @@ import com.mybatis.enhance.store.constants.MySqlTypeConstant;
 @Table(name="users")
 public class Users extends BaseModel {
 
-		@Column(name = "uid",type = MySqlTypeConstant.INT,length = 11,isKey = true,isAutoIncrement = true)
+		@Column(name = "uid",type = MySqlTypeConstant.INT,length = 11,isKey = true)
 	    private Integer	uid;
 
 	    @Column(name = "uname",type = MySqlTypeConstant.VARCHAR,length = 50)

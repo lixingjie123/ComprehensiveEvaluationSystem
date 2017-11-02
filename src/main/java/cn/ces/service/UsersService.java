@@ -5,6 +5,7 @@ import cn.ces.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,5 +34,20 @@ public class UsersService {
 
     public List<Users> selectAllUsers(){
         return usersDao.selectAll();
+    }
+
+
+    //批量添加用户   并把未添加成功的用户返回
+    public List<Users> insertUsers(List<Users> usersList){
+        List<Users> usersList1 = new ArrayList<Users>();
+        for (int i = 0;usersList.size()>i;i++){
+            int t = 0;
+            Users users = usersList.get(i);
+            t = usersDao.insertUser(users);
+            if (t==0){
+                usersList1.add(users);
+            }
+        }
+        return usersList1;
     }
 }

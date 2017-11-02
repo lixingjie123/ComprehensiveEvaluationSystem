@@ -86,12 +86,20 @@ public class UserController {
                 users.setUname(row.getCell(1).getStringCellValue());
                 users.setPwd(row.getCell(2).getStringCellValue());
                 users.setSex(row.getCell(3).getStringCellValue());
-                users.setPhone(String.valueOf(row.getCell(4).getNumericCellValue()));
+                users.setPhone(String.valueOf((int)row.getCell(4).getNumericCellValue()));
                 users.setRid((int)(row.getCell(5).getNumericCellValue()));
                 System.out.println(users.getUid()+"  "+users.getUname());
                 usersList.add(users);
             }
-            msg = "新增成功";
+            List<Users> usersList1 = usersService.insertUsers(usersList);
+
+            if (usersList1.size()>0){
+               for (int i = 0 ;usersList1.size() > i ; i++){
+                   msg +=usersList1.get(i).getUname()+"\n";
+               }
+               msg +="未添加成功";
+            } else {msg = "新增成功";}
+
         }
 
 
@@ -113,7 +121,7 @@ public class UserController {
 
     @GetMapping(value = "/onlondUser")
     @ResponseBody
-    public String onlondUser(HttpServletResponse response) throws IOException{
+    public void onlondUser(HttpServletResponse response) throws IOException{
         List<Users> usersList = usersService.selectAllUsers();
 
         // 创建HSSFWorkbook对象(excel的文档对象)
@@ -149,16 +157,12 @@ public class UserController {
             row.createCell(5).setCellValue(users.getRid());
         }
 
-        String msg = "文件下载失败";
         // 输出Excel文件
         OutputStream output = response.getOutputStream();
         response.reset();
         response.setHeader("Content-disposition", "attachment; filename=details.xls");
         response.setContentType("application/msexcel");
         wkb.write(output);
-        msg = "文件下载成功";
         output.close();
-        return msg;
-
     }
 }

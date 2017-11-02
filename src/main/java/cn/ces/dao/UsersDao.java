@@ -1,6 +1,7 @@
 package cn.ces.dao;
 
 import cn.ces.entity.Users;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -26,4 +27,10 @@ public interface UsersDao {
 
     @Select("select * from users limit #{pageIndex},#{pageSize}")
     List<Users> selectPageList(@Param("pageIndex")int pageIndex,@Param("pageSize")int pageSize);
+
+
+    @Insert("INSERT INTO users (uid,uname,pwd,sex,phone,rid) " +
+            " VALUES (#{uid},#{uname},#{pwd},#{sex},#{phone},#{rid})")
+    int insertUser(Users users);
+
 }
