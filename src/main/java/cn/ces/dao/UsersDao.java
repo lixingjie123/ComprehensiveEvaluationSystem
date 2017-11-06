@@ -1,6 +1,7 @@
 package cn.ces.dao;
 
 import cn.ces.entity.Users;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -33,4 +34,9 @@ public interface UsersDao {
             " VALUES (#{uid},#{uname},#{pwd},#{sex},#{phone},#{rid})")
     int insertUser(Users users);
 
+    @Delete("delete from users where uid = #{uid}")
+    int deleteUser(Integer uid);
+
+    @Select("select * from users where uid = #{uid}")
+    Users selectUserByUid(Integer uid);
 }

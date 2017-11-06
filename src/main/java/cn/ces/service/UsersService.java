@@ -1,9 +1,7 @@
 package cn.ces.service;
 
-import cn.ces.dao.LeadersDao;
-import cn.ces.dao.StudentDao;
-import cn.ces.dao.TeachersDao;
-import cn.ces.dao.UsersDao;
+import cn.ces.dao.*;
+import cn.ces.entity.Department;
 import cn.ces.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,13 +26,15 @@ public class UsersService {
     private final TeachersDao teachersDao;
     private final StudentDao studentDao;
     private final LeadersDao leadersDao;
+    private final DepartmentDao departmentDao;
 
     @Autowired
-    public UsersService(TeachersDao teachersDao, UsersDao usersDao, StudentDao studentDao, LeadersDao leadersDao) {
+    public UsersService(TeachersDao teachersDao, UsersDao usersDao, StudentDao studentDao, LeadersDao leadersDao, DepartmentDao departmentDao) {
         this.teachersDao = teachersDao;
         this.usersDao = usersDao;
         this.studentDao = studentDao;
         this.leadersDao = leadersDao;
+        this.departmentDao = departmentDao;
     }
 
     public Map<String,Object> getPageUsers(int pageIndex, int pageSiz){
@@ -52,9 +52,12 @@ public class UsersService {
 
 
     //批量添加用户   并把未添加成功的用户返回
-    public List<Users> insertUsers(List<Users> usersList){
+    public String insertUsers(List<Users> usersList){
+        String msg ="添加成功";
         List<Users> usersList1 = new ArrayList<Users>();
-        for (int i = 0;usersList.size()>i;i++){
+
+        try {
+            for (int i = 0;usersList.size()>i;i++){
             int t = 0;
             Users users = usersList.get(i);
             t = usersDao.insertUser(users);
@@ -62,12 +65,37 @@ public class UsersService {
                 usersList1.add(users);
             }else {
                 switch (users.getRid()) {
-                    case 0: teachersDao.insertTeachers(users.getUid(),users.getOther_id());break;
-                    case 1: studentDao.insertStudent(users.getUid(),users.getOther_id());break;
+                    case 1: teachersDao.insertTeachers(users.getUid(),users.getOther_id());break;
+                    case 0: studentDao.insertStudent(users.getUid(),users.getOther_id());break;
                     case 2: leadersDao.insertLeader(users.getUid(),users.getOther_id());break;
                 }
             }
         }
-        return usersList1;
+        }catch (Exception e){
+            msg = e.getMessage();
+        }
+
+        return msg;
+    }
+
+    public String deleteUser(Integer uid){
+        String msg = "删除成功";
+        Users user = usersDao.selectUserByUid(uid);
+        try {
+            switch (user.getRid()) {
+                case 1: teachersDao.deleteTeacher(uid);break;
+                case 0: studentDao.deleteStudent(uid);break;
+                case 2: leadersDao.deleteLeader(uid);break;
+            }
+            usersDao.deleteUser(uid);
+        }catch (Exception e){
+            msg = e.getMessage();
+        }
+        return msg;
+    }
+
+    //生成部门动态下拉列表框
+    public List<Department> selectDeptOption(){
+        return departmentDao.selectDeptAll();
     }
 }

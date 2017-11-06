@@ -60,6 +60,8 @@
 </form>
 
 <button id="onlond" ><a href="/onlondUser">下载用户信息</a></button>
+<br>
+<a href="test.html">1111111</a>
 <table class="table table-bordered table-hover definewidth m10" id="table">
 </table>
 </body>
@@ -141,11 +143,11 @@
                 },
                 {
                     title: '操作',
-                    field: 'id',
+                    field: 'uid',
                     align: 'center',
                     formatter:function(value,row,index){
-                        var e = '<a href="#" mce_href="#" onclick="edit(\''+ row.uid + '\')">编辑</a> ';
-                        var d = '<a href="#" mce_href="#" onclick="del(\''+ row.uid +'\')">删除</a> ';
+                        var e = '<a href="#"  mce_href="#" onclick="edit(\''+ row.uid + '\')">编辑</a> ';
+                        var d = '<a href="#"  mce_href="#" onclick="del(\''+ row.uid +'\')">删除</a> ';
                         return e+d;
                     }
                 }
@@ -155,16 +157,26 @@
 
     });
 
-    function del(id)
+    function del(uid)
     {
 
 
         if(confirm("确定要删除吗？"))
         {
 
-            var url = "index.html";
-
-            window.location.href=url;
+            $.ajax({
+                url:"/deleteUser?uid="+uid,
+                type:"GET",
+                processData:false,
+                contentType:false,
+                success:function(data){
+                    alert(data);
+                    window.location.reload();
+                },
+                error:function(e){
+                    alert("错误！！");
+                }
+            })
 
         }
 

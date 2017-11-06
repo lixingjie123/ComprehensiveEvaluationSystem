@@ -1,6 +1,7 @@
 package cn.ces.controller;
 
 import cn.ces.dao.UsersDao;
+import cn.ces.entity.Department;
 import cn.ces.entity.Users;
 import cn.ces.service.UsersService;
 import com.mybatis.enhance.store.manager.common.BaseMysqlCRUDManager;
@@ -53,13 +54,26 @@ public class UserController {
         this.usersService = usersService;
     }
 
+
+    @GetMapping(value = "/selectDeptOption")
+    @ResponseBody
+    public List<Department> selectDeptOption(){
+       return usersService.selectDeptOption();
+    }
+
     @GetMapping(value = "/selectPageUser")
     @ResponseBody
     public Map<String,Object> selectPageUser(int offset, int limit){
         return  usersService.getPageUsers(offset,limit);
     }
 
-
+    @GetMapping(value = "/deleteUser",produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String deleteUser(HttpServletRequest request){
+        int uid = Integer.parseInt(request.getParameter("uid"));
+        String msg= usersService.deleteUser(uid);
+       return msg;
+    }
 
     @PostMapping(value = "/addUsersByExcel",produces = "text/plain;charset=utf-8")
     @ResponseBody
@@ -93,31 +107,8 @@ public class UserController {
                 users.setOther_id((int)(row.getCell(6).getNumericCellValue()));
                 usersList.add(users);
             }
-            List<Users> usersList1 = usersService.insertUsers(usersList);
-
-            if (usersList1.size()>0){
-               for (int i = 0 ;usersList1.size() > i ; i++){
-                   msg +=usersList1.get(i).getUname()+"\n";
-               }
-               msg +="未添加成功";
-            } else {msg = "新增成功";}
-
+            msg = usersService.insertUsers(usersList);
         }
-
-
-     /*   String path ="E:\\TCESFile\\Users";
-        String fileName = file.getOriginalFilename();
-        File dir = new File(path,fileName);
-        if(!dir.exists()){
-            dir.mkdirs();
-            //MultipartFile自带的解析方法
-            System.out.println( fileName+"文件上传成功");
-            file.transferTo(dir);
-            msg = "新增成功";
-        }else{
-            msg="("+fileName+"文件已存在）上传失败！";
-            System.out.println("（"+fileName+"文件已存在）上传失败！");
-        }*/
         return msg;
     }
 

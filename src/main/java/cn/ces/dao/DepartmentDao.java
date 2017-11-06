@@ -17,5 +17,8 @@ import java.util.List;
 public interface DepartmentDao {
 
     @Select("select * from department where dept_id = #{deptId}")
-    Department selectDeptAll(@Param("deptId")Integer deptId);
+    Department selectDeptByDeptid(@Param("deptId")Integer deptId);
+
+    @Select("select * from department")
+    List<Department> selectDeptAll();
 }

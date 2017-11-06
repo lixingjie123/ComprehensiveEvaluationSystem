@@ -1,6 +1,7 @@
 package cn.ces.dao;
 
 import cn.ces.entity.Leaders;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -22,4 +23,7 @@ public interface LeadersDao {
     @Insert("INSERT INTO leaders (lid,dept_id) " +
             " VALUES (#{lid},#{deptId})")
     int insertLeader(@Param("lid")Integer lid, @Param("deptId")Integer dept_id);
+
+    @Delete("delete from leaders where lid = #{lid}")
+    int deleteLeader(Integer lid);
 }
