@@ -7,5 +7,5 @@ package cn.ces.dao;
  * Date: 2017-11-06
  * Time: 14:07
  */
-public class ClassDao {
+public interface ClassDao {
 }
