@@ -339,24 +339,7 @@ var check_form = function (formname, opt) {
         return false;
     }
 
-    //ajax校验
-    function cf_ajax(obj, str) {
-        _temp_ajax = _temp_ajax.concat({obj: obj, str: str});
-        return true;
-        //return _cf_ajax.call(obj.get(0),obj,str);
-    }
 
-    function _cf_ajax(obj, str) {
-        var str_obj = eval('(' + str + ')');
-        var resp = $.ajax({
-            url: str_obj.url,
-            async: false,
-            data: str_obj.data
-        }).responseText;
-        if (resp === 'true') return true;
-        obj.data('jscheckerror', resp);
-        return false;
-    }
 
     function get_param(str) {
         return eval('(' + str + ')');

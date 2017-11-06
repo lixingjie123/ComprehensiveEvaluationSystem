@@ -17,6 +17,18 @@ public class Power extends BaseModel{
     
     @Column(name = "fp_id",type = MySqlTypeConstant.INT,length = 11)
     private Integer	fp_id;
+    
+private String fname;
+
+    
+
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
 
     public Integer getPid() {
         return pid;
