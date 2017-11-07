@@ -11,7 +11,7 @@ import cn.ces.entity.Power;
 
 public interface PowerDao {
      @Select("select * from power where pname like #{pname} limit #{start}, #{pagesize}")
-     List<Power> selectpower(@Param("start")int start,@Param("pagesize")int pagesize,@Param("pname")String panme);
+     List<Power> selectpower (@Param("start")int start,@Param("pagesize")int pagesize,@Param("pname")String panme);
      
      @Select("select count(*) from power where pname like #{pname}")
      int selectcount(@Param("pname")String pname );

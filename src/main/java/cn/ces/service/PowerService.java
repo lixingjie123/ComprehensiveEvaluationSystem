@@ -19,7 +19,7 @@ public class PowerService {
     @Autowired
     private PowerDao pd;
 
-    public Map<String,Object> selectallpower(int pageIndex, int pageSiz,String pname){
+    public  Map<String,Object> selectallpower(int pageIndex, int pageSiz,String pname){
         Map<String,Object> result = new HashMap<String,Object>();
         int total=pd.selectcount(pname);
         List<Power> rows=pd.selectpower(pageIndex,pageSiz,pname);

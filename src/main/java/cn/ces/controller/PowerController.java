@@ -51,7 +51,7 @@ public class PowerController {
 
     @GetMapping(value = "/selectpower")
     @ResponseBody
-    public Map<String,Object> selectpower(int offset, int limit,String pname){
+    public Map<String,Object>  selectpower(int offset, int limit,String pname){
     	try {
     		pname=new String(pname.getBytes("iso8859-1"),"UTF-8");
 
