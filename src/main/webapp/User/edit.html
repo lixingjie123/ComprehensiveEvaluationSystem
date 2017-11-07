@@ -124,6 +124,8 @@
                 $("#sex").val(data.sex);
                 $("#phone").val(data.phone);
                 $("#rid").val(data.rid);
+                $("#rid").attr("onfocus","this.defaultIndex=this.selectedIndex;");
+                $("#rid").attr("onchange","this.selectedIndex=this.defaultIndex;");
             },
             error:function(e){
                 alert("错误！！");
