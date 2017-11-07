@@ -1,6 +1,6 @@
 package cn.ces.dao;
 
-import cn.ces.entity.Class;
+import cn.ces.entity.Role;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -10,10 +10,10 @@ import java.util.List;
  * Description:
  * User: lixingjie
  * Date: 2017-11-06
- * Time: 14:07
+ * Time: 15:31
  */
-public interface ClassDao {
+public interface RoleDao {
 
-    @Select("select * from class")
-    List<Class> selectClassAll();
+    @Select("select * from role")
+    List<Role> selectRoleAll();
 }

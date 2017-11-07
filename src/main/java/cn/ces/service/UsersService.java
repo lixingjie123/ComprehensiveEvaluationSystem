@@ -1,7 +1,9 @@
 package cn.ces.service;
 
 import cn.ces.dao.*;
+import cn.ces.entity.Class;
 import cn.ces.entity.Department;
+import cn.ces.entity.Role;
 import cn.ces.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,14 +29,18 @@ public class UsersService {
     private final StudentDao studentDao;
     private final LeadersDao leadersDao;
     private final DepartmentDao departmentDao;
+    private final ClassDao classDao;
+    private final RoleDao roleDao;
 
     @Autowired
-    public UsersService(TeachersDao teachersDao, UsersDao usersDao, StudentDao studentDao, LeadersDao leadersDao, DepartmentDao departmentDao) {
+    public UsersService(TeachersDao teachersDao, UsersDao usersDao, StudentDao studentDao, LeadersDao leadersDao, DepartmentDao departmentDao, ClassDao classDao, RoleDao roleDao) {
         this.teachersDao = teachersDao;
         this.usersDao = usersDao;
         this.studentDao = studentDao;
         this.leadersDao = leadersDao;
         this.departmentDao = departmentDao;
+        this.classDao = classDao;
+        this.roleDao = roleDao;
     }
 
     public Map<String,Object> getPageUsers(int pageIndex, int pageSiz){
@@ -48,6 +54,11 @@ public class UsersService {
 
     public List<Users> selectAllUsers(){
         return usersDao.selectAll();
+    }
+
+    //查询uid用户
+    public Users selectUserByUid(Integer uid){
+        return usersDao.selectUserByUid(uid);
     }
 
 
@@ -78,6 +89,7 @@ public class UsersService {
         return msg;
     }
 
+    //删除用户
     public String deleteUser(Integer uid){
         String msg = "删除成功";
         Users user = usersDao.selectUserByUid(uid);
@@ -97,5 +109,27 @@ public class UsersService {
     //生成部门动态下拉列表框
     public List<Department> selectDeptOption(){
         return departmentDao.selectDeptAll();
+    }
+
+    //生成班级动态下拉列表
+    public List<Class> selectClassOption(){
+        return classDao.selectClassAll();
+    }
+
+    //生成动态角色下拉框
+    public List<Role> selectRoleOption(){
+        return roleDao.selectRoleAll();
+    }
+
+    //通过Uid修改Users
+    public String updateUsersByUid(Users users){
+        String msg = "修改成功";
+
+        try {
+            usersDao.updateUserByUid(users);
+        }catch (Exception e){
+            msg = e.getMessage();
+        }
+        return msg;
     }
 }

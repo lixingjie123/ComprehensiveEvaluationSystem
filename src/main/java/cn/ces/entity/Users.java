@@ -24,7 +24,7 @@ public class Users extends BaseModel {
 	    private String	sex; 
 	    
 	    @Column(name = "phone",type = MySqlTypeConstant.VARCHAR,length = 50,isNull = true)
-	    private String	phone; 
+	    private String	phone;
 	    
 	    @Column(name = "rid",type = MySqlTypeConstant.INT,length = 50)
 	    private Integer	rid;

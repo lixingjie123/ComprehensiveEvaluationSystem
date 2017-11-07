@@ -1,10 +1,7 @@
 package cn.ces.dao;
 
 import cn.ces.entity.Users;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -39,4 +36,9 @@ public interface UsersDao {
 
     @Select("select * from users where uid = #{uid}")
     Users selectUserByUid(Integer uid);
+
+    @Update("UPDATE users SET uname = #{uname},pwd = #{pwd}," +
+            "sex = #{sex},phone = #{phone} , rid = #{rid} " +
+            "WHERE uid = #{uid}")
+    int updateUserByUid(Users users);
 }

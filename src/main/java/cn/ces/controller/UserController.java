@@ -1,7 +1,9 @@
 package cn.ces.controller;
 
 import cn.ces.dao.UsersDao;
+import cn.ces.entity.Class;
 import cn.ces.entity.Department;
+import cn.ces.entity.Role;
 import cn.ces.entity.Users;
 import cn.ces.service.UsersService;
 import com.mybatis.enhance.store.manager.common.BaseMysqlCRUDManager;
@@ -19,6 +21,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -54,11 +57,23 @@ public class UserController {
         this.usersService = usersService;
     }
 
-
-    @GetMapping(value = "/selectDeptOption")
+    @GetMapping(value = "/selectUserByUid")
     @ResponseBody
-    public List<Department> selectDeptOption(){
-       return usersService.selectDeptOption();
+    public Users selectUserByUid(ModelMap map,HttpServletRequest request){
+        int uid = Integer.parseInt(request.getParameter("uid"));
+        return usersService.selectUserByUid(uid);
+    }
+
+    @GetMapping(value = "/selectRoleOption")
+    @ResponseBody
+    public List<Role> selectRoleOption(){
+       return usersService.selectRoleOption();
+    }
+
+    @GetMapping(value = "/selectClassOption")
+    @ResponseBody
+    public List<Class> selectClassOption(){
+        return usersService.selectClassOption();
     }
 
     @GetMapping(value = "/selectPageUser")
@@ -67,6 +82,12 @@ public class UserController {
         return  usersService.getPageUsers(offset,limit);
     }
 
+    @PostMapping(value = "/updateUserByUid",produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String updateUserByUid(Users users){
+        String msg =usersService.updateUsersByUid(users);
+        return msg;
+    }
     @GetMapping(value = "/deleteUser",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String deleteUser(HttpServletRequest request){
