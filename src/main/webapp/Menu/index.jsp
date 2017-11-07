@@ -67,7 +67,7 @@
 		alert(decodeURI(getUrlParam("pname")));
         var $table = $('#table');
             $table.bootstrapTable({
-            url: "/selectpower?pname="+getUrlParam("pname"),
+            url: "/selectpower?pname="+encodeURI(getUrlParam("pname")),
             dataType: "json",
             singleSelect: false,
             height: 550,//高度调整

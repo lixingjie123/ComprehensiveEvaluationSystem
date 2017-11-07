@@ -52,13 +52,14 @@ public class PowerController {
     @GetMapping(value = "/selectpower")
     @ResponseBody
     public Map<String,Object>  selectpower(int offset, int limit,String pname){
-    	try {
-    		pname=new String(pname.getBytes("iso8859-1"),"UTF-8");
+    
+    		try {
+				pname=URLDecoder.decode(pname,"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
     	System.out.println(pname);
     	String p="%%";
       if(!pname.equals("null")){
