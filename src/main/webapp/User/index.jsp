@@ -49,11 +49,7 @@
 
 <form class="form-inline definewidth m20" action="index.html?type=javascript:$('#role').val"method="get">
     选择角色：
-    <select id="role">
-        <option value="0">教师</option>
-        <option value="1">学生</option>
-        <option value="1">领导</option>
-    </select>
+    <select id="dpdField1"></select>
     用户名称：
     <input type="text" name="username" id="username"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;
     <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">新增用户</button>
@@ -61,13 +57,39 @@
 
 <button id="onlond" ><a href="/onlondUser">下载用户信息</a></button>
 <br>
-<a href="test.html">1111111</a>
 <table class="table table-bordered table-hover definewidth m10" id="table">
 </table>
 </body>
 </html>
 <script>
     $(function () {
+
+        $.ajax({
+            url: "/selectRoleOption",    //后台webservice里的方法名称
+            type: "get",
+            dataType: "json",
+            contentType: "application/json",
+            traditional: true,
+            success: function (data) {
+
+                var jsonObj =data;
+                var optionstring = "";
+                for (var j = 0; j < jsonObj.length; j++) {
+
+                    if (${updataUser.rid ==jsonObj[j].rid}){
+                        optionstring += "<option selected = \"selected\"  value=\"" + jsonObj[j].rid + "\" >" + jsonObj[j].rname + "</option>";
+                    }else {
+                        optionstring += "<option value=\"" + jsonObj[j].rid + "\" >" + jsonObj[j].rname + "</option>";
+                    }
+
+                }
+                $("#dpdField1").html("<option value='请选择'>----请选择----</option> "+optionstring);
+
+            },
+            error: function (msg) {
+                alert("出错了！");
+            }
+        });
 /*
         $('#onlond').click(function () {
             $.ajax({
@@ -156,6 +178,12 @@
 
 
     });
+
+
+    function edit(uid) {
+        var url = "edit.html?uid="+uid;
+        window.location.href=url;
+    }
 
     function del(uid)
     {

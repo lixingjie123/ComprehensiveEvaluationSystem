@@ -7,10 +7,10 @@
     <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
     <link rel="stylesheet" type="text/css" href="../Css/style.css" />
     <script type="text/javascript" src="../Js/jquery.js"></script>
-    <script type="text/javascript" src="../Js/jquery.sorted.js"></script>
     <script type="text/javascript" src="../Js/bootstrap.js"></script>
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
+    <script type="text/javascript" src="../Js/jquery.form.js"></script>
 
  
 
@@ -35,40 +35,37 @@
     </style>
 </head>
 <body>
-<form action="{:U('User/edit')}" method="post" class="definewidth m20">
-<input type="hidden" name="id" value="{$user.id}" />
+<form id="updateUserFrom" action="/updateUserByUid" method="post" class="definewidth m20">
+
+<input type="hidden" name="uid" id="uid" value="" />
     <table class="table table-bordered table-hover definewidth m10">
         <tr>
-            <td width="10%" class="tableleft">登录名</td>
-            <td><input type="text" name="username" value="{$user.username}"/></td>
+            <td width="10%" class="tableleft">用户名</td>
+            <td><input type="text" id="uname" name="uname" /></td>
         </tr>
         <tr>
             <td class="tableleft">密码</td>
-            <td><input type="password" name="password"/></td>
+            <td><input type="password" id="pwd" name="pwd"/></td>
         </tr>
         <tr>
-            <td class="tableleft">真实姓名</td>
-            <td><input type="text" name="realname" value="{$user.realname}"/></td>
+            <td class="tableleft">性别</td>
+            <td><input type="text" name="sex" id="sex"/></td>
         </tr>
         <tr>
-            <td class="tableleft">邮箱</td>
-            <td><input type="text" name="email" value="{$user.email}"/></td>
-        </tr>
-        <tr>
-            <td class="tableleft">状态</td>
+            <td class="tableleft">电话</td>
             <td>
-                <input type="radio" name="status" value="0"/> 启用
-              <input type="radio" name="status" value="1" /> 禁用
+                <input type="text" name="phone" id="phone"/>
             </td>
         </tr>
         <tr>
             <td class="tableleft">角色</td>
-            <td>{$role_checkbox}</td>
+            <td> <select id="rid" name="rid"></select></td>
         </tr>
         <tr>
             <td class="tableleft"></td>
             <td>
-                <button type="submit" class="btn btn-primary" type="button">保存</button>				 &nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
+                <input type="button" id="updateSubmit" class="btn btn-primary" value="保存">
+                <!--<button type="button" id="updateSubmit" class="btn btn-primary" >保存</button>		-->		 &nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
             </td>
         </tr>
     </table>
@@ -76,9 +73,67 @@
 </body>
 </html>
 <script>
-    $(function () {       
-		$('#backid').click(function(){
-				window.location.href="{:U('User/index')}";
+    $(function () {
+
+
+        $("#updateSubmit").click(function () {
+
+            $("#updateUserFrom").ajaxSubmit(function(data){
+                alert(data);
+            });
+        });
+
+        function getUrlParam(uid) {
+            var reg = new RegExp("(^|&)" + uid + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+
+        var uid = getUrlParam("uid");
+
+        $.ajax({
+            url: "/selectRoleOption",    //后台webservice里的方法名称
+            type: "get",
+            dataType: "json",
+            contentType: "application/json",
+            traditional: true,
+            success: function (data) {
+
+                var jsonObj =data;
+                var optionstring = "";
+                for (var j = 0; j < jsonObj.length; j++) {
+                    optionstring += "<option value=\"" + jsonObj[j].rid + "\" >" + jsonObj[j].rname + "</option>";
+                }
+                $("#rid").html("<option value='请选择'>----请选择----</option> "+optionstring);
+
+            },
+            error: function (msg) {
+                alert("出错了！");
+            }
+        });
+
+        $.ajax({
+            url:"/selectUserByUid?uid="+uid,
+            type:"GET",
+            processData:false,
+            contentType:false,
+            success:function(data){
+                $("#uid").val(data.uid);
+                $("#uname").val(data.uname);
+                $("#pwd").val(data.pwd);
+                $("#sex").val(data.sex);
+                $("#phone").val(data.phone);
+                $("#rid").val(data.rid);
+                $("#rid").attr("onfocus","this.defaultIndex=this.selectedIndex;");
+                $("#rid").attr("onchange","this.selectedIndex=this.defaultIndex;");
+            },
+            error:function(e){
+                alert("错误！！");
+            }
+        });
+
+        $('#backid').click(function(){
+				window.location.href="index.jsp";
 		 });
 
     });
