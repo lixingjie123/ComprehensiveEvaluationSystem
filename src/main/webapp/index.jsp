@@ -30,7 +30,6 @@
         <div class="dl-inform"><div class="dl-inform-title"><s class="dl-inform-icon dl-up"></s></div></div>
         <ul id="J_Nav"  class="nav-list ks-clear">
             <li class="nav-item dl-selected"><div class="nav-item-inner nav-home">菜单栏</div></li>
-
         </ul>
     </div>
     <ul id="J_NavContent" class="dl-tab-conten">

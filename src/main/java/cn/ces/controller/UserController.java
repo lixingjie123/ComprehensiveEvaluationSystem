@@ -57,6 +57,20 @@ public class UserController {
         this.usersService = usersService;
     }
 
+    @GetMapping(value = "/selectUserByRidAndUname")
+    @ResponseBody
+    public Map<String,Object> selectUserByRidAndUname(int offset, int limit, Integer rid, String uname){
+        String un = "%%";
+        String r="%%";
+        if (!uname.equals(null)){
+            un = "%"+uname+"%";
+        }
+        if (rid!=null){
+            r = "%"+rid+"%";
+        }
+        return  usersService.selectUserByRidAndUname(offset,limit,r,un);
+    }
+
     @GetMapping(value = "/selectUserByUid")
     @ResponseBody
     public Users selectUserByUid(ModelMap map,HttpServletRequest request){

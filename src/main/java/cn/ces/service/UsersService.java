@@ -43,6 +43,8 @@ public class UsersService {
         this.roleDao = roleDao;
     }
 
+
+    //分页查询
     public Map<String,Object> getPageUsers(int pageIndex, int pageSiz){
         Map<String,Object> result = new HashMap<String,Object>();
         int total=usersDao.selectCount();
@@ -52,6 +54,15 @@ public class UsersService {
         return result;
     }
 
+    //按条件分页查询
+    public Map<String,Object> selectUserByRidAndUname(int pageIndex, int pageSiz,String like_r,String like_un){
+        Map<String,Object> result = new HashMap<String,Object>();
+        int total=usersDao.getRidAndUnameCount(like_r,like_un);
+        List<Users> rows=usersDao.selectUserByRidAndUname(pageIndex,pageSiz,like_r,like_un);
+        result.put("total",total);
+        result.put("rows",rows);
+        return result;
+    }
     public List<Users> selectAllUsers(){
         return usersDao.selectAll();
     }

@@ -26,6 +26,12 @@ public interface UsersDao {
     @Select("select * from users limit #{pageIndex},#{pageSize}")
     List<Users> selectPageList(@Param("pageIndex")int pageIndex,@Param("pageSize")int pageSize);
 
+    @Select("select * from users where rid like #{like_r} and uname like #{like_un} limit #{pageIndex},#{pageSize}")
+    List<Users> selectUserByRidAndUname(@Param("pageIndex")int pageIndex,@Param("pageSize")int pageSize,
+                                        @Param("like_rid")String r,@Param("like_un")String un);
+
+    @Select("select count(*) from users  where rid like #{like_r} and uname like #{like_un}")
+    int getRidAndUnameCount(@Param("like_r")String r,@Param("like_un")String un);
 
     @Insert("INSERT INTO users (uid,uname,pwd,sex,phone,rid) " +
             " VALUES (#{uid},#{uname},#{pwd},#{sex},#{phone},#{rid})")

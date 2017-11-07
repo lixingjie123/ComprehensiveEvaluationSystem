@@ -47,11 +47,11 @@
 </head>
 <body>
 
-<form class="form-inline definewidth m20" action="index.html?type=javascript:$('#role').val"method="get">
+<form class="form-inline definewidth m20" action="index.jsp" method="get">
     选择角色：
-    <select id="dpdField1"></select>
+    <select id="role"></select>
     用户名称：
-    <input type="text" name="username" id="username"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;
+    <input type="text" name="uname" id="uname"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;
     <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">新增用户</button>
 </form>
 
@@ -63,6 +63,13 @@
 </html>
 <script>
     $(function () {
+        var rid =0;
+        var uname = null;
+        $("#role,#username").change(function () {
+            rid = $("#role").val();
+            uname = $("#username").val();
+            alert(rid +"    "+uname);
+        });
 
         $.ajax({
             url: "/selectRoleOption",    //后台webservice里的方法名称
@@ -83,7 +90,7 @@
                     }
 
                 }
-                $("#dpdField1").html("<option value='请选择'>----请选择----</option> "+optionstring);
+                $("#role").html("<option value='请选择'>----请选择----</option> "+optionstring);
 
             },
             error: function (msg) {
@@ -209,6 +216,11 @@
         }
 
 
+        function getUrlParam(uid) {
+            var reg = new RegExp("(^|&)" + uid + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
 
 
     }
