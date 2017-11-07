@@ -42,7 +42,7 @@
 </head>
 <body>
 
-<form class="form-inline definewidth m20" action="index.jsp" method="get" id="form">
+<form class="form-inline definewidth m20" action="index.jsp" method="get">
     菜单名称：
     <input type="text" name="pname" id="pname"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
     <button class="btn btn-primary" id=query type="submit">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">新增菜单</button>
@@ -54,20 +54,16 @@
 </html>
 <script>
     $(function () {
-    	
-    	$("#form").submit(function(){
-    		$("#pname").val(encodeURI($("#pname").val()));
-    	})
         
 
 		$('#addnew').click(function(){
 
 				window.location.href="/Menu/add.jsp";
 		 });
-		alert(decodeURI(getUrlParam("pname")));
+		alert(getUrlParam("pname"));
         var $table = $('#table');
             $table.bootstrapTable({
-            url: "/selectpower?pname="+getUrlParam("pname"),
+            url: "/t?pname="+getUrlParam("pname"),
             dataType: "json",
             singleSelect: false,
             height: 550,//高度调整

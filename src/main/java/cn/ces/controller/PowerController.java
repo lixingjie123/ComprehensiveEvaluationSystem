@@ -49,9 +49,9 @@ public class PowerController {
         this.powerService = powerService;
     }
 
-    @GetMapping(value = "/selectpower")
+    @GetMapping(value = "/t")
     @ResponseBody
-    public Map<String,Object> selectpower(int offset, int limit,String pname){
+    public Map<String,Object> selectPageUser(int offset, int limit,String pname){
     	try {
     		pname=new String(pname.getBytes("iso8859-1"),"UTF-8");
 
@@ -61,8 +61,8 @@ public class PowerController {
 		}
     	System.out.println(pname);
     	String p="%%";
-      if(!pname.equals("null")){
-    	 p="%"+pname+"%";} 
+/*      if(!(pname=="")){
+    	 p="%"+pname+"%";} */
         return  powerService.selectallpower(offset, limit,p);
     }
     @GetMapping(value = "/poweroption")
