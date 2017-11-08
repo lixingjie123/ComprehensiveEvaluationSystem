@@ -59,13 +59,13 @@ public class UserController {
 
     @GetMapping(value = "/selectUserByRidAndUname")
     @ResponseBody
-    public Map<String,Object> selectUserByRidAndUname(int offset, int limit, Integer rid, String uname){
+    public Map<String,Object> selectUserByRidAndUname(int offset, int limit, String rid, String uname){
         String un = "%%";
         String r="%%";
-        if (!uname.equals(null)){
+        if (!uname.equals(null)&&!uname.equals("")&&!uname.equals("null")){
             un = "%"+uname+"%";
         }
-        if (rid!=null){
+        if (!rid.equals(null)&&!rid.equals("")&&!rid.equals("null")){
             r = "%"+rid+"%";
         }
         return  usersService.selectUserByRidAndUname(offset,limit,r,un);

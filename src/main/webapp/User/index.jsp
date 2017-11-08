@@ -49,7 +49,7 @@
 
 <form class="form-inline definewidth m20" action="index.jsp" method="get">
     选择角色：
-    <select id="role"></select>
+    <select name="rid" id="role" class="abc input-default"></select>
     用户名称：
     <input type="text" name="uname" id="uname"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;
     <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">新增用户</button>
@@ -63,8 +63,8 @@
 </html>
 <script>
     $(function () {
-        var rid =0;
-        var uname = null;
+        var rid;
+        var uname;
         $("#role,#username").change(function () {
             rid = $("#role").val();
             uname = $("#username").val();
@@ -84,13 +84,13 @@
                 for (var j = 0; j < jsonObj.length; j++) {
 
                     if (${updataUser.rid ==jsonObj[j].rid}){
-                        optionstring += "<option selected = \"selected\"  value=\"" + jsonObj[j].rid + "\" >" + jsonObj[j].rname + "</option>";
+                        optionstring += "<option value=\"" + jsonObj[j].rid + "\" >" + jsonObj[j].rname + "</option>";
                     }else {
                         optionstring += "<option value=\"" + jsonObj[j].rid + "\" >" + jsonObj[j].rname + "</option>";
                     }
 
                 }
-                $("#role").html("<option value='请选择'>----请选择----</option> "+optionstring);
+                $("#role").html("<option selected = \"selected\" value=''>----请选择----</option> "+optionstring);
 
             },
             error: function (msg) {
@@ -126,14 +126,14 @@
 
         /*接收后台JSON对象*/
         $table.bootstrapTable({
-            url: "/selectPageUser",
+            url: "/selectUserByRidAndUname?rid="+getUrlParam("rid")+"&uname="+getUrlParam("uname"),
             dataType: "json",
             singleSelect: false,
             height: 550,//高度调整
             locale:'zh-CN',//中文支持
             pagination: true,//是否开启分页（*）
             pageNumber:1,//初始化加载第一页，默认第一页
-            pageSize: 5,//每页的记录行数（*）
+            pageSize: 10,//每页的记录行数（*）
             pageList: [5,10,11],//可供选择的每页的行数（*）
 
             sidePagination: "server", //服务端处理分页
@@ -192,6 +192,13 @@
         window.location.href=url;
     }
 
+
+    function getUrlParam(uid) {
+        var reg = new RegExp("(^|&)" + uid + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+    }
+
     function del(uid)
     {
 
@@ -214,14 +221,6 @@
             })
 
         }
-
-
-        function getUrlParam(uid) {
-            var reg = new RegExp("(^|&)" + uid + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-            if (r != null) return unescape(r[2]); return null; //返回参数值
-        }
-
 
     }
 </script>
