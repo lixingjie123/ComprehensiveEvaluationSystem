@@ -39,4 +39,8 @@ public class DepartmentService {
 	    result.put("rows",rows);
 	    return result;
 	}
+	
+	public Department selectDeptid(Integer dept_id){
+        return departmentDao.selectDeptid(dept_id);
+    }
 }

@@ -5,10 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +20,7 @@ import com.mybatis.enhance.store.manager.common.BaseMysqlCRUDManager;
 
 import cn.ces.entity.Department;
 import cn.ces.entity.Power;
+import cn.ces.entity.Users;
 import cn.ces.service.DepartmentService;
 import cn.ces.service.PowerService;
 import net.sf.json.JSONArray;
@@ -51,4 +54,12 @@ public class DepartmentController {
         }
         return  departmentService.selectDepartmentBydeptname(offset, limit, dept_name);
     }
+    
+    @GetMapping(value = "/selectDeptid")
+    @ResponseBody
+    public Department selectDeptid(ModelMap map,HttpServletRequest request){
+        int deptid = Integer.parseInt(request.getParameter("dept_id"));
+		return departmentService.selectDeptid(deptid);
+    }
 }
+
