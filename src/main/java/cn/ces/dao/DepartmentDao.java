@@ -20,7 +20,7 @@ import java.util.Map;
  */
 public interface DepartmentDao {
 
-    @Select("select * from department where dept_id = #{deptId}")
+    @Select("select * from department where dept_id = #{dept_Id}")
     Department selectDeptid(@Param("deptId")int deptId);
 
     @Select("select * from department")
