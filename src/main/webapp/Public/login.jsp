@@ -13,6 +13,7 @@
     <script type="text/javascript" src="../Js/bootstrap.js"></script>
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
+    <script type="text/javascript" src="../Js/jquery.form.js"></script>
     <style type="text/css">
         body {
             padding-top: 40px;
@@ -69,7 +70,7 @@
 <div class="title"><p>教师综合评教系统</p></div>
 <div class="container">
     
-    <form class="form-signin" method="post" id="login">
+    <form class="form-signin" method="post" action="/login" id="login">
         <h2 class="form-signin-heading">登录教师评教系统</h2>
         身份： <select name="rid" id="rid" class="abc input-default"></select><br>
         账号：<input type="text" name="uid" class="input-block-level"><br>
@@ -110,12 +111,21 @@ $(function(){
 	}); */
 	
 	$("#loginBtn").click(function() {
-		var from = new FormData("#login");
+
+            $("#login").ajaxSubmit(function(data){
+                if(data.p==0){
+                    alert(data.msg);
+                }else{
+                    alert(data.msg);
+                    window.location.href="../index.jsp";
+                }
+            });
+	   /* alert($('#login').serialize());
 		$.ajax({
 	        url: "/login",    //后台webservice里的方法名称
 	        type: "post",
 	        dataType: "json",
-	        data:from,
+	        data:$('#login').serialize(),
 	        contentType: "application/json",
 	        traditional: true,
 	        success: function (data) {
@@ -124,7 +134,7 @@ $(function(){
 	        error: function (msg) {
 	            alert("出错了！");
 	        }
-	    });
+	    });*/
 		
 	});
 })
