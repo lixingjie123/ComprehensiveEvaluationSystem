@@ -38,9 +38,17 @@ public class DepartmentController {
     @GetMapping(value = "/selectPageDepart")
     @ResponseBody
     public Map<String,Object> selectPageDepart(int offset, int limit){
-    	System.out.println(offset);
-    	System.out.println(limit);
         return  departmentService.getPageDepart(offset,limit);
     }
     
+    @GetMapping(value = "/selectDepartmentBydeptname")
+    @ResponseBody
+    public Map<String,Object> selectDepartmentBydeptname(int offset, int limit, String dept_name){
+        System.out.println(dept_name);
+    	String name = "%%";
+        if (!dept_name.equals(null)&&!dept_name.equals("")&&!dept_name.equals("null")){
+        	name = "%"+dept_name+"%";
+        }
+        return  departmentService.selectDepartmentBydeptname(offset, limit, dept_name);
+    }
 }

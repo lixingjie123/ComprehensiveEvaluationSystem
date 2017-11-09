@@ -30,4 +30,13 @@ public class DepartmentService {
 	public List<Department> selectAllDepartment() {
 		return departmentDao.selectDeptAll();
 	}
+	
+	public Map<String,Object> selectDepartmentBydeptname(int pageIndex, int pageSize,String dept_name){
+	    Map<String,Object> result = new HashMap<String,Object>();
+	    int total=departmentDao.getdeptnameCount(dept_name);//获取查询结果总数
+	    List<Department> rows=departmentDao.selectDepartmentBydeptname(pageIndex, pageSize, dept_name);//获取查询结果
+	    result.put("total",total);
+	    result.put("rows",rows);
+	    return result;
+	}
 }

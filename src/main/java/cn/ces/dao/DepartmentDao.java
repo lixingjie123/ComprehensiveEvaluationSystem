@@ -31,5 +31,13 @@ public interface DepartmentDao {
     
     @Select("select * from department limit #{pageIndex},#{pageSize}")
     List<Department> selectPageList(@Param("pageIndex")int pageIndex,@Param("pageSize")int pageSize);
+    
+    @Select("select * from department where dept_name like #{dept_name} limit #{pageIndex},#{pageSize}")
+    List<Department> selectDepartmentBydeptname(@Param("pageIndex")int pageIndex,@Param("pageSize")int pageSize,
+                                        @Param("dept_name")String dept_name);
+    
+    @Select("select count(*) from department  where dept_name like #{dept_name}")
+    int getdeptnameCount(@Param("dept_name")String dept_name);
+
 }
 
