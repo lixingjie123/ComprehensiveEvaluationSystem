@@ -158,7 +158,16 @@
                 {
                     title: '用户角色',
                     field: 'rid',
-                    align: 'center'
+                    align: 'center',
+                    formatter:function(value,row,index){
+                       if (row.rid==0){
+                           return "学生";
+                       }else if(row.rid==1){
+                           return "教师";
+                       }else{
+                           return "领导";
+                       }
+                    }
                 },
                 {
                     title: '用户性别',
