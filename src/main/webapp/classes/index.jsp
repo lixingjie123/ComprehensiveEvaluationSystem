@@ -100,7 +100,7 @@
                     field: 'status',
                     align: 'center',
                     formatter:function (value,row,index) {
-                        if (row.status!=0){
+                        if (row.fettle!=0){
                             return "启用";
                         }else {
                             return "禁用";
@@ -114,11 +114,10 @@
                     formatter:function(value,row,index){
                         var e = '<a href="#"  mce_href="#" onclick="edit(\''+ row.clid + '\')">编辑</a> ';
                         var d ;
-                        if (row.status!=0){
-                            d='<a href="#"  mce_href="#" >禁用班级</a> ';
+                        if (row.fettle!=0){
+                            d='<a href="#"  mce_href="#"   onclick="mode(\''+ row.clid + '\')">禁用班级</a> ';
                         }else {
-                            d='<a href="#"  mce_href="#" >启用班级</a> ';
-
+                            d='<a href="#"  mce_href="#" onclick="mode(\''+ row.clid + '\')">启用班级</a> ';
                         }
                         return e+d;
                     }
@@ -139,5 +138,23 @@
         var url = "edit.html?clid="+clid;
 
         window.location.href=url;
+    }
+    function mode(clid)
+    {
+        var url = "/updateStatus?clid="+clid;
+
+        $.ajax({
+            url:url,
+            type:"GET",
+            processData:false,
+            contentType:false,
+            success:function(data){
+                alert(data);
+                window.location.reload();
+            },
+            error:function(e){
+                alert("错误！！");
+            }
+        })
     }
 </script>

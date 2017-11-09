@@ -27,6 +27,7 @@ public class ClassService {
         this.classDao = classDao;
     }
 
+    //按条件查询
     public Map<String,Object> selectPageByClname(String like_cn, int pageIndex, int pageSiz){
         Map<String,Object> result = new HashMap<String,Object>();
         int total=classDao.getCountByClname(like_cn);
@@ -34,5 +35,25 @@ public class ClassService {
         result.put("total",total);
         result.put("rows",rows);
         return result;
+    }
+
+    //修改班级状态
+    public String updateClssOfFettle(Integer clid){
+        String msg = "修改成功";
+        Integer fettle = 1;
+        Class aClass = new Class();
+        try{
+            aClass = classDao.selectClassByClid(clid);
+            fettle = aClass.getFettle();
+            if (fettle!=0){
+                fettle = 0;
+            }else {
+                fettle = 1;
+            }
+            classDao.updateClassOfFettle(fettle,clid);
+        }catch (Exception e){
+            msg=e.getMessage();
+        }
+        return msg;
     }
 }

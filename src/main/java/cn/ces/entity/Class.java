@@ -24,8 +24,8 @@ public class Class extends BaseModel{
     @Column(name = "clname",type = MySqlTypeConstant.VARCHAR,length = 50)
     private String clname;
 
-    @Column(name = "status",type = MySqlTypeConstant.INT,length = 1)
-    private Integer status;
+    @Column(name = "fettle",type = MySqlTypeConstant.INT,length = 1)
+    private Integer fettle;
 
     private List<Students> studentList;
 
@@ -53,11 +53,11 @@ public class Class extends BaseModel{
         this.clname = clname;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getFettle() {
+        return fettle;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setFettle(Integer fettle) {
+        this.fettle = fettle;
     }
 }

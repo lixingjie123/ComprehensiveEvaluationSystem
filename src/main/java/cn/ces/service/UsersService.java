@@ -57,8 +57,8 @@ public class UsersService {
     //按条件分页查询
     public Map<String,Object> selectUserByRidAndUname(int pageIndex, int pageSiz,String like_r,String like_un){
         Map<String,Object> result = new HashMap<String,Object>();
-        int total=usersDao.getRidAndUnameCount(like_r,like_un);
-        List<Users> rows=usersDao.selectUserByRidAndUname(pageIndex,pageSiz,like_r,like_un);
+        int total=usersDao.getRidAndUnameCount(like_r,like_un);//获取查询结果总数
+        List<Users> rows=usersDao.selectUserByRidAndUname(pageIndex,pageSiz,like_r,like_un);//获取查询结果
         result.put("total",total);
         result.put("rows",rows);
         return result;
