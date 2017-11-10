@@ -108,7 +108,7 @@
                 field: 'rid',
                 align: 'center',
                 formatter:function(value,row,index){
-                    var e = '<a href="#" mce_href="#" onclick="edit(\''+ row.rid + '\')">编辑</a> ';
+                    var e = '<a href="#" mce_href="#" onclick="edit(\''+ row.rid + '\',\' ' +row.rname+ '\')">编辑</a> ';
                     var d = '<a href="#" mce_href="#" onclick="del(\''+ row.rid +'\')">删除</a> ';
                     return e+d;
                 }
@@ -142,7 +142,7 @@
 				},
 				success: function(data) {
 					alert(data)
-					window.location.href="/index.jsp";
+					window.location.href="/Role/index.jsp";
 			
 				}
 				});	
@@ -154,8 +154,8 @@
 	
 	
 	}
-	function edit(id){
+	function edit(id,name){
 		alert
-		window.location.href="/Menu/edit.jsp?pid="+id;
+		window.location.href="/Role/edit.jsp?rid="+id+"&&rname="+name;
 	}
 </script>

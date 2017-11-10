@@ -44,7 +44,7 @@
 
 <form class="form-inline definewidth m20" action="index.jsp" method="get" id="form">
     菜单名称：
-    <input type="text" name="pname" id="pname"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
+    <input type="text" name="pname" id="pname"class="abc input-default" placeholder="" value="">&nbsp;&nbsp; 
     <button class="btn btn-primary" id=query type="submit">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">新增菜单</button>
 </form>
 <table class="table table-bordered table-hover definewidth m10" id="table">

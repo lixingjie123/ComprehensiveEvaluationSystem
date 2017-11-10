@@ -101,7 +101,7 @@
 =======
 <script>
     BUI.use('common/main',function(){
-        var config = [{id:'1',menu:[{text:'权限管理',items:[{id:'3',text:'角色管理',href:'Role/index.html'},{id:'4',text:'用户管理',href:'User/index.jsp'},{id:'6',text:'菜单管理',href:'Menu/index.jsp'}]},
+        var config = [{id:'1',menu:[{text:'权限管理',items:[{id:'3',text:'角色管理',href:'Role/index.jsp'},{id:'4',text:'用户管理',href:'User/index.jsp'},{id:'6',text:'菜单管理',href:'Menu/index.jsp'}]},
             {text:'业务管理',items:[{id:'3',text:'系部管理',href:'Departement/index.jsp'},{id:'4',text:'班级管理',href:'classes/index.jsp'},{id:'6',text:'指标管理',href:'Menu/index.html'},{id:'6',text:'问卷管理',href:'questions/index.html'}]},
             {text:'其他',items:[{id:'3',text:'修改密码',href:'Role/index.html'},{id:'4',text:'显示详情',href:'User/index.html'}]}]}];
         new PageUtil.MainPage({

@@ -38,126 +38,72 @@ body {
 }
 </style>
 <script>
-$(function () {
-    var dept_name;
-    $("#deptname").change(function () {
-        dept_name = $("#deptname").val();
+    $(function () {
+		$('#addnew').click(function(){
+				window.location.href="add.html";
+		 });
+		 var $table = $('#dtable');
+         $table.bootstrapTable({
+         url: "/selectPageDepart",
+         dataType: "json",
+         singleSelect: false,
+         height: 550,//高度调整
+         locale:'zh-CN',//中文支持
+         pagination: true,//是否开启分页（*）
+         pageNumber:1,//初始化加载第一页，默认第一页
+         pageSize: 5,//每页的记录行数（*）
+         pageList: [5,10,11],//可供选择的每页的行数（*）
+
+         sidePagination: "server", //服务端处理分页
+         showColumns: true,//列选择按钮
+         clickToSelect: true,
+         toolbar: "#toolbar",//指定工具栏
+         toolbarAlign: "right",//工具栏对齐方式
+         detailView: false, //是否显示详情折叠
+         cache:false,
+             columns: [
+         {
+             title: '系部id',
+             field: 'dept_id',
+             align: 'center',
+             valign: 'middle'
+         },
+         {
+             title: '系部名称',
+             field: 'dept_name',
+             align: 'center',
+             valign: 'middle', 
+         },
+         {
+             title: '操作',
+             field: 'dept_id',
+             align: 'center',
+             formatter:function(value,row,index){
+                 var e = '<a href="#" mce_href="#" onclick="edit(\''+ row.dept_id + '\')">编辑</a> ';
+                 var d = '<a href="#" mce_href="#" onclick="del(\''+ row.dept_id +'\')">删除</a> ';
+                 return e+d;
+             }
+         }
+     ]
+ });
     });
 
-	$(function() {
-		$('#addnew').click(function() {
-			window.location.href = "add.html";
-		});
-		var $table = $('#dtable');
-		$table.bootstrapTable({
-			url : "/selectPageDepart",
-			dataType : "json",
-			singleSelect : false,
-			height : 550,//高度调整
-			locale : 'zh-CN',//中文支持
-			pagination : true,//是否开启分页（*）
-			pageNumber : 1,//初始化加载第一页，默认第一页
-			pageSize : 5,//每页的记录行数（*）
-			pageList : [ 5, 10, 11 ],//可供选择的每页的行数（*）
-
-			sidePagination : "server", //服务端处理分页
-			showColumns : true,//列选择按钮
-			clickToSelect : true,
-			toolbar : "#toolbar",//指定工具栏
-			toolbarAlign : "right",//工具栏对齐方式
-			detailView : false, //是否显示详情折叠
-			cache : false,
-			columns : [
-					{
-						title : '系部id',
-						field : 'dept_id',
-						align : 'center',
-						valign : 'middle'
-					},
-					{
-						title : '系部名称',
-						field : 'dept_name',
-						align : 'center',
-						valign : 'middle',
-					},
-					{
-						title : '操作',
-						field : 'dept_id',
-						align : 'center',
-						formatter : function(value, row, index) {
-							var e = '<a href="#" mce_href="#" onclick="edit(\''
-									+ row.dept_id + '\')">编辑</a> ';
-							var d = '<a href="#" mce_href="#" onclick="del(\''
-									+ row.dept_id + '\')">删除</a> ';
-							return e + d;
-						}
-					} ]
-		});
-		
-		
-		$table.bootstrapTable({
-            url: "/selectDepartmentBydeptname?&dept_name="+getUrlParam("dept_name"),
-            dataType: "json",
-            singleSelect: false,
-            height: 550,//高度调整
-            locale:'zh-CN',//中文支持
-            pagination: true,//是否开启分页（*）
-            pageNumber:1,//初始化加载第一页，默认第一页
-            pageSize: 10,//每页的记录行数（*）
-            pageList: [5,10,11],//可供选择的每页的行数（*）
-
-            sidePagination: "server", //服务端处理分页
-            showColumns: true,//列选择按钮
-            clickToSelect: true,
-            toolbar: "#toolbar",//指定工具栏
-            toolbarAlign: "right",//工具栏对齐方式
-            detailView: false, //是否显示详情折叠
-            columns: [
-                {
-                    title: '系部ID',
-                    field: 'dept_id',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: '系部名称',
-                    field: 'dept_name',
-                    align: 'center',
-                    valign: 'middle',
-                    formatter:function(value,row,index){
-                        var e = '<a href="#"  mce_href="#" onclick="edit(\''+ row.dept_id + '\')">编辑</a> ';
-                        var d = '<a href="#"  mce_href="#" onclick="del(\''+ row.dept_id +'\')">删除</a> ';
-                        return e+d;
-                    }
-                }
-            ]
-        });
-
-	});
-
-	function getUrlParam(deptid) {
-        var reg = new RegExp("(^|&)" + deptid + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-        if (r != null) 
-        	return unescape(r[2]); 
-        return null; //返回参数值
-    }
-	
-	function del(id) {
-		if (confirm("确定要删除吗？")) {
+	function del(id)
+	{
+		if(confirm("确定要删除吗？"))
+		{
 			var url = "index.html";
-
-			window.location.href = url;
-
+			
+			window.location.href=url;		
+		
 		}
 	}
-})
 </script>
 </head>
 <body>
-<form class="form-inline definewidth m20" action="index.jsp" method="get">    
-    系部名称：
-    <input type="text" name="dept_name" id="deptname"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
+<form class="form-inline definewidth m20" action="index.html" method="get">    
+    用户名称：
+    <input type="text" name="username" id="username"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
     <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">新增系部</button>
 </form>
 <table class="table table-bordered table-hover definewidth m10" id="dtable">

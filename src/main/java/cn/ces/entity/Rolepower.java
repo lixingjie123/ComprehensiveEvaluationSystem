@@ -11,11 +11,11 @@ public class Rolepower extends BaseModel {
 	@Column(name = "rpid",type = MySqlTypeConstant.INT,length = 11,isKey = true,isAutoIncrement = true)
     private Integer	rpid;
 
-    @Column(name = "rid",type = MySqlTypeConstant.INT,length = 50)
-    private String	rid;
+    @Column(name = "rid",type = MySqlTypeConstant.INT,length = 11)
+    private Integer	rid;
     
-    @Column(name = "pid",type = MySqlTypeConstant.INT,length = 50)
-    private String	pid;
+    @Column(name = "pid",type = MySqlTypeConstant.INT,length = 11)
+    private Integer	pid;
 
     public Integer getRpid() {
         return rpid;
@@ -25,19 +25,19 @@ public class Rolepower extends BaseModel {
         this.rpid = rpid;
     }
 
-    public String getRid() {
+    public Integer getRid() {
         return rid;
     }
 
-    public void setRid(String rid) {
+    public void setRid(Integer rid) {
         this.rid = rid;
     }
 
-    public String getPid() {
+    public Integer getPid() {
         return pid;
     }
 
-    public void setPid(String pid) {
+    public void setPid(Integer pid) {
         this.pid = pid;
     }
 }

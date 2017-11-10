@@ -1,42 +1,26 @@
 package cn.ces.controller;
 
-import cn.ces.dao.UsersDao;
 import cn.ces.entity.Power;
 import cn.ces.entity.Role;
-import cn.ces.entity.Users;
+import cn.ces.entity.Rolepower;
 import cn.ces.service.PowerService;
 import cn.ces.service.RoleService;
-import cn.ces.service.UsersService;
+import cn.ces.tool.TreeNode;
+
 import com.mybatis.enhance.store.manager.common.BaseMysqlCRUDManager;
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.util.SystemOutLogger;
+import cn.ces.tool.TreeNodeTool;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 
 @Controller
@@ -44,11 +28,13 @@ public class RoleController {
 
     private final BaseMysqlCRUDManager baseMysqlCRUDManager;
     private final RoleService roleService;
+    private final PowerService powerService;
 
     @Autowired
-    public RoleController(BaseMysqlCRUDManager baseMysqlCRUDManager, RoleService roleService) {
+    public RoleController(BaseMysqlCRUDManager baseMysqlCRUDManager, RoleService roleService,PowerService powerService) {
         this.baseMysqlCRUDManager = baseMysqlCRUDManager;
         this.roleService = roleService;
+        this.powerService = powerService;
     }
 
     @GetMapping(value = "/selectrole")
@@ -68,23 +54,52 @@ public class RoleController {
     	 p="%"+rname+"%";} 
         return  roleService.selectallrole(offset, limit,p);
     }
-    @GetMapping(value = "/roleoption")
+    @PostMapping(value = "/rolepowertree",produces = "text/plain;charset=utf-8")
     @ResponseBody
-    public List<Power> poweroption(){
+    public String powertree(int rid){
     	
-    	List<Power> powerlist=roleService.selectpower();
+    	List<Power> powerlist=powerService.selectpower();
+    	List<Rolepower> rolepowerlist=roleService.selectpower(rid);
+    	TreeNode tl1 = null;
+    	String res = null;
+    	for(int i=0;i<powerlist.size();i++){
+    		Boolean b=false;
+    		for(int j=0;j<rolepowerlist.size();j++){
+    			if(powerlist.get(i).getPid()==rolepowerlist.get(j).getPid()){
+    				b=true;
+    			}
+    		}
+			tl1=TreeNodeTool.setTreeNode(tl1, powerlist.get(i).getPid(), powerlist.get(i).getFp_id(), powerlist.get(i).getPname(), powerlist.get(i).getUrl(),b);
+		     JSONArray json = JSONArray.fromObject(tl1);
+			res= json.get(0).toString();
+			res = "[" + res + "]";
+		}
+    	
+    	
 
-        return powerlist ;
+        return res ;
     }
     
     @PostMapping(value = "/seaverole",produces = "text/plain;charset=utf-8")
     @ResponseBody
-    public String seaverole(Role role){
-    	String msg; 
+    public String seaverole(Role role,String idlist){
+    	String msg;
+    	int ret[] = new int[idlist.length()];
+    	StringTokenizer toKenizer = new StringTokenizer(idlist, ",");
+    	int i = 0;
+    	while (toKenizer.hasMoreElements()) {
+         ret[i++] = Integer.valueOf(toKenizer.nextToken());
+    		}
        if(roleService.insterrole(role)){
-    	    msg = "添加成功";
+    	    msg = "添加角色成功";
        }else msg = "添加失败";
-
+       int rid=roleService.selectrolebyname(role.getRname()).getRid();
+       if(roleService.dispower(ret,rid)){
+    	   msg = "添加成功";
+       }else{
+    	   roleService.delectrole(rid);
+    	   msg = "添加失败";
+       }
         return msg;
     }
     
@@ -112,19 +127,29 @@ public class RoleController {
     }
     @PostMapping(value = "/updatarole",produces = "text/plain;charset=utf-8")
     @ResponseBody
-    public String updatapower(Role role){
-    	String msg; 
-    	Boolean a = roleService.delectrole(role.getRid());
-    	role.setRid(null);
-    	Boolean b = roleService.insterrole(role);
-       if(a&&b){
-    	    msg = "添加成功";
+    public String updatarole(Role role,String idlist){
+    	String msg;
+    	roleService.delectrole(role.getRid());
+    	roleService.delectpower(role.getRid());
+    	int ret[] = new int[idlist.length()];
+    	StringTokenizer toKenizer = new StringTokenizer(idlist, ",");
+    	int i = 0;
+    	while (toKenizer.hasMoreElements()) {
+         ret[i++] = Integer.valueOf(toKenizer.nextToken());
+    		}
+       if(roleService.insterrole(role)){
+    	    msg = "添加角色成功";
        }else msg = "添加失败";
-
+       int rid=roleService.selectrolebyname(role.getRname()).getRid();
+       if(roleService.dispower(ret,rid)){
+    	   msg = "添加成功";
+       }else{
+    	   roleService.delectrole(rid);
+    	   msg = "添加失败";
+       }
         return msg;
-    }
     
-
+    }
 
 
     

@@ -19,6 +19,9 @@ public interface PowerDao {
      @Select("select * from power where pid = #{pid}")
      Power selectpowerbyid(@Param("pid")int pid);
      
+     @Select("select * from power where pname = #{pname}")
+     Power selectpowerbyname(@Param("pname")String pname);
+     
      @Select("select * from power")
      List<Power> selectpoweroption();
      

@@ -5,6 +5,9 @@ import cn.ces.entity.Power;
 import cn.ces.entity.Users;
 import cn.ces.service.PowerService;
 import cn.ces.service.UsersService;
+import cn.ces.tool.TreeNode;
+import cn.ces.tool.TreeNodeTool;
+
 import com.mybatis.enhance.store.manager.common.BaseMysqlCRUDManager;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -73,6 +76,25 @@ public class PowerController {
     	List<Power> powerlist=powerService.selectpower();
 
         return powerlist ;
+    }
+    
+    @PostMapping(value = "/powertree",produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String powertree(){
+    	
+    	List<Power> powerlist=powerService.selectpower();
+    	TreeNode tl1 = null;
+    	String res = null;
+    	for(int i=0;i<powerlist.size();i++){
+			tl1=TreeNodeTool.setTreeNode(tl1, powerlist.get(i).getPid(), powerlist.get(i).getFp_id(), powerlist.get(i).getPname(), powerlist.get(i).getUrl(),false);
+		     JSONArray json = JSONArray.fromObject(tl1);
+			res= json.get(0).toString();
+			res = "[" + res + "]";
+		}
+    	
+    	
+
+        return res ;
     }
     
     @PostMapping(value = "/seavepower",produces = "text/plain;charset=utf-8")

@@ -2,6 +2,7 @@ package cn.ces.dao;
 
 import cn.ces.entity.Power;
 import cn.ces.entity.Role;
+import cn.ces.entity.Rolepower;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -30,8 +31,10 @@ public interface RoleDao {
     @Select("select * from power where pid = #{pid}")
     Power selectpowerbyid(@Param("pid")int pid);
     
-    @Select("select * from power")
-    List<Power> selectpoweroption();
+    @Select("select * from role where rname = #{rname}")
+    Role selectrolebyname(@Param("rname")String rname);
+    
+    
     
     @Insert("INSERT INTO role (rname)" +
            " VALUES (#{rname})")
@@ -39,4 +42,7 @@ public interface RoleDao {
     
     @Delete("delete from role where rid = #{rid}")
     int delectrolebyid(@Param("rid")int rid);
+    
+	@Insert("INSERT INTO rolepower (rid,pid) VALUES (1,1)")
+    int insterpoaerrole();
 }
