@@ -119,7 +119,7 @@ public class UsersService {
 
     //生成部门动态下拉列表框
     public List<Department> selectDeptOption(){
-        return departmentDao.selectDeptAll();
+        return departmentDao.selectDepartmentAll();
     }
 
     //生成班级动态下拉列表
