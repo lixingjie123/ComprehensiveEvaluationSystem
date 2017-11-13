@@ -64,6 +64,7 @@
 
 				window.location.href="/Menu/add.jsp";
 		 });
+    	
 		alert(decodeURI(getUrlParam("pname")));
         var $table = $('#table');
             $table.bootstrapTable({
@@ -84,12 +85,6 @@
             toolbarAlign: "right",//工具栏对齐方式
             detailView: false, //是否显示详情折叠
             cache:false,
-            
-            
-         
-
-               
-               
                 columns: [
             {
                 title: '菜单id',
@@ -129,43 +124,39 @@
 
     });
 	
-	        function getUrlParam(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-            if (r != null) return unescape(r[2]); return null; //返回参数值
-        }
-	function del(id)
-	{
-		
-		
-		if(confirm("确定要删除吗？"))
-		{
-		
-               $.ajax({
-				
-				type: "get",
-				url:"/delectpower?pid="+id, 
-				
-				
-				error: function(request) {
-				alert("发送请求失败！");
+	        
+	function getUrlParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+		var r = window.location.search.substr(1).match(reg); //匹配目标参数
+		if (r != null)
+			return unescape(r[2]);
+		return null; //返回参数值
+	}
+	
+	function del(id) {
+
+		if (confirm("确定要删除吗？")) {
+
+			$.ajax({
+
+				type : "get",
+				url : "/delectpower?pid=" + id,
+
+				error : function(request) {
+					alert("发送请求失败！");
 				},
-				success: function(data) {
+				success : function(data) {
 					alert(data)
-					window.location.href="/index.jsp";
-			
+					window.location.href = "/index.jsp";
+
 				}
-				});	
-		
+			});
+
 		}
 
-	
-	
-	
-	
 	}
-	function edit(id){
+	function edit(id) {
 		alert
-		window.location.href="/Menu/edit.jsp?pid="+id;
+		window.location.href = "/Menu/edit.jsp?pid=" + id;
 	}
 </script>

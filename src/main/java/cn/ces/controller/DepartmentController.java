@@ -21,7 +21,7 @@ import cn.ces.entity.Power;
 import cn.ces.service.DepartmentService;
 import cn.ces.service.PowerService;
 import net.sf.json.JSONArray;
-
+//用于系部管理
 @Controller
 @SessionAttributes({"Department"})
 public class DepartmentController {
@@ -41,6 +41,16 @@ public class DepartmentController {
     	System.out.println(offset);
     	System.out.println(limit);
         return  departmentService.getPageDepart(offset,limit);
+    }
+    
+    @GetMapping(value = "/selectDepartmentByDidAndDname")
+    @ResponseBody
+    public Map<String,Object> selectDepartmentByDidAndDname(int offset, int limit, String dept_name){
+        String name = "%%";
+        if (!dept_name.equals(null)&&!dept_name.equals("")&&!dept_name.equals("null")){
+            name = "%"+dept_name+"%";
+        }
+        return  departmentService.selectDepartmentByDidAndDname(offset, limit, name);
     }
     
 }
