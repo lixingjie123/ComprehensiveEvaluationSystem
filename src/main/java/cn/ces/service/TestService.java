@@ -27,7 +27,7 @@ public class TestService {
         return testDao.selectAll();
     }
 
-    public Department selectDeptAll(Integer deptId){
-        return departmentDao.selectDeptid(deptId);
+    public Department selectDeptAll(Integer dept_id){
+        return departmentDao.selectDepartmentByid(dept_id);
     }
 }
