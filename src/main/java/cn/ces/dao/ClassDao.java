@@ -1,6 +1,7 @@
 package cn.ces.dao;
 
 import cn.ces.entity.Class;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -30,4 +31,11 @@ public interface ClassDao {
 
     @Update("update class set fettle = #{fettle} where clid = #{clid}")
     int updateClassOfFettle(@Param("fettle")Integer fettle,@Param("clid") Integer clid);
+
+    @Update("update class set clname = #{clname}, fettle = #{fettle} where clid = #{clid}")
+    int updateClass(Class aClass);
+
+    @Insert("INSERT INTO class (clname,fettle) " +
+            " VALUES (#{clname},#{fettle})")
+    int insertClass(Class aClass);
 }

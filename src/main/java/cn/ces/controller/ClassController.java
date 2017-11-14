@@ -5,6 +5,7 @@ import cn.ces.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
@@ -43,4 +44,21 @@ public class ClassController {
         return classService.updateClssOfFettle(clid);
     }
 
+    @GetMapping(value = "/selectClassByClid")
+    @ResponseBody
+    public Class selectClassByClid(Integer clid){
+        return classService.selectClassByClid(clid);
+    }
+
+    @PostMapping(value = "/updateClass",produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String updateClass(Class aClass){
+        return classService.UpdateClass(aClass);
+    }
+
+    @PostMapping(value = "/addClass",produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String addClass(Class aClass){
+        return classService.AddClass(aClass);
+    }
 }

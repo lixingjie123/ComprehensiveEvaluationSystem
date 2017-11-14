@@ -11,6 +11,7 @@
     <script type="text/javascript" src="../Js/bootstrap.js"></script>
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
+    <script type="text/javascript" src="../Js/jquery.form.js"></script>
 
  
 
@@ -35,24 +36,24 @@
     </style>
 </head>
 <body>
-<form action="index.html" method="post" class="definewidth m20">
+<form action="/addClass" method="post" class="definewidth m20" id="addClassFrom">
 <table class="table table-bordered table-hover definewidth m10">
     <tr>
         <td width="10%" class="tableleft">班级名</td>
-        <td><input type="text" name="username"/></td>
+        <td><input type="text" name="clname"/></td>
     </tr>
 
     <tr>
         <td class="tableleft">状态</td>
         <td>
-            <input type="radio" name="status" value="1" checked/> 启用
-           <input type="radio" name="status" value="0"/> 禁用
+            <input type="radio" name="fettle" value="1" checked/> 启用
+           <input type="radio" name="fettle" value="0"/> 禁用
         </td>
     </tr>
     <tr>
         <td class="tableleft"></td>
         <td>
-            <button type="submit" class="btn btn-primary" type="button">保存</button> &nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
+            <button class="btn btn-primary" id="addClassFromBtn" type="button">保存</button> &nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
         </td>
     </tr>
 </table>
@@ -60,10 +61,13 @@
 </body>
 </html>
 <script>
-    $(function () {       
-		$('#backid').click(function(){
-				window.location.href="index.html";
-		 });
-
+    $(function () {
+        $("#addClassFromBtn").click(function () {
+            $("#addClassFrom").ajaxSubmit(function (data) {
+                alert(data);
+                var url = "index.jsp";
+                window.location.href=url;
+            });
+        });
     });
 </script>

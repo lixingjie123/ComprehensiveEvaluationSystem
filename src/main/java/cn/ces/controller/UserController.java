@@ -48,12 +48,10 @@ import java.util.Map;
 @Controller
 public class UserController {
 
-    private final BaseMysqlCRUDManager baseMysqlCRUDManager;
     private final UsersService usersService;
 
     @Autowired
-    public UserController(BaseMysqlCRUDManager baseMysqlCRUDManager, UsersService usersService) {
-        this.baseMysqlCRUDManager = baseMysqlCRUDManager;
+    public UserController( UsersService usersService) {
         this.usersService = usersService;
     }
 
@@ -99,15 +97,14 @@ public class UserController {
     @PostMapping(value = "/updateUserByUid",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String updateUserByUid(Users users){
-        String msg =usersService.updateUsersByUid(users);
-        return msg;
+        return usersService.updateUsersByUid(users);
     }
+
     @GetMapping(value = "/deleteUser",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String deleteUser(HttpServletRequest request){
         int uid = Integer.parseInt(request.getParameter("uid"));
-        String msg= usersService.deleteUser(uid);
-       return msg;
+       return usersService.deleteUser(uid);
     }
 
     @PostMapping(value = "/addUsersByExcel",produces = "text/plain;charset=utf-8")

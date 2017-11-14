@@ -39,20 +39,52 @@ public class ClassService {
 
     //修改班级状态
     public String updateClssOfFettle(Integer clid){
-        String msg = "修改成功";
+        String msg = "启用成功";
         Integer fettle = 1;
-        Class aClass = new Class();
         try{
-            aClass = classDao.selectClassByClid(clid);
+            Class  aClass = classDao.selectClassByClid(clid);
             fettle = aClass.getFettle();
             if (fettle!=0){
                 fettle = 0;
+                msg = "禁用成功";
             }else {
                 fettle = 1;
+                msg = "启用成功";
             }
             classDao.updateClassOfFettle(fettle,clid);
         }catch (Exception e){
             msg=e.getMessage();
+        }
+        return msg;
+    }
+
+    //通过clid查询Class
+    public Class selectClassByClid(Integer clid){
+        return classDao.selectClassByClid(clid);
+    }
+
+    //修改班级
+    public String UpdateClass(Class aClass){
+        String msg =  "修改失败!";
+        try{ int p = classDao.updateClass(aClass);
+            if (p!=0){
+                msg = "修改成功！";
+            }
+        }catch (Exception e){
+            msg = e.getMessage();
+        }
+        return msg;
+    }
+
+    //新增班级
+    public String AddClass(Class aClass){
+        String msg = "添加失败";
+        try{ int p = classDao.insertClass(aClass);
+            if (p!=0){
+                msg = "添加成功！";
+            }
+        }catch (Exception e){
+            msg = e.getMessage();
         }
         return msg;
     }
