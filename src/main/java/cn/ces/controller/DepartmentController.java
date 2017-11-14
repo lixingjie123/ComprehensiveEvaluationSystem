@@ -1,6 +1,7 @@
 package cn.ces.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -20,6 +22,8 @@ import cn.ces.entity.Department;
 import cn.ces.entity.Power;
 import cn.ces.service.DepartmentService;
 import cn.ces.service.PowerService;
+import cn.ces.tool.TreeNode;
+import cn.ces.tool.TreeNodeTool;
 import net.sf.json.JSONArray;
 //用于系部管理
 @Controller
@@ -34,23 +38,22 @@ public class DepartmentController {
     	this.baseMysqlCRUDManager=baseMysqlCRUDManager;
     	this.departmentService=departmentService;
     }
-    
-    @GetMapping(value = "/selectPageDepart")
+    @GetMapping(value = "/selectDepartment")
     @ResponseBody
-    public Map<String,Object> selectPageDepart(int offset, int limit){
-    	System.out.println(offset);
-    	System.out.println(limit);
-        return  departmentService.getPageDepart(offset,limit);
-    }
-    
-    @GetMapping(value = "/selectDepartmentByDidAndDname")
-    @ResponseBody
-    public Map<String,Object> selectDepartmentByDidAndDname(int offset, int limit, String dept_name){
-        String name = "%%";
-        if (!dept_name.equals(null)&&!dept_name.equals("")&&!dept_name.equals("null")){
-            name = "%"+dept_name+"%";
-        }
-        return  departmentService.selectDepartmentByDidAndDname(offset, limit, name);
+    public Map<String,Object> selectDepartment(int offset, int limit,String dept_name){
+    		try {
+    			dept_name=URLDecoder.decode(dept_name,"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	System.out.println(dept_name);
+    	String p="%%";
+    	if(!dept_name.equals("null")){
+    	 p="%"+dept_name+"%";
+    	 } 
+    	System.out.println(p);
+        return  departmentService.selectDepartmentall(offset, limit, p);
     }
     
 }

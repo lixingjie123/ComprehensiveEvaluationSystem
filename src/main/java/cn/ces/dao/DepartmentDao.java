@@ -19,24 +19,22 @@ import java.util.Map;
  * Time: 15:18
  */
 public interface DepartmentDao {
+	
+	@Select("select * from department where dept_name like #{dept_name} limit #{pageIndex},#{pageSize}")
+    List<Department> selectDepartment(@Param("pageIndex")int pageIndex,@Param("pageSize")int pageSize,@Param("dept_name")String dept_name);
 
+	@Select("select count(*) from department where dept_name like #{dept_name}")
+    int selectDepartmentcount(@Param("dept_name")String dept_name);
+	
     @Select("select * from department where dept_id = #{dept_id}")
     Department selectDepartmentByid(@Param("dept_id")int dept_id);
+    
+    @Select("select * from department where dept_name = #{dept_name}")
+    Department selectDepartmentbyname(@Param("dept_name")String dept_name);
 
     @Select("select * from department")
     List<Department> selectDepartmentAll();
-    
-    @Select("select count(*) from department")
-    int selectDepartmentcount();
-    
-    @Select("select * from department limit #{pageIndex},#{pageSize}")
-    List<Department> selectPageList(@Param("pageIndex")int pageIndex,@Param("pageSize")int pageSize);
-    
-    @Select("select * from department where dept_name like #{dept_name} limit #{pageIndex},#{pageSize}")
-    List<Department> selectDepartmentByDidAndDname(@Param("pageIndex")int pageIndex,@Param("pageSize")int pageSize,
-                                        @Param("dept_name")String dept_name);
 
-    @Select("select count(*) from department where dept_name like #{dept_name}")
-    int getDnameCount(@Param("dept_name")String dept_name);
+   
 }
 

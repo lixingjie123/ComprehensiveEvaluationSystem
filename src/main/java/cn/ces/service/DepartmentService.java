@@ -18,26 +18,21 @@ public class DepartmentService {
 	@Autowired
 	private DepartmentDao departmentDao;
 	//分页查询
-	public Map<String,Object> getPageDepart(int pageIndex, int pageSiz){
+	public Map<String,Object> selectDepartmentall(int pageIndex, int pageSize,String dept_name){
         Map<String,Object> result = new HashMap<String,Object>();
-        int total=departmentDao.selectDepartmentcount();
-        List<Department> rows=departmentDao.selectPageList(pageIndex,pageSiz);
+        int total = departmentDao.selectDepartmentcount(dept_name);
+        List<Department> rows = departmentDao.selectDepartment(pageSize,pageIndex,dept_name);
+        for(int i=0;i<rows.size();i++){
+        	Department dept = departmentDao.selectDepartmentByid(rows.get(i).getDept_id());
+        	if(dept!=null){
+        	rows.get(i).setDept_name(dept.getDept_name());
+        	}
+        }
         result.put("total",total);
         result.put("rows",rows);
         return result;
     }
-    //查询所有的系部
-	public List<Department> selectAllDepartment() {
+	/*public List<Department> selectDepartment() {
 		return departmentDao.selectDepartmentAll();
-	}
-	
-	//按条件分页查询
-    public Map<String,Object> selectDepartmentByDidAndDname(int pageIndex, int pageSiz,String dept_name){
-        Map<String,Object> result = new HashMap<String,Object>();
-        int total=departmentDao.getDnameCount(dept_name);//获取查询结果总数
-        List<Department> rows=departmentDao.selectDepartmentByDidAndDname(pageIndex,pageSiz,dept_name);//获取查询结果
-        result.put("total",total);
-        result.put("rows",rows);
-        return result;
-    }
+	}*/
 }
