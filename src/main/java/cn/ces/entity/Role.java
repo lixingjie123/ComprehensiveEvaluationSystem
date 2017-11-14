@@ -1,12 +1,9 @@
 package cn.ces.entity;
 
-import cn.ces.dao.UsersDao;
 import com.mybatis.enhance.store.annotation.Column;
 import com.mybatis.enhance.store.annotation.Table;
 import com.mybatis.enhance.store.command.BaseModel;
 import com.mybatis.enhance.store.constants.MySqlTypeConstant;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
 
 @Table(name="role")

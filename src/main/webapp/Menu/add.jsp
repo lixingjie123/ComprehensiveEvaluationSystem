@@ -15,6 +15,10 @@
     <script type="text/javascript" src="../Js/bootstrap.js"></script>
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
+        <link rel="stylesheet" type="text/css" href="../Css/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../Css/icon.css">
+	<link rel="stylesheet" type="text/css" href="../Css/demo.css">
+	<script type="text/javascript" src="../Js/jquery.easyui.min.js"></script>
 
     <style type="text/css">
         body {
@@ -42,17 +46,16 @@
     <tr>
         <td width="10%" class="tableleft">上级</td>
         <td>
-            <select name="fp_id" id="power">
-            </select>
+        <input id="cc" value="菜单">  
         </td>
     </tr>
     <tr>
         <td class="tableleft">名称</td>
-        <td><input type="text" name="pname"/></td>
+        <td><input type="text" name="pname" id="pname"/></td>
     </tr>
     <tr>
         <td class="tableleft">url</td>
-        <td><input type="text" name="url"/></td>
+        <td><input type="text" name="url" id="url"/></td>
     </tr>
     <tr>
         <td class="tableleft"></td>
@@ -65,17 +68,29 @@
 </body>
 </html>
 <script>
+$('#cc').combotree({    
+    url: '/powertree',
+    checkbox:true,
+    multiple:false,
+    cascadeCheck:true,
+    required: true   
+});  
     $(function () {       
 		$('#backid').click(function(){
 				window.location.href="index.jsp";
 		 });
 		$('#seave').click(function(){
-			
+			  var t = $('#cc').combotree('tree');	// 获取树对象
+			  var n = t.tree('getSelected');		// 获取选择的节点
+			  alert(n.id)
 			$.ajax({
 				
 				type: "POST",
 				url:"/seavepower", 
-				data:$('#formset').serialize(), //要发送的是ajaxFrm表单中的数据
+				data:{pname:$("#pname").val(),
+					url:$("#url").val(),
+					fp_id:n.id
+				}, //要发送的是ajaxFrm表单中的数据
 				
 				error: function(request) {
 				alert("发送请求失败！");
@@ -89,26 +104,7 @@
 	 });
 		
 			
-	            $.ajax({  
-	                url: "/poweroption",    //后台webservice里的方法名称  
-	                type: "get",  
-	                dataType: "json",  
-	                contentType: "application/json",  
-	                traditional: true,  
-	                success: function (data) {  
-	                    
-	                        var jsonObj =data;  
-	                        var optionstring = "";  
-	                        for (var j = 0; j < jsonObj.length; j++) {  
-	                            optionstring += "<option value=\"" + jsonObj[j].pid + "\" >" + jsonObj[j].pname + "</option>";  
-	                        }  
-	                        $("#power").html("<option value='0'>根节点</option> "+optionstring);  
-	                     
-	                },  
-	                error: function (msg) {  
-	                    alert("出错了！");  
-	                }  
-	            });            
+	           
 	      
    
 

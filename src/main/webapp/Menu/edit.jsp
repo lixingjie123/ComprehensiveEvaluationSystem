@@ -14,6 +14,10 @@
     <script type="text/javascript" src="../Js/bootstrap.js"></script>
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
+        <link rel="stylesheet" type="text/css" href="../Css/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../Css/icon.css">
+	<link rel="stylesheet" type="text/css" href="../Css/demo.css">
+	<script type="text/javascript" src="../Js/jquery.easyui.min.js"></script>
 
     <style type="text/css">
         body {
@@ -42,8 +46,8 @@
     <tr>
         <td width="10%" class="tableleft">上级</td>
         <td>
-            <select name="fp_id" id="power">
-            </select>
+            <input id="cc" value="菜单">  
+            
         </td>
     </tr>
     <tr>
@@ -65,39 +69,32 @@
 </body>
 </html>
 <script>
+$('#cc').combotree({    
+    url: '/powertree',
+    checkbox:true,
+    multiple:false,
+    cascadeCheck:true,
+    required: true   
+});  
     $(function () {       
 		$('#backid').click(function(){
 				window.location.href="index.jsp";
 		 });
 		//原数据
 		$.ajax({  
-            url: "/poweroption",    //后台webservice里的方法名称  
+            url: "/powergetbyid?pid="+getUrlParam("pid"),    
             type: "get",  
             dataType: "json",  
             contentType: "application/json",  
             traditional: true,  
             success: function (data) {  
                 
-                    var jsonObj =data;  
-                    var optionstring = "";
-                    var i=0;
-                    for (var j = 0; j < jsonObj.length; j++) {
-                    	if(jsonObj[j].pid==getUrlParam("pid")){
-                    		i=j;
-                    	}
-                    	
-                    }
-                    for(var j=0 ;j<jsonObj.length;j++){
-                    	if(jsonObj[i].fp_id==jsonObj[j].pid){
-                    		optionstring += "<option value=\"" + jsonObj[j].pid + "\" selected = 'selected' >" + jsonObj[j].pname + "</option>";  
-                    	}else{
-                        optionstring += "<option value=\"" + jsonObj[j].pid + "\" >" + jsonObj[j].pname + "</option>"; } 
-                    }
-                    $("#power").html("<option value='0'>根节点</option> "+optionstring);
-                    alert($("#panme"))
-                    $("#panme").val(jsonObj[i].pname);
-                    $("#url").val(jsonObj[i].url);
-                    $("#pid").val(jsonObj[i].pid);
+                    
+                    $("#panme").val(data.pname);
+                    $("#url").val(data.url);
+                    $("#pid").val(data.pid);
+                    var t = $('#cc').combotree('tree');
+                    t.tree("check",data.fp_id)
                     
                  
             },  

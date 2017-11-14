@@ -51,10 +51,11 @@ public class PowerController {
         this.baseMysqlCRUDManager = baseMysqlCRUDManager;
         this.powerService = powerService;
     }
-
+  //显示菜单列表，模糊查询菜单
     @GetMapping(value = "/selectpower")
     @ResponseBody
-    public Map<String,Object>  selectpower(int offset, int limit,String pname){
+    
+    public List<Power> selectpower(String pname){
     
     		try {
 				pname=URLDecoder.decode(pname,"UTF-8");
@@ -67,15 +68,15 @@ public class PowerController {
     	String p="%%";
       if(!pname.equals("null")){
     	 p="%"+pname+"%";} 
-        return  powerService.selectallpower(offset, limit,p);
+        return  powerService.selectallpower(p);
     }
-    @GetMapping(value = "/poweroption")
+    @GetMapping(value = "/powergetbyid")
     @ResponseBody
-    public List<Power> poweroption(){
+    public Power poweroption(Power p){
     	
-    	List<Power> powerlist=powerService.selectpower();
+    	Power power=powerService.selectposerbyid(p.getPid());
 
-        return powerlist ;
+        return power ;
     }
     
     @PostMapping(value = "/powertree",produces = "text/plain;charset=utf-8")
