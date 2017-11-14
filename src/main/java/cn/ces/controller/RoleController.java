@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -41,8 +42,7 @@ public class RoleController {
     @ResponseBody
     public Map<String,Object> selectrole(int offset, int limit,String rname){
        	try {
-    		rname=new String(rname.getBytes("iso8859-1"),"UTF-8");
-
+            rname= URLDecoder.decode(rname,"UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

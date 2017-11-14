@@ -67,7 +67,7 @@
 		alert(decodeURI(getUrlParam("rname")));
         var $table = $('#table');
             $table.bootstrapTable({
-            url: "/selectrole?rname="+getUrlParam("rname"),
+            url: "/selectrole?rname="+encodeURI(getUrlParam("rname")),
             dataType: "json",
             singleSelect: false,
             height: 550,//高度调整

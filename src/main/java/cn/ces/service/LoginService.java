@@ -40,7 +40,7 @@ public class LoginService {
 					msg="该账号与角色不匹配";
 				}
 			}else{
-				msg = "没有该账号";
+				msg = "该账号不存在";
 			}
 		result.put("msg", msg);
 		result.put("p", p);
