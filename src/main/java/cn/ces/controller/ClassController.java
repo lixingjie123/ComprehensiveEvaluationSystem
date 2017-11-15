@@ -22,7 +22,6 @@ import java.util.Map;
 public class ClassController {
 
     private final ClassService classService;
-
     @Autowired
     public ClassController(ClassService classService) {
         this.classService = classService;

@@ -37,11 +37,11 @@
     </dependency>
 
     <!-- Mybatis 自动建表与更新工具依赖 -->
-    <dependency>
-      <groupId>com.mybatis.enhance.store</groupId>
-      <artifactId>mybatis-enhance-actable</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
+      <dependency>
+          <groupId>com.gitee.sunchenbin.mybatis.actable</groupId>
+          <artifactId>mybatis-enhance-actable</artifactId>
+          <version>1.0.1</version>
+      </dependency>
 
     <!-- 添加junit4依赖 -->
     <dependency>

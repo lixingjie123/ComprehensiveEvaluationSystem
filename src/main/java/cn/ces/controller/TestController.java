@@ -2,7 +2,6 @@ package cn.ces.controller;
 import cn.ces.entity.Department;
 import cn.ces.entity.Test;
 import cn.ces.service.TestService;
-import com.mybatis.enhance.store.manager.common.BaseMysqlCRUDManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,13 +15,11 @@ import java.util.List;
 public class TestController {
 
     private final TestService testService;
-    private final BaseMysqlCRUDManager baseMysqlCRUDManager;
 
     @Autowired
-    public TestController(TestService testService, BaseMysqlCRUDManager baseMysqlCRUDManager) {
+    public TestController(TestService testService) {
         this.testService = testService;
-        this.baseMysqlCRUDManager = baseMysqlCRUDManager;
-    }
+}
 
   /*  @GetMapping(value = "/test")
     public String Test(ModelMap map){

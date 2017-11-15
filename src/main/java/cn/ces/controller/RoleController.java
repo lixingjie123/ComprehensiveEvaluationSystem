@@ -7,7 +7,6 @@ import cn.ces.service.PowerService;
 import cn.ces.service.RoleService;
 import cn.ces.tool.TreeNode;
 
-import com.mybatis.enhance.store.manager.common.BaseMysqlCRUDManager;
 import net.sf.json.JSONArray;
 import cn.ces.tool.TreeNodeTool;
 
@@ -27,13 +26,11 @@ import java.util.StringTokenizer;
 @Controller
 public class RoleController {
 
-    private final BaseMysqlCRUDManager baseMysqlCRUDManager;
     private final RoleService roleService;
     private final PowerService powerService;
 
     @Autowired
-    public RoleController(BaseMysqlCRUDManager baseMysqlCRUDManager, RoleService roleService,PowerService powerService) {
-        this.baseMysqlCRUDManager = baseMysqlCRUDManager;
+    public RoleController( RoleService roleService,PowerService powerService) {
         this.roleService = roleService;
         this.powerService = powerService;
     }

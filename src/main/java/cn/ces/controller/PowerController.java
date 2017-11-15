@@ -8,7 +8,6 @@ import cn.ces.service.UsersService;
 import cn.ces.tool.TreeNode;
 import cn.ces.tool.TreeNodeTool;
 
-import com.mybatis.enhance.store.manager.common.BaseMysqlCRUDManager;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -43,12 +42,10 @@ import java.util.Map;
 @Controller
 public class PowerController {
 
-    private final BaseMysqlCRUDManager baseMysqlCRUDManager;
     private final PowerService powerService;
 
     @Autowired
-    public PowerController(BaseMysqlCRUDManager baseMysqlCRUDManager, PowerService powerService) {
-        this.baseMysqlCRUDManager = baseMysqlCRUDManager;
+    public PowerController( PowerService powerService) {
         this.powerService = powerService;
     }
   //显示菜单列表，模糊查询菜单

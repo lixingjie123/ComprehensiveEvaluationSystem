@@ -1,9 +1,10 @@
 package cn.ces.entity;
 
-import com.mybatis.enhance.store.annotation.Column;
-import com.mybatis.enhance.store.annotation.Table;
-import com.mybatis.enhance.store.command.BaseModel;
-import com.mybatis.enhance.store.constants.MySqlTypeConstant;
+
+import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
+import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
+import com.gitee.sunchenbin.mybatis.actable.command.BaseModel;
+import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,7 +15,7 @@ import com.mybatis.enhance.store.constants.MySqlTypeConstant;
  */
 
 @Table(name = "students")
-public class Students extends BaseModel{
+public class Students extends BaseModel {
 
     @Column(name = "sid",type = MySqlTypeConstant.INT,length = 11,isKey = true,isAutoIncrement = true)
     private Integer sid;
