@@ -1,14 +1,11 @@
 package cn.ces.controller;
 import cn.ces.entity.Department;
-import cn.ces.entity.Test;
 import cn.ces.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
-import java.util.List;
 
 @Controller
 @SessionAttributes({"Test"})

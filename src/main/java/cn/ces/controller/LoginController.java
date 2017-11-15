@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.ces.service.LoginService;
 
-import javax.xml.registry.infomodel.User;
 
 @Controller
 public class LoginController {
