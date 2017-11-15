@@ -19,12 +19,15 @@ public class DepartmentService {
 	public Map<String,Object> selectDepartmentall(int pageIndex, int pageSize,String dept_name){
         Map<String,Object> result = new HashMap<String,Object>();
         int total = departmentDao.selectDepartmentcount(dept_name);
-        List<Department> rows = departmentDao.selectDepartment(pageIndex,pageSize,dept_name);
+        List<Department> rows = departmentDao.selectDepartment(pageIndex, pageSize,dept_name);
         result.put("total",total);
         result.put("rows",rows);
         return result;
-    }
+	
+	}
+	
 	/*public List<Department> selectDepartment() {
-		return departmentDao.selectDepartmentAll();
+         return departmentDao.selectDepartmentall();
 	}*/
+	
 }
