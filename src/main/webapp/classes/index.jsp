@@ -139,8 +139,8 @@
 
         window.location.href=url;
     }
-    function mode(clid)
-    {
+    
+    function mode(clid){
         var url = "/updateStatus?clid="+clid;
 
         $.ajax({

@@ -71,4 +71,14 @@ public class Department extends BaseModel{
     public void setDept_name(String dept_name) {
         this.dept_name = dept_name;
     }
+
+	public Integer getFettle() {
+		return fettle;
+	}
+
+	public void setFettle(Integer fettle) {
+		this.fettle = fettle;
+	}
+
+	
 }

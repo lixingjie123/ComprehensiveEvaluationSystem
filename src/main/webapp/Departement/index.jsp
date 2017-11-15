@@ -56,9 +56,13 @@ body {
     		$("#dname").val(encodeURI($("#dname").val()));
     	})
     	
-		$('#addnew').click(function() {
-			window.location.href = "add.html";
-		});
+    	//接收上一个页面传值
+        function getUrlParam(uid) {
+            var reg = new RegExp("(^|&)" + uid + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+		
 		alert(decodeURI(getUrlParam("dept_name")));
         var $table = $('#dtable');
             $table.bootstrapTable({
@@ -93,12 +97,29 @@ body {
                 valign: 'middle',
             },
             {
+                title: '系部状态',
+                field: 'fettle',
+                align: 'center',
+                formatter:function (value,row,index) {
+                    if (row.fettle!=0){
+                        return "启用";
+                    }else {
+                        return "禁用";
+                    }
+                }
+            },
+            {
                 title: '操作',
                 field: 'dept_id',
                 align: 'center',
                 formatter:function(value,row,index){
-                    var e = '<a href="#" mce_href="#" onclick="edit(\''+ row.dept_id + '\')">编辑</a> ';
-                    var d = '<a href="#" mce_href="#" onclick="del(\''+ row.dept_id +'\')">删除</a> ';
+                    var e = '<a href="#"  mce_href="#" onclick="edit(\''+ row.dept_id + '\')">编辑</a> ';
+                    var d ;
+                    if (row.fettle!=0){
+                        d='<a href="#"  mce_href="#"   onclick="mode(\''+ row.dept_id + '\')">禁用系部</a> ';
+                    }else {
+                        d='<a href="#"  mce_href="#" onclick="mode(\''+ row.dept_id + '\')">启用系部</a> ';
+                    }
                     return e+d;
                 }
             }
@@ -106,18 +127,43 @@ body {
      });
 	});
 
+	$('#addnew').click(function() {
+		window.location.href = "add.jsp";
+	});
+	
 	function getUrlParam(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
         var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-        if (r != null) return unescape(r[2]); return null; //返回参数值
+        if (r != null) return unescape(r[2]); 
+        return null; //返回参数值
     }
 	
 	function del(id) {
 		if (confirm("确定要删除吗？")) {
 			var url = "index.html";
-
 			window.location.href = url;
-
 		}
+	}
+	
+	function edit(dept_id) {
+		var url = "edit.jsp?dept_id=" + dept_id;
+		window.location.href = url;
+	}
+
+	function mode(dept_id) {
+		var url = "/updateDepartmentStatus?dept_id=" + dept_id;
+		$.ajax({
+			url : url,
+			type : "GET",
+			processData : false,
+			contentType : false,
+			success : function(data) {
+				alert(data);
+				window.location.reload();
+			},
+			error : function(e) {
+				alert("错误！！");
+			}
+		})
 	}
 </script>
