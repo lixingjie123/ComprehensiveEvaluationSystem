@@ -26,6 +26,9 @@ public class Department extends BaseModel{
 
     @Column(name = "dept_name",type = MySqlTypeConstant.VARCHAR,length = 50)
     private String dept_name;
+    
+    @Column(name = "fettle",type = MySqlTypeConstant.INT,length = 1)
+    private Integer fettle;
 
     List<Leaders> leaderList;
 
