@@ -28,6 +28,6 @@ public class TestService {
     }
 
     public Department selectDeptAll(Integer dept_id){
-        return departmentDao.selectDepartmentByid(dept_id);
+        return departmentDao.selectDepartmentbyid(dept_id);
     }
 }

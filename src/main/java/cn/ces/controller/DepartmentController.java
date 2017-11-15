@@ -8,7 +8,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.gitee.sunchenbin.mybatis.actable.manager.common.BaseMysqlCRUDManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.mybatis.enhance.store.manager.common.BaseMysqlCRUDManager;
 
 import cn.ces.entity.Department;
 import cn.ces.entity.Power;
@@ -29,11 +29,13 @@ import net.sf.json.JSONArray;
 @Controller
 @SessionAttributes({"Department"})
 public class DepartmentController {
-
+	
+	private final BaseMysqlCRUDManager baseMysqlCRUDManager;
     private final DepartmentService departmentService;
     
     @Autowired
-    public DepartmentController(DepartmentService departmentService) {
+    public DepartmentController(BaseMysqlCRUDManager baseMysqlCRUDManager,DepartmentService departmentService) {
+    	this.baseMysqlCRUDManager=baseMysqlCRUDManager;
     	this.departmentService=departmentService;
     }
     @GetMapping(value = "/selectDepartment")
