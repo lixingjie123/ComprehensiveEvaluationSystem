@@ -101,7 +101,7 @@
         });
 
 		$('#backid').click(function(){
-				window.location.href="{:U('Department/index')}";
+				window.location.href="{:U('User/index')}";
 		 });
 
     });

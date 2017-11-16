@@ -35,12 +35,10 @@ public class DepartmentController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(dept_name);
 		String p = "%%";
 		if (!dept_name.equals("null")) {
 			p = "%" + dept_name + "%";
 		}
-		System.out.println(p);
 		return departmentService.selectDepartmentall(offset, limit, p);
 	}
 

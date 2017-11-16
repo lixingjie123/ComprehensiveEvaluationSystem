@@ -57,13 +57,12 @@ body {
     	})
     	
     	//接收上一个页面传值
-        function getUrlParam(uid) {
-            var reg = new RegExp("(^|&)" + uid + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        function getUrlParam(did) {
+            var reg = new RegExp("(^|&)" + did + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
             var r = window.location.search.substr(1).match(reg);  //匹配目标参数
             if (r != null) return unescape(r[2]); return null; //返回参数值
         }
 		
-		alert(decodeURI(getUrlParam("dept_name")));
         var $table = $('#dtable');
             $table.bootstrapTable({
             url: "/selectDepartment?dept_name="+encodeURI(getUrlParam("dept_name")),
@@ -130,13 +129,6 @@ body {
 	$('#addnew').click(function() {
 		window.location.href = "add.jsp";
 	});
-	
-	function getUrlParam(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-        if (r != null) return unescape(r[2]); 
-        return null; //返回参数值
-    }
 	
 	function del(id) {
 		if (confirm("确定要删除吗？")) {
