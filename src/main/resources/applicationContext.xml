@@ -64,6 +64,7 @@
 
 
 
+
     <!-- 自动扫描  @Service-->
     <context:component-scan base-package="cn.ces.service"/>
 
