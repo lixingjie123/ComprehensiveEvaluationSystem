@@ -19,23 +19,14 @@ public class PowerService {
     @Autowired
     private PowerDao pd;
 
-    public List<Power> selectallpower(String pname){
-       
-        
-        List<Power> rows=pd.selectpower(pname);
-        for(int i=0;i<rows.size();i++){
-        	Power p=pd.selectpowerbyid(rows.get(i).getFp_id());
-        	if(p!=null){
-        	rows.get(i).setFname(p.getPname());
-        	}
-        }
-       
-      
-        return rows;
+    //模糊查询菜单
+    public List<Power> selectpower(String pname){
+    	return pd.selectpower(pname);
     }
-    public List<Power> selectpower(){
-    	return pd.selectpoweroption();
+    public List<Power> selectpowertree(){
+    	return pd.selectpowertree();
     }
+    //插入菜单
     public Boolean insterpower(Power power){
     	Boolean b = false;
     	if(pd.insterpower(power)>0){
@@ -43,6 +34,7 @@ public class PowerService {
     	}else b=false;
     	return b ;
     }
+    //删除菜单
     public Boolean delectpower(int pid){
     	Boolean b = false;
     	if(pd.delectpowerbyid(pid)>0){
@@ -50,6 +42,7 @@ public class PowerService {
     	}else b=false;
     	return b ;
     }
+    //通过id查询菜单
     public Power selectposerbyid(int pid){
     	return pd.selectpowerbyid(pid);
     }

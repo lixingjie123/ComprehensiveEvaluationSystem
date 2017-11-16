@@ -140,7 +140,7 @@
  $.ajax({
 		
 		type: "post",
-		url:"/powertree", 
+		url:"/powertree?pname="+encodeURI(getUrlParam("pname")), 
 		
 		
 		error: function(request) {
@@ -175,10 +175,10 @@
 	    				width: "200"
 	    			},
 	    			{
-	    				headerText: "备注",
-	    				dataField: "assignee",
+	    				headerText: "Url",
+	    				dataField: "attributes",
 	    				headerAlign: "center",
-	    				handler: "customOrgName",
+	    				handler: "attributesUrl",
 	    				dataAlign: "center",
 	    				
 	    			},

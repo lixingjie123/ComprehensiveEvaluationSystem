@@ -70,7 +70,7 @@
 </html>
 <script>
 $('#cc').combotree({    
-    url: '/powertree',
+    url: '/powertree?pname=',
     checkbox:true,
     multiple:false,
     cascadeCheck:true,
@@ -82,7 +82,7 @@ $('#cc').combotree({
 		 });
 		//原数据
 		$.ajax({  
-            url: "/powergetbyid?pid="+getUrlParam("pid"),    
+            url: "/querypowerbyid?pid="+getUrlParam("pid"),    
             type: "get",  
             dataType: "json",  
             contentType: "application/json",  

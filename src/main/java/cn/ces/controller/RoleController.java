@@ -34,7 +34,7 @@ public class RoleController {
         this.roleService = roleService;
         this.powerService = powerService;
     }
-
+      //模糊查询角色，并分页
     @GetMapping(value = "/selectrole")
     @ResponseBody
     public Map<String,Object> selectrole(int offset, int limit,String rname){
@@ -51,11 +51,12 @@ public class RoleController {
     	 p="%"+rname+"%";} 
         return  roleService.selectallrole(offset, limit,p);
     }
+    //获取菜单下拉框
     @PostMapping(value = "/rolepowertree",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String powertree(int rid){
     	
-    	List<Power> powerlist=powerService.selectpower();
+    	List<Power> powerlist=powerService.selectpowertree();
     	List<Rolepower> rolepowerlist=roleService.selectpower(rid);
     	TreeNode tl1 = null;
     	String res = null;
@@ -76,7 +77,7 @@ public class RoleController {
 
         return res ;
     }
-    
+    //添加角色
     @PostMapping(value = "/seaverole",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String seaverole(Role role,String idlist){
@@ -99,12 +100,13 @@ public class RoleController {
        }
         return msg;
     }
-    
+    //删除角色，并删除分配的菜单
     @GetMapping(value = "/delectrole",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String delectrole(int rid){
     	String msg; 
         if(roleService.delectrole(rid)){
+        	roleService.delectpower(rid);
      	    msg = "删除成功";
         }else msg = "删除失败";
 
@@ -112,16 +114,7 @@ public class RoleController {
     	
     	
     }
-    
-    @GetMapping(value = "/queryrolebyid",produces = "text/plain;charset=utf-8")
-    public Power querypowerbyid(int pid,HttpServletResponse re){
-    	
-		
-			
-
-    	return roleService.selectposerbyid(pid);
-    	
-    }
+    //修改角色，并修改菜单列表
     @PostMapping(value = "/updatarole",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String updatarole(Role role,String idlist){

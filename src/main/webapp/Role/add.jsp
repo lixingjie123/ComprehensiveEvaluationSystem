@@ -69,7 +69,7 @@
 <script>
 
 $('#cc').combotree({    
-    url: '/powertree',
+    url: '/powertree?pname=',
     checkbox:true,
     multiple:true,
     cascadeCheck:true,

@@ -4,7 +4,7 @@
  * @link http://chenjumin.javaeye.com
  */
 TreeGrid = function(_config){
-	debugger;
+	
 	_config = _config || {};
 	
 	var s = "";
@@ -21,7 +21,7 @@ TreeGrid = function(_config){
 
 	//显示表头行
 	drowHeader = function(){
-		debugger;
+		
 		s += "<tr class='header' height='" + (_config.headerHeight || "25") + "'>";
 		var cols = _config.columns;
 		for(i=0;i<cols.length;i++){
@@ -144,7 +144,7 @@ TreeGrid = function(_config){
 
 		//展开、关闭下级节点
 		__root.find("img[folder='Y']").bind("click", function(){
-			debugger;	
+			
 			var trid = this.trid || this.getAttribute("trid");
 			var dom=__root.find("#" + trid)[0];			
 			var isOpen=dom.getAttribute("open");				
@@ -161,7 +161,7 @@ TreeGrid = function(_config){
 
 	//显示或隐藏子节点数据
 	showHiddenNode = function(_trid, _open){
-		debugger;
+	
 		if(_open == "N"){ //隐藏子节点
 			__root.find("#"+_trid).find("img[folder='Y']").attr("src", folderCloseIcon);
 			__root.find("tr[id^=" + _trid + "_]").css("display", "none");
@@ -173,7 +173,7 @@ TreeGrid = function(_config){
 
 	//递归检查下一级节点是否需要显示
 	showSubs = function(_trid){
-		debugger;
+	
 	//	var isOpen = __root.find("#" + _trid).attr("open");		
 		var isOpen=__root.find("#" + _trid)[0].getAttribute("open");			
 		if(isOpen == "Y"){
@@ -238,7 +238,7 @@ TreeGrid.json2str = function(obj){
 }
 
 TreeGrid.str2json = function(s){
-	debugger;
+	
 	var json = null;
     var explorer = navigator.userAgent;
 	if (explorer.indexOf("MSIE") >= 0) {
@@ -316,6 +316,17 @@ function TreeGridItem (_root, _rowId, _rowIndex, _rowData){
 		function customCheckBox(row, col){
 
 			return "<input type='checkbox'>";
+
+		}
+		
+		function attributesUrl(row, col){
+			
+			
+			var name = row[col.dataField].url
+			
+			
+
+			return name;
 
 		}
 

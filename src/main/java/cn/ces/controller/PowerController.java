@@ -30,39 +30,17 @@ public class PowerController {
     public PowerController( PowerService powerService) {
         this.powerService = powerService;
     }
-  //显示菜单列表，模糊查询菜单
-    @GetMapping(value = "/selectpower")
-    @ResponseBody
-    
-    public List<Power> selectpower(String pname){
-    
-    		try {
-				pname=URLDecoder.decode(pname,"UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-    	System.out.println(pname);
-    	String p="%%";
-      if(!pname.equals("null")){
-    	 p="%"+pname+"%";} 
-        return  powerService.selectallpower(p);
-    }
-    @GetMapping(value = "/powergetbyid")
-    @ResponseBody
-    public Power poweroption(Power p){
-    	
-    	Power power=powerService.selectposerbyid(p.getPid());
-
-        return power ;
-    }
+  //显示菜单列表，模糊查询菜单,树形显示
     
     @PostMapping(value = "/powertree",produces = "text/plain;charset=utf-8")
     @ResponseBody
-    public String powertree(){
-    	
-    	List<Power> powerlist=powerService.selectpower();
+    public String powertree(String pname){
+   
+   
+	String p="%%";
+  if(!pname.equals(null)&&pname!=""){
+	 p="%"+pname+"%";} 
+    	List<Power> powerlist=powerService.selectpower(p);
     	TreeNode tl1 = null;
     	String res = null;
     	for(int i=0;i<powerlist.size();i++){
@@ -76,7 +54,7 @@ public class PowerController {
 
         return res ;
     }
-    
+    //插入菜单
     @PostMapping(value = "/seavepower",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String seavepower(Power power){
@@ -88,6 +66,7 @@ public class PowerController {
         return msg;
     }
     
+    //删除菜单
     @GetMapping(value = "/delectpower",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String delectpower(int pid){
@@ -101,15 +80,17 @@ public class PowerController {
     	
     }
     
-    @GetMapping(value = "/querypowerbyid",produces = "text/plain;charset=utf-8")
-    public Power querypowerbyid(int pid,HttpServletResponse re){
+    @GetMapping(value = "/querypowerbyid")
+    @ResponseBody
+    public Power querypowerbyid(int pid){
     	
 		
-			
+    	Power p=powerService.selectposerbyid(pid);
 
-    	return powerService.selectposerbyid(pid);
+    	return p;
     	
     }
+    //修改菜单
     @PostMapping(value = "/updatapower",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String updatapower(Power power){

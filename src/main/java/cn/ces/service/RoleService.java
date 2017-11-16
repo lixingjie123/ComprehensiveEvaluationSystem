@@ -35,7 +35,7 @@ public class RoleService {
     }
 
 
-
+   //分页查询角色
     public Map<String,Object> selectallrole(int pageIndex, int pageSiz,String rname){
         Map<String,Object> result = new HashMap<String,Object>();
         int total=rd.selectcount(rname);
@@ -45,9 +45,11 @@ public class RoleService {
         result.put("rows",rows);
         return result;
     }
+    //查询角色菜单
     public List<Rolepower> selectpower(Integer rid){
     	return rpd.selectpoweroption(rid);
     }
+    //添加角色
     public Boolean insterrole(Role role){
     	Boolean b = false;
     	if(rd.insterrole(role)>0){
@@ -55,6 +57,7 @@ public class RoleService {
     	}else b=false;
     	return b ;
     }
+    //删除角色
     public Boolean delectrole(int rid){
     	Boolean b = false;
     	if(rd.delectrolebyid(rid)>0){
@@ -62,6 +65,7 @@ public class RoleService {
     	}else b=false;
     	return b ;
     }
+    //删除角色菜单
     public Boolean delectpower(int rid){
     	Boolean b = false;
     	if(rpd.delectpowerbyid(rid)>0){
@@ -69,12 +73,11 @@ public class RoleService {
     	}else b=false;
     	return b ;
     }
-    public Power selectposerbyid(int pid){
-    	return rd.selectpowerbyid(pid);
-    }
+   //名字查询角色
     public Role selectrolebyname(String rname){
     	return rd.selectrolebyname(rname);
     }
+    //添加分配角色
     public Boolean dispower(int[] powerid,int rid){
     	int p = 0;
     
