@@ -8,14 +8,12 @@
     <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
     <link rel="stylesheet" type="text/css" href="../Css/style.css" />
     <script type="text/javascript" src="../Js/jquery.js"></script>
+    <script type="text/javascript" src="../Js/jquery.sorted.js"></script>
     <script type="text/javascript" src="../Js/bootstrap.js"></script>
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
-    <link href="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.css" rel="stylesheet"/>
-
-    <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
-
-    <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="../Js/jquery.form.js"></script>
+    
 <title>Insert title here</title>
     <style type="text/css">
         body {
@@ -52,7 +50,7 @@
     <tr>
         <td class="tableleft"></td>
         <td>
-            <button type="submit" class="btn btn-primary" type="button" id="addDepartmentBtn">保存</button> &nbsp;&nbsp;
+            <button type="submit" class="btn btn-primary" type="button" id="addDepartmentFromBtn">保存</button> &nbsp;&nbsp;
             <button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
         </td>
     </tr>
@@ -62,7 +60,7 @@
 </html>
 <script>
 $(function () {
-    $("#addDepartmentBtn").click(function () {
+    $("#addDepartmentFromBtn").click(function () {
         $("#addDepartmentFrom").ajaxSubmit(function (data) {
             var url = "index.jsp";
             window.location.href=url;

@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
     <link rel="stylesheet" type="text/css" href="../Css/style.css" />
     <script type="text/javascript" src="../Js/jquery.js"></script>
@@ -35,7 +36,7 @@
 </head>
 <body>
 <form action="/updateDepartment" method="post" class="definewidth m20" id="updateDepartmentFrom">
-<input type="hidden" name="clid" id="clid" />
+<input type="hidden" name="dept_id" id="dept_id" />
     <table class="table table-bordered table-hover definewidth m10">
         <tr>
             <td width="10%" class="tableleft">系部名称</td>

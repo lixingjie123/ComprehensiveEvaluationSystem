@@ -32,7 +32,6 @@ public class Department extends BaseModel{
 
     List<Teachers> teacherList;
 
-
     public List<Leaders> getLeaderList() {
         return leaderList;
     }
@@ -72,6 +71,5 @@ public class Department extends BaseModel{
 	public void setFettle(Integer fettle) {
 		this.fettle = fettle;
 	}
-
-	
+    
 }

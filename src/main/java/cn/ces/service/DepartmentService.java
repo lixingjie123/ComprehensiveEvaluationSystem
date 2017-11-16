@@ -16,6 +16,7 @@ public class DepartmentService {
 
 	@Autowired
 	private DepartmentDao departmentDao;
+	
 	//分页查询
 	public Map<String,Object> selectDepartmentall(int pageIndex, int pageSize,String dept_name){
         Map<String,Object> result = new HashMap<String,Object>();
@@ -27,6 +28,7 @@ public class DepartmentService {
 	
 	}
 	
+	//根据系部id查询
 	public Department selectDepartmentbyid(Integer dept_id) {
 		return departmentDao.selectDepartmentbyid(dept_id);
 	}
@@ -34,7 +36,8 @@ public class DepartmentService {
 	//新增系部
     public String AddDepartment(Department aDepartment){
         String msg = "添加失败";
-        try{ int p = departmentDao.insertDepartment(aDepartment);
+        try{ 
+        	int p = departmentDao.insertDepartment(aDepartment);
             if (p!=0){
                 msg = "添加成功！";
             }
@@ -44,7 +47,7 @@ public class DepartmentService {
         return msg;
     }
     
-  //修改班级状态
+    //修改班级状态
     public String updateDepartmentOfFettle(Integer dept_id){
         String msg = "启用成功";
         Integer fettle = 1;
@@ -78,6 +81,5 @@ public class DepartmentService {
         }
         return msg;
     }
-
 	
 }

@@ -29,8 +29,7 @@ public interface DepartmentDao {
     @Select("select * from department")
     List<Department> selectDepartmentall();
     
-    @Insert("INSERT INTO department (dept_name,fettle) " +
-            " VALUES (#{dept_name},#{fettle})")
+    @Insert("INSERT INTO department (dept_name,fettle) " + " VALUES (#{dept_name},#{fettle})")
     int insertDepartment(Department aDepartment);
     
     @Update("update department set fettle = #{fettle} where dept_id = #{dept_id}")
