@@ -17,6 +17,7 @@
     <script type="text/javascript" src="../Js/bootstrap.js"></script>
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
+    <script type="text/javascript" src="../Js/prompt.alert.js"></script>
     <link href="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.css" rel="stylesheet"/>
 
     <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
@@ -63,13 +64,6 @@
 </html>
 <script>
     $(function () {
-        var rid;
-        var uname;
-        $("#role,#username").change(function () {
-            rid = $("#role").val();
-            uname = $("#username").val();
-            alert(rid +"    "+uname);
-        });
 
         $.ajax({
             url: "/selectRoleOption",    //后台webservice里的方法名称
@@ -94,28 +88,9 @@
 
             },
             error: function (msg) {
-                alert("出错了！");
+                prompt_alert("error","角色查询失败！");
             }
         });
-/*
-        $('#onlond').click(function () {
-            $.ajax({
-                url: "/onlondUser",
-                dataType: "json",
-                type: "get",
-                data: data,
-                success: function (data){
-
-                        alert(data);
-
-                },
-                error: function(data){
-
-                    alert(data);
-
-                }
-            });
-        });*/
 
         $('#addnew').click(function(){
 
@@ -221,13 +196,12 @@
                 processData:false,
                 contentType:false,
                 success:function(data){
-                    alert(data);
-                    window.location.reload();
+                    prompt_alert("success",data,"index.jsp");
                 },
                 error:function(e){
-                    alert("错误！！");
+                    prompt_alert("error","错误！！");
                 }
-            })
+            });
 
         }
 

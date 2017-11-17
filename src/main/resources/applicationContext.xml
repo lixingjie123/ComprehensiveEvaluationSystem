@@ -24,7 +24,7 @@
         <property name="username" value="group3" />
         <property name="password" value="123456" />
         <!-- 事务是否自动提交 -->
-        <property name="defaultAutoCommit" value="true"></property>
+        <property name="defaultAutoCommit" value="true"/>
     </bean>
 
     <!-- mybatis和spring完美整合，不需要mybatis的配置映射文件 -->
@@ -44,7 +44,7 @@
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="cn.ces.dao;com.gitee.sunchenbin.mybatis.actable.dao.*" />
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
     <!-- 自动扫描(自动注入mybatis-enhance-actable的Manager)必须要配置，否则扫描不到底层的mananger方法 -->

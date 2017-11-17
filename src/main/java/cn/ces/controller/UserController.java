@@ -92,8 +92,7 @@ public class UserController {
 
     @GetMapping(value = "/deleteUser",produces = "text/plain;charset=utf-8")
     @ResponseBody
-    public String deleteUser(HttpServletRequest request){
-        int uid = Integer.parseInt(request.getParameter("uid"));
+    public String deleteUser(Integer uid){
        return usersService.deleteUser(uid);
     }
 
