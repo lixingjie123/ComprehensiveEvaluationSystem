@@ -1,15 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 2017/10/30
-  Time: 12:01
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title></title>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
     <link rel="stylesheet" type="text/css" href="../Css/style.css" />
@@ -18,23 +12,22 @@
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
     <script type="text/javascript" src="../Js/prompt.alert.js"></script>
-    <link href="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.css" rel="stylesheet"/>
+    <link href="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.css" rel="stylesheet" />
 
     <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
 
     <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/locale/bootstrap-table-zh-CN.min.js"></script>
-
-
-
+    <title>Insert title here</title>
     <style type="text/css">
         body {
             padding-bottom: 40px;
         }
+
         .sidebar-nav {
             padding: 9px 0;
         }
 
-        @media (max-width: 980px) {
+        @media ( max-width : 980px) {
             /* Enable use of floated navbar text */
             .navbar-text.pull-right {
                 float: none;
@@ -42,23 +35,23 @@
                 padding-right: 5px;
             }
         }
-
-
     </style>
 </head>
 <body>
-
 <form class="form-inline definewidth m20" action="index.jsp" method="get">
-    选择角色：
-    <select name="rid" id="role" class="abc input-default"></select>
-    用户名称：
-    <input type="text" name="uname" id="uname"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;
-    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">新增用户</button>
+    选择角色： <select name="rid" id="role" class="abc input-default"></select>
+    用户名称： <input type="text" name="uname" id="uname" class="abc input-default" placeholder="" value="">&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>
+    &nbsp;&nbsp;
+    <button type="button" class="btn btn-success" id="addnew">新增用户</button>
 </form>
 
-<button id="onlond" ><a href="/onlondUser">下载用户信息</a></button>
+<button id="onlond">
+    <a href="/onlondUser">下载用户信息</a>
+</button>
 <br>
-<table class="table table-bordered table-hover definewidth m10" id="table">
+<table class="table table-bordered table-hover definewidth m10"
+       id="table">
 </table>
 </body>
 </html>
@@ -88,7 +81,7 @@
 
             },
             error: function (msg) {
-                prompt_alert("error","角色查询失败！");
+                prompt_alert("error","出错了！");
             }
         });
 
@@ -104,7 +97,6 @@
             url: "/selectUserByRidAndUname?rid="+getUrlParam("rid")+"&uname="+getUrlParam("uname"),
             dataType: "json",
             singleSelect: false,
-            height: 550,//高度调整
             locale:'zh-CN',//中文支持
             pagination: true,//是否开启分页（*）
             pageNumber:1,//初始化加载第一页，默认第一页
@@ -197,11 +189,12 @@
                 contentType:false,
                 success:function(data){
                     prompt_alert("success",data,"index.jsp");
+
                 },
                 error:function(e){
                     prompt_alert("error","错误！！");
                 }
-            });
+            })
 
         }
 

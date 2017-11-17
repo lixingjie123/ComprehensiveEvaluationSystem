@@ -12,6 +12,7 @@
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
     <script type="text/javascript" src="../Js/jquery.form.js"></script>
+    <script type="text/javascript" src="../Js/prompt.alert.js"></script>
 
  
 
@@ -64,9 +65,8 @@
     $(function () {
         $("#addClassFromBtn").click(function () {
             $("#addClassFrom").ajaxSubmit(function (data) {
-                alert(data);
-                var url = "index.jsp";
-                window.location.href=url;
+                prompt_alert("success",data,"index.jsp");
+
             });
         });
     });

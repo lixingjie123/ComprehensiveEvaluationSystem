@@ -5,10 +5,12 @@
   Time: 11:36
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
     <link rel="stylesheet" type="text/css" href="../Css/style.css" />
@@ -16,22 +18,23 @@
     <script type="text/javascript" src="../Js/bootstrap.js"></script>
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
+    <script type="text/javascript" src="../Js/prompt.alert.js"></script>
     <link href="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.css" rel="stylesheet"/>
 
     <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
 
     <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/locale/bootstrap-table-zh-CN.min.js"></script>
-
-
+    <title>Insert title here</title>
     <style type="text/css">
         body {
             padding-bottom: 40px;
         }
+
         .sidebar-nav {
             padding: 9px 0;
         }
 
-        @media (max-width: 980px) {
+        @media ( max-width : 980px) {
             /* Enable use of floated navbar text */
             .navbar-text.pull-right {
                 float: none;
@@ -39,8 +42,6 @@
                 padding-right: 5px;
             }
         }
-
-
     </style>
 </head>
 <body>
@@ -69,7 +70,6 @@
             url: "/selectPageByClname?clname="+getUrlParam("clname"),
             dataType: "json",
             singleSelect: false,
-            height: 550,//高度调整
             locale:'zh-CN',//中文支持
             pagination: true,//是否开启分页（*）
             pageNumber:1,//初始化加载第一页，默认第一页
@@ -139,7 +139,7 @@
 
         window.location.href=url;
     }
-    
+
     function mode(clid){
         var url = "/updateStatus?clid="+clid;
 
@@ -149,11 +149,11 @@
             processData:false,
             contentType:false,
             success:function(data){
-                alert(data);
-                window.location.reload();
+                prompt_alert("success",data,"index.jsp");
+
             },
             error:function(e){
-                alert("错误！！");
+                prompt_alert("error","错误！！");
             }
         })
     }

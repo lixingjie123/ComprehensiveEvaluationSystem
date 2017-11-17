@@ -11,6 +11,7 @@
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
     <script type="text/javascript" src="../Js/jquery.form.js"></script>
+    <script type="text/javascript" src="../Js/prompt.alert.js"></script>
 
  
 
@@ -79,9 +80,7 @@
         $("#updateSubmit").click(function () {
 
             $("#updateUserFrom").ajaxSubmit(function(data){
-                alert(data);
-                var url = "index.jsp";
-                window.location.href=url;
+                prompt_alert("success",data,"index.jsp");
             });
         });
 
@@ -110,7 +109,7 @@
 
             },
             error: function (msg) {
-                alert("出错了！");
+                prompt_alert("error","出错了！");
             }
         });
 
@@ -130,7 +129,7 @@
                 $("#rid").attr("onchange","this.selectedIndex=this.defaultIndex;");
             },
             error:function(e){
-                alert("错误！！");
+                prompt_alert("error","出错了！");
             }
         });
 

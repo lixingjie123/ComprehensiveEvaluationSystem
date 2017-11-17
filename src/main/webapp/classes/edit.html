@@ -12,6 +12,7 @@
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
     <script type="text/javascript" src="../Js/jquery.form.js"></script>
+    <script type="text/javascript" src="../Js/prompt.alert.js"></script>
 
 
 
@@ -74,14 +75,11 @@
 
         $("#updateClassFromBtn").click(function () {
             $("#updateClassFrom").ajaxSubmit(function (data) {
-                alert(data);
-                var url = "index.jsp";
-                window.location.href=url;
+                prompt_alert("success",data,"index.jsp");
             });
         });
 
 
-        alert(getUrlParam("clid"))
         $.ajax({
             url:"/selectClassByClid?clid="+getUrlParam("clid"),
             type:"GET",
@@ -99,7 +97,7 @@
                 }
             },
             error:function(e){
-                alert("错误！！");
+                prompt_alert("error","错误！！");
             }
         });
 
