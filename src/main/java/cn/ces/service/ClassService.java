@@ -62,6 +62,10 @@ public class ClassService {
     public Class selectClassByClid(Integer clid){
         return classDao.selectClassByClid(clid);
     }
+    
+    public List<Class> selectClass(){
+        return classDao.selectClassAll();
+    }
 
     //修改班级
     public String UpdateClass(Class aClass){

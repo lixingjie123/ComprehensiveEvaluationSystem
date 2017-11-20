@@ -35,6 +35,13 @@ public class CourseService {
         result.put("rows",rows);
         return result;
     }
+    public List<Course> selectallcourse2(){
+       
+        List<Course> rows=cd.selectCourseAll();
+        
+     
+        return rows;
+    }
     //添加课程
     public Boolean instercourse(Course course){
     	Boolean b = false;

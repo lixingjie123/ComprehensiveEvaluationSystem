@@ -36,8 +36,14 @@ public class PowerController {
     @ResponseBody
     public String powertree(String pname){
    
-   
+    	try {
+			pname = URLDecoder.decode(pname, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	String p="%%";
+	System.out.println(pname);
   if(!pname.equals(null)&&pname!=""){
 	 p="%"+pname+"%";} 
     	List<Power> powerlist=powerService.selectpower(p);

@@ -53,6 +53,14 @@ public class CourseController {
     	 p="%"+cname+"%";} 
         return  courseService.selectallcourse(offset, limit,p);
     }
+    //查询说有课程
+    @GetMapping(value = "/selectallcourse")
+    @ResponseBody
+    public List<Course> selectallcourse(){
+       	
+       
+        return  courseService.selectallcourse2();
+    }
     
     //添加课程
     @PostMapping(value = "/seavecourse",produces = "text/plain;charset=utf-8")

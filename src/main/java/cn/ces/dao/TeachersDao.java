@@ -21,6 +21,9 @@ public interface TeachersDao {
 
     @Select("select * from teachers where dept_id=#{deptId}")
     List<Teachers> selectTeachersByDept(@Param("deptId") Integer dept_id);
+    
+    @Select("select * from teachers ")
+    List<Teachers> selectTeachers();
 
     @Insert("INSERT INTO teachers (tid,dept_id) " +
             " VALUES (#{tid},#{deptId})")

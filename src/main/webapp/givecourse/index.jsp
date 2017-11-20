@@ -44,9 +44,13 @@
 <body>
 
 <form class="form-inline definewidth m20" action="index.jsp" method="get" id="form">
-    课程名称：
-    <input type="text" name="cname" id="cname"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
-    <button class="btn btn-primary" id=query type="submit">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">新增课程</button>
+  课程：
+    <input type="text" name="cname" id="cname"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;
+  教师：
+    <input type="text" name="uname" id="uname"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
+ 班级：
+    <input type="text" name="clname" id="clname"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
+    <button class="btn btn-primary" id=query type="submit">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">开课</button>
 </form>
 <table class="table table-bordered table-hover definewidth m10" id="table">
 	    
@@ -63,15 +67,15 @@
 
 		$('#addnew').click(function(){
 
-				window.location.href="/course/add.jsp";
+				window.location.href="add.jsp";
 		 });
 		
         var $table = $('#table');
             $table.bootstrapTable({
-            url: "/selectcourse?cname="+encodeURI(getUrlParam("cname")),
+            url: "/showgivecourse?cname="+encodeURI(getUrlParam("cname"))+"&uname="+encodeURI(getUrlParam("uname"))+"&clname="+encodeURI(getUrlParam("clname")),
             dataType: "json",
             singleSelect: false,
-            height: 550,//高度调整
+           
             locale:'zh-CN',//中文支持
             pagination: true,//是否开启分页（*）
             pageNumber:1,//初始化加载第一页，默认第一页
@@ -93,14 +97,20 @@
                
                 columns: [
             {
-                title: '课程编号',
-                field: 'cid',
+                title: '课程名',
+                field: 'cname',
                 align: 'center',
                 valign: 'middle'
             },
             {
-                title: '课程名称',
-                field: 'cname',
+                title: '教师名称',
+                field: 'uname',
+                align: 'center',
+                valign: 'middle',
+            },
+            {
+                title: '班级名称',
+                field: 'clname',
                 align: 'center',
                 valign: 'middle',
             },
@@ -109,8 +119,8 @@
                 field: 'cid',
                 align: 'center',
                 formatter:function(value,row,index){
-                    var e = '<a href="#" mce_href="#" onclick="edit(\''+ row.cid + '\',\' ' +row.cname+ '\')">编辑</a> ';
-                    var d = '<a href="#" mce_href="#" onclick="del(\''+ row.cid +'\')">删除</a> ';
+                    var e = '<a href="#" mce_href="#" onclick="edit(\''+ row.info_id + '\',\' ' +row.cid+ '\',\' ' +row.tid+ '\',\' ' +row.clid+ '\')">编辑</a> ';
+                    var d = '<a href="#" mce_href="#" onclick="del(\''+ row.info_id +'\')">删除</a> ';
                     return e+d;
                 }
             }
@@ -135,14 +145,14 @@
                $.ajax({
 				
 				type: "get",
-				url:"/delectcourse?cid="+id, 
+				url:"/delectgivecourse?info_id="+id, 
 				
 				
 				error: function(request) {
 					prompt_alert("error","错误！！");
 				},
 				success: function(data) {
-					 prompt_alert("success",data,"index.jsp");
+					prompt_alert("success",data,"index.jsp");
 			
 				}
 				});	
@@ -154,8 +164,8 @@
 	
 	
 	}
-	function edit(id,name){
-	
-		window.location.href="/course/edit.jsp?cid="+id+"&&cname="+name;
+	function edit(id,cname,uname,clname){
+		alert
+		window.location.href="edit.jsp?info_id="+id+"&&cname="+cname+"&&uname="+uname+"&&clname="+clname;
 	}
 </script>

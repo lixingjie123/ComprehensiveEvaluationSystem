@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="../Css/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../Css/icon.css">
 	<link rel="stylesheet" type="text/css" href="../Css/demo.css">
+	<script type="text/javascript" src="../Js/prompt.alert.js"></script>
 	<script type="text/javascript" src="../Js/jquery.easyui.min.js"></script>
     
 
@@ -100,11 +101,10 @@ $('#cc').combotree({
 					}, //要发送的是ajaxFrm表单中的数据
 				
 				error: function(request) {
-				alert("发送请求失败！");
+					prompt_alert("error","错误！！");
 				},
 				success: function(data) {
-					alert(data)
-					window.location.href="/Role/index.jsp";
+					 prompt_alert("success",data,"index.jsp");
 			
 				}
 				});

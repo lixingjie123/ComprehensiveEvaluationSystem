@@ -41,7 +41,7 @@ public interface UsersDao {
     int deleteUser(Integer uid);
 
     @Select("select * from users where uid = #{uid}")
-    Users selectUserByUid(Integer uid);
+    Users selectUserByUid(@Param("uid")int uid);
 
     @Update("UPDATE users SET uname = #{uname},pwd = #{pwd}," +
             "sex = #{sex},phone = #{phone} , rid = #{rid} " +

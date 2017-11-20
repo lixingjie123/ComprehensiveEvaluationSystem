@@ -10,17 +10,23 @@
     <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
     <link rel="stylesheet" type="text/css" href="../Css/style.css" />
-    <link rel="stylesheet" type="text/css" href="../Css/bootstrap-treeview.css" />
+  
     <script type="text/javascript" src="../Js/jquery.js"></script>
     <script type="text/javascript" src="../Js/jquery.sorted.js"></script>
     <script type="text/javascript" src="../Js/bootstrap.js"></script>
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
-    <link rel="stylesheet" type="text/css" href="../Css/easyui.css">
+    <script type="text/javascript" src="../Js/b.selectpage.js"></script>
+    <script type="text/javascript" src="../Js/demo.js"></script>
+    <script type="text/javascript" src="../Js/selectpage.js"></script>
+    
 	<link rel="stylesheet" type="text/css" href="../Css/icon.css">
 	<link rel="stylesheet" type="text/css" href="../Css/demo.css">
-	<script type="text/javascript" src="../Js/prompt.alert.js"></script>
+	<link rel="stylesheet" type="text/css" href="../Css/demo2.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+	<link rel="stylesheet" type="text/css" href="../Css/selectpage.css">
 	<script type="text/javascript" src="../Js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../Js/prompt.alert.js"></script>
     
 
     <style type="text/css">
@@ -48,8 +54,16 @@
 <table class="table table-bordered table-hover m10">
 
     <tr>
-        <td class="tableleft">课程名</td>
-        <td><input type="text" name="cname" id="cname"/></td>
+        <td class="tableleft">课程</td>
+        <td><input type="text" id="cname" class="input-block-level"></td>
+    </tr>
+     <tr>
+        <td class="tableleft">教师</td>
+        <td><input type="text" id="uname" class="input-block-level"></td>
+    </tr>
+     <tr>
+        <td class="tableleft">班级</td>
+        <td><input type="text" id="clname" class="input-block-level"></td>
     </tr>
 
     <tr>
@@ -65,6 +79,78 @@
 <script>
 
 
+$.ajax({
+	
+	type: "get",
+	url:"/selectallcourse", 
+	data:{
+		
+		
+		}, //要发送的是ajaxFrm表单中的数据
+	
+	error: function(request) {
+	alert("发送请求失败！");
+	},
+	success: function(data) {
+		$('#cname').bSelectPage({
+		    showField : 'cname',
+		    keyField : 'cid',
+		    pageSize : 5,
+		    data : data,
+		   
+		});
+
+	}
+	});
+$.ajax({
+	
+	type: "get",
+	url:"/selectteacher", 
+	data:{
+		
+		
+		}, //要发送的是ajaxFrm表单中的数据
+	
+	error: function(request) {
+	alert("发送请求失败！");
+	},
+	success: function(data) {
+		$('#uname').bSelectPage({
+		    showField : 'uname',
+		    keyField : 'tid',
+		    pageSize : 5,
+		    data : data,
+		   
+		});
+
+	}
+	});
+$.ajax({
+	
+	type: "get",
+	url:"/selectClass", 
+	data:{
+		
+		
+		}, //要发送的是ajaxFrm表单中的数据
+	
+	error: function(request) {
+	alert("发送请求失败！");
+	},
+	success: function(data) {
+		$('#clname').bSelectPage({
+		    showField : 'clname',
+		    keyField : 'clid',
+		    pageSize : 5,
+		    data : data,
+		   
+		});
+
+	}
+	});
+
+
+
 
 
     
@@ -73,11 +159,14 @@
 		 });
 		$('#seave').click(function(){
 			
+			
 			$.ajax({
 				
 				type: "POST",
-				url:"/seavecourse", 
-				data:{cname:$("#cname").val(),
+				url:"/seavegivecourse", 
+				data:{cid:$("#cname").val(),
+					tid:$("#uname").val(),
+					clid:$("#clname").val(),
 					
 					}, //要发送的是ajaxFrm表单中的数据
 				

@@ -14,6 +14,7 @@
     <script type="text/javascript" src="../Js/bootstrap.js"></script>
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
+    <script type="text/javascript" src="../Js/prompt.alert.js"></script>
     <link href="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.css" rel="stylesheet"/>
 
     <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
@@ -223,11 +224,10 @@
 				
 				
 				error: function(request) {
-				alert("发送请求失败！");
+					prompt_alert("error","错误！！");
 				},
 				success: function(data) {
-					alert(data)
-					window.location.href="/index.jsp";
+					prompt_alert("success",data,"index.jsp");
 			
 				}
 				});	

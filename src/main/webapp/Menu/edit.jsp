@@ -112,11 +112,10 @@ $('#seave').click(function(){
 				data:$('#formset').serialize(), //要发送的是ajaxFrm表单中的数据
 				
 				error: function(request) {
-				alert("发送请求失败！");
+					prompt_alert("error","错误！！");
 				},
 				success: function(data) {
-					alert(data)
-					window.location.href="/Menu/index.jsp";
+					prompt_alert("success",data,"index.jsp");
 			
 				}
 				});

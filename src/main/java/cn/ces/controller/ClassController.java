@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -47,6 +48,12 @@ public class ClassController {
     @ResponseBody
     public Class selectClassByClid(Integer clid){
         return classService.selectClassByClid(clid);
+    }
+    
+    @GetMapping(value = "/selectClass")
+    @ResponseBody
+    public List<Class> selectClass(){
+        return classService.selectClass();
     }
 
     @PostMapping(value = "/updateClass",produces = "text/plain;charset=utf-8")

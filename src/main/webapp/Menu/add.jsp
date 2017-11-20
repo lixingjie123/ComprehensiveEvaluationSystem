@@ -19,6 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="../Css/icon.css">
 	<link rel="stylesheet" type="text/css" href="../Css/demo.css">
 	<script type="text/javascript" src="../Js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../Js/prompt.alert.js"></script>
 
     <style type="text/css">
         body {
@@ -82,7 +83,7 @@ $('#cc').combotree({
 		$('#seave').click(function(){
 			  var t = $('#cc').combotree('tree');	// 获取树对象
 			  var n = t.tree('getSelected');		// 获取选择的节点
-			  alert(n.id)
+			
 			$.ajax({
 				
 				type: "POST",
@@ -93,11 +94,10 @@ $('#cc').combotree({
 				}, //要发送的是ajaxFrm表单中的数据
 				
 				error: function(request) {
-				alert("发送请求失败！");
+					prompt_alert("error","错误！！");
 				},
 				success: function(data) {
-					alert(data)
-					window.location.href="/Menu/index.jsp";
+					prompt_alert("success",data,"index.jsp");
 			
 				}
 				});

@@ -19,11 +19,21 @@ import java.util.List;
 @Table(name = "teachers")
 public class Teachers extends BaseModel{
 
-    @Column(name = "tid",type = MySqlTypeConstant.INT,length = 11,isKey = true,isAutoIncrement = true)
+    public String getUname() {
+		return uname;
+	}
+
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+
+	@Column(name = "tid",type = MySqlTypeConstant.INT,length = 11,isKey = true,isAutoIncrement = true)
     private Integer tid;
 
     @Column(name = "dept_id",type = MySqlTypeConstant.INT,length = 11,isNull = true)
     private Integer dept_id;
+    
+    private String uname;
 
     private List<Score> scoreList;
 

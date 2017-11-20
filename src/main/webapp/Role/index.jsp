@@ -12,6 +12,7 @@
     <script type="text/javascript" src="../Js/jquery.sorted.js"></script>
     <script type="text/javascript" src="../Js/bootstrap.js"></script>
     <script type="text/javascript" src="../Js/ckform.js"></script>
+     <script type="text/javascript" src="../Js/prompt.alert.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
     <link href="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.css" rel="stylesheet"/>
 
@@ -64,7 +65,7 @@
 
 				window.location.href="/Role/add.jsp";
 		 });
-		alert(decodeURI(getUrlParam("rname")));
+		
         var $table = $('#table');
             $table.bootstrapTable({
             url: "/selectrole?rname="+encodeURI(getUrlParam("rname")),
@@ -138,11 +139,10 @@
 				
 				
 				error: function(request) {
-				alert("发送请求失败！");
+					 prompt_alert("error","错误！！");
 				},
 				success: function(data) {
-					alert(data)
-					window.location.href="/Role/index.jsp";
+					 prompt_alert("success",data,"index.jsp");
 			
 				}
 				});	
