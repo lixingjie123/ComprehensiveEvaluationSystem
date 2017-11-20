@@ -72,7 +72,6 @@
     
     <form class="form-signin" method="post" action="/login" id="login">
         <h2 class="form-signin-heading">登录教师评教系统</h2>
-        身份： <select name="rid" id="rid" class="abc input-default"></select><br>
         账号：<input type="text" name="uid" class="input-block-level"><br>
         密码：<input type="password" name="pwd" class="input-block-level">
 
@@ -84,7 +83,7 @@
 </html>
 <script>
 $(function(){
-	$.ajax({
+	/*$.ajax({
         url: "/selectRoleOption",    //后台webservice里的方法名称
         type: "get",
         dataType: "json",
@@ -106,9 +105,10 @@ $(function(){
         }
     });
 	
-/* 	$("#rid").change(function() {
+    $("#rid").change(function() {
 		alert($("#rid").val());
-	}); */
+	});
+*/
 	
 	$("#loginBtn").click(function() {
 

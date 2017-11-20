@@ -24,7 +24,7 @@ public class LoginController {
 	@PostMapping(value = "/login")
     @ResponseBody 
     public Map<String, Object> login(Users users){
-		Map<String, Object> result = loginService.loginService(users.getUid(), users.getPwd(), users.getRid());
+		Map<String, Object> result = loginService.loginService(users.getUid(), users.getPwd());
 		return result;
 	}
 	

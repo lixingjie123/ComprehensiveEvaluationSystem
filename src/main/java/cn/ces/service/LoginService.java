@@ -23,24 +23,20 @@ public class LoginService {
 		this.roleDao = roleDao;
 	}
 	
-	public Map<String, Object> loginService(Integer uid,String pwd,Integer rid) {
+	public Map<String, Object> loginService(Integer uid,String pwd) {
 		String msg = "登录失败";
 		int p=0;
 		Map<String,Object> result = new HashMap<String,Object>();
 			Users users = usersDao.selectUserByUid(uid);
 			if(users!=null) {
-				if (rid == users.getRid()) {
 					if(pwd.equals(users.getPwd())) {
 						msg="登录成功";
 						p = 1;
 					}else {
 						msg="账号与密码不匹配";
-					}
-				}else {
-					msg="该账号与角色不匹配";
-				}
-			}else{
-				msg = "该账号不存在";
+					}	
+			        }else{
+				        msg = "该账号不存在";
 			}
 		result.put("msg", msg);
 		result.put("p", p);
