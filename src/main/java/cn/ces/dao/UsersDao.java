@@ -47,4 +47,9 @@ public interface UsersDao {
             "sex = #{sex},phone = #{phone} , rid = #{rid} " +
             "WHERE uid = #{uid}")
     int updateUserByUid(Users users);
+    
+    /*修改密码*/
+    @Update("update users set pwd=#{pwd} where uid=#{uid}")
+    int updateUsersPwd(Users users);
+    
 }

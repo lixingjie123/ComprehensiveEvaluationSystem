@@ -28,4 +28,13 @@ public class LoginController {
 		return result;
 	}
 	
+	
+	@PostMapping(value="/updatepwd",produces = "text/plain;charset=utf-8")
+	@ResponseBody
+	public String updatepwd(Integer uid,String npwd,String opwd){
+		return loginService.AquirieValue(uid, npwd, opwd);
+		
+	}
+	
+	
 }

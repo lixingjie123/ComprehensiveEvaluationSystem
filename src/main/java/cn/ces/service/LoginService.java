@@ -42,5 +42,26 @@ public class LoginService {
 		result.put("p", p);
 		return result;
 	}
+	
+	/*修改密码*/
+	public String AquirieValue(Integer uid,String npwd,String opwd){
+		String msg="修改失败";
+		 int p=0;
+		Users users=usersDao.selectUserByUid(uid);
+		if(users!=null){
+        	if(opwd.equals(users.getPwd())){
+        		users.setPwd(npwd);
+        		if(usersDao.updateUsersPwd(users)>0){
+				msg="修改成功";
+				p=1;
+        		}
+			}else{
+				msg="旧密码输入错误";
+			}
+		}else{
+			msg="用户不存在";
+		}
+		return msg;
+	}
 
 }
