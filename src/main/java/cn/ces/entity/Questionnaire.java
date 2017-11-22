@@ -28,13 +28,13 @@ public class Questionnaire extends BaseModel{
     @Column(name = "type" ,type = MySqlTypeConstant.VARCHAR,length = 50)
     private String type;
 
-    private List<Index> indexList;
+    private List<Indexs> indexList;
 
-    public List<Index> getIndexList() {
+    public List<Indexs> getIndexList() {
         return indexList;
     }
 
-    public void setIndexList(List<Index> indexList) {
+    public void setIndexList(List<Indexs> indexList) {
         this.indexList = indexList;
     }
 

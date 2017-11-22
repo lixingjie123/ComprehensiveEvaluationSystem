@@ -1,6 +1,7 @@
 package cn.ces.controller;
 
 import cn.ces.entity.Class;
+import cn.ces.entity.Power;
 import cn.ces.entity.Role;
 import cn.ces.entity.Users;
 import cn.ces.service.UsersService;
@@ -45,6 +46,7 @@ public class UserController {
         this.usersService = usersService;
     }
 
+    //用户模糊查询分页显示
     @GetMapping(value = "/selectUserByRidAndUname")
     @ResponseBody
     public Map<String,Object> selectUserByRidAndUname(int offset, int limit, String rid, String uname){
@@ -59,6 +61,7 @@ public class UserController {
         return  usersService.selectUserByRidAndUname(offset,limit,r,un);
     }
 
+    //通过用户编号查询用户
     @GetMapping(value = "/selectUserByUid")
     @ResponseBody
     public Users selectUserByUid(ModelMap map,HttpServletRequest request){
@@ -66,36 +69,42 @@ public class UserController {
         return usersService.selectUserByUid(uid);
     }
 
+    //生成角色下拉框
     @GetMapping(value = "/selectRoleOption")
     @ResponseBody
     public List<Role> selectRoleOption(){
        return usersService.selectRoleOption();
     }
 
+    //生成班级下拉框
     @GetMapping(value = "/selectClassOption")
     @ResponseBody
     public List<Class> selectClassOption(){
         return usersService.selectClassOption();
     }
 
+    //分页查询用户
     @GetMapping(value = "/selectPageUser")
     @ResponseBody
     public Map<String,Object> selectPageUser(int offset, int limit){
         return  usersService.getPageUsers(offset,limit);
     }
 
+    //修改用户信息
     @PostMapping(value = "/updateUserByUid",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String updateUserByUid(Users users){
         return usersService.updateUsersByUid(users);
     }
 
+    //通过用户编号删除用户
     @GetMapping(value = "/deleteUser",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String deleteUser(Integer uid){
        return usersService.deleteUser(uid);
     }
 
+    //通过excel的文档批量添加用户
     @PostMapping(value = "/addUsersByExcel",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String addUsersByExcel(MultipartFile file, HttpServletRequest request) throws IOException{
@@ -133,6 +142,7 @@ public class UserController {
         return msg;
     }
 
+    //打印用户信息表
     @GetMapping(value = "/onlondUser")
     @ResponseBody
     public void onlondUser(HttpServletResponse response) throws IOException{
@@ -178,5 +188,12 @@ public class UserController {
         response.setContentType("application/msexcel");
         wkb.write(output);
         output.close();
+    }
+
+    //通过用户角色查询权限菜单
+    @GetMapping(value = "/selectPowerByRid",produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String selectPowerByRid(Integer rid){
+        return usersService.selectPowerByRid(rid);
     }
 }

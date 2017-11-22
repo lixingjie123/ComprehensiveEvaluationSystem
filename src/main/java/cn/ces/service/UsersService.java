@@ -1,10 +1,8 @@
 package cn.ces.service;
 
 import cn.ces.dao.*;
+import cn.ces.entity.*;
 import cn.ces.entity.Class;
-import cn.ces.entity.Department;
-import cn.ces.entity.Role;
-import cn.ces.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +29,13 @@ public class UsersService {
     private final DepartmentDao departmentDao;
     private final ClassDao classDao;
     private final RoleDao roleDao;
+    private final RolePowerDao rolePowerDao;
+    private final PowerDao powerDao;
 
     @Autowired
-    public UsersService(TeachersDao teachersDao, UsersDao usersDao, StudentDao studentDao, LeadersDao leadersDao, DepartmentDao departmentDao, ClassDao classDao, RoleDao roleDao) {
+    public UsersService(TeachersDao teachersDao, UsersDao usersDao, StudentDao studentDao, LeadersDao leadersDao,
+                        DepartmentDao departmentDao, ClassDao classDao, RoleDao roleDao, RolePowerDao rolePowerDao,
+                        PowerDao powerDao) {
         this.teachersDao = teachersDao;
         this.usersDao = usersDao;
         this.studentDao = studentDao;
@@ -41,6 +43,8 @@ public class UsersService {
         this.departmentDao = departmentDao;
         this.classDao = classDao;
         this.roleDao = roleDao;
+        this.rolePowerDao = rolePowerDao;
+        this.powerDao = powerDao;
     }
 
 
@@ -142,5 +146,39 @@ public class UsersService {
             msg = e.getMessage();
         }
         return msg;
+    }
+
+    //通过用户角色查询该用户的权限菜单
+    public String  selectPowerByRid(Integer rid){
+        List<Rolepower> rolepowerList = rolePowerDao.selectpoweroption(rid);
+        List<Power> powerList = new ArrayList<Power>();
+        for (Rolepower rolepower: rolepowerList) {
+            Power power = powerDao.selectpowerbyid(rolepower.getPid());
+            if (power!=null){
+                powerList.add(power);
+            }
+        }
+        String jsonMenu = "[{" +
+                "                        id: '1'," +
+                "                        menu: ";
+        jsonMenu+="[";
+        for (Power power: powerList) {
+            if (power.getFp_id()==1){
+                jsonMenu+="{";
+                jsonMenu+="id:'"+power.getPid()+"',";
+                jsonMenu+="text:'"+power.getPname()+"',";
+                jsonMenu+="items: [";
+                for (Power p:powerList) {
+                    if (p.getFp_id()==power.getPid()){
+                        jsonMenu+="{id:'"+p.getPid()+"',";
+                        jsonMenu+="text:'"+p.getPname()+"',";
+                        jsonMenu+="href:' "+p.getUrl()+"'},";
+                    }
+                }
+                jsonMenu+="]},";
+            }
+        }
+        jsonMenu+="]}];";
+        return jsonMenu;
     }
 }

@@ -14,79 +14,77 @@
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
     <script type="text/javascript" src="../Js/jquery.form.js"></script>
-<style type="text/css">
-body {
-	padding-top: 40px;
-	padding-bottom: 40px;
-	background-color: #f5f5f5;
-}
+    <style type="text/css">
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
+        }
 
-.form-signin {
-	max-width: 300px;
-	padding: 39px 49px 59px;
-	float: right;
-	background-color: #fff;
-	border: 1px solid #e5e5e5;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
-	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
-	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
-}
+        .form-signin {
+            max-width: 300px;
+            padding: 19px 29px 29px;
+            float: right;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+            -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+        }
 
-.form-signin .form-signin-heading, .form-signin .checkbox {
-	margin-bottom: 30px;
-	font-weight:normal;
-	text-align:center;
-}
+        .form-signin .form-signin-heading,
+        .form-signin .checkbox {
+            margin-bottom: 10px;
+        }
 
-.form-signin input[type="text"], .form-signin input[type="password"] {
-	font-size: 16px;
-	height: auto;
-	margin-bottom: 25px;
-	padding: 8px 9px;
-}
+        .form-signin input[type="text"],
+        .form-signin input[type="password"] {
+            font-size: 16px;
+            height: auto;
+            margin-bottom: 15px;
+            padding: 7px 9px;
+        }
+        .container{
 
-.container {
-	width: 60%;
-	background-image: url("../Images/login_pic.png");
-	background-repeat: no-repeat;
-	margin: 0 auto;
-}
+            width:60%;
+            background-image: url("../Images/login_pic.png");
+            background-repeat: no-repeat;
+            margin: 0 auto;
+        }
+        .title{
+            font-size: 30px;
+            text-align: center;
+            margin: 30px;
+            font-style: inherit;
+        }
+        .abc input-default,.input-block-level{
+        width:230px;
+        }
 
-.title {
-	font-size: 40px;
-	text-align: center;
-	margin: 60px;
-	font-style: inherit;
-	font-weight: bold;
-}
-
-.abc input-default, .input-block-level {
-	width: 230px;
-}
-#loginBtn{
-   margin-left:140px;
-   width:120px;
-}
-</style>
+    </style>
 </head>
 <body>
 <div class="title"><p>教师综合评教系统</p></div>
 <div class="container">
-   <form class="form-signin" method="post" action="/login" id="login">
-        <h2 class="form-signin-heading">欢迎登录</h2>
+    
+    <form class="form-signin" method="post" action="/login" id="login">
+        <h2 class="form-signin-heading">登录教师评教系统</h2>
+        身份： <select name="rid" id="rid" class="abc input-default"></select><br>
         账号：<input type="text" name="uid" class="input-block-level"><br>
         密码：<input type="password" name="pwd" class="input-block-level">
-      <p><button class="btn btn-large btn-primary" id="loginBtn" type="button">登录</button></p>
-   </form>
+
+        <p><button class="btn btn-large btn-primary" id="loginBtn" type="button">登录</button></p>
+    </form>
+
 </div>
 </body>
 </html>
 <script>
 $(function(){
-	/*$.ajax({
+	$.ajax({
         url: "/selectRoleOption",    //后台webservice里的方法名称
         type: "get",
         dataType: "json",
@@ -108,10 +106,9 @@ $(function(){
         }
     });
 	
-    $("#rid").change(function() {
+/* 	$("#rid").change(function() {
 		alert($("#rid").val());
-	});
-*/
+	}); */
 	
 	$("#loginBtn").click(function() {
 
