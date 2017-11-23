@@ -96,17 +96,16 @@ public class PowerController {
     	return p;
     	
     }
-    //修改菜单
+  //修改菜单
     @PostMapping(value = "/updatapower",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String updatapower(Power power){
     	String msg; 
-    	Boolean a = powerService.delectpower(power.getPid());
-    	power.setPid(null);
-    	Boolean b = powerService.insterpower(power);
-       if(a&&b){
-    	    msg = "添加成功";
-       }else msg = "添加失败";
+
+    	Boolean b = powerService.updatapower(power);
+       if(b){
+    	    msg = "修改成功";
+       }else msg = "修改失败";
 
         return msg;
     }

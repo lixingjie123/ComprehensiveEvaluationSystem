@@ -46,5 +46,13 @@ public class PowerService {
     public Power selectposerbyid(int pid){
     	return pd.selectpowerbyid(pid);
     }
+    //修改菜单
+    public Boolean updatapower(Power p){
+    	Boolean b = false;
+    	if(pd.updatapower(p)>0){
+    		b=true;
+    	}else b=false;
+    	return b ;
+    }
 
 }

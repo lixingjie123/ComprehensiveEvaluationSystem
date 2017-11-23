@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import cn.ces.entity.Power;
 
@@ -25,6 +26,11 @@ public interface PowerDao {
      //查询菜单通过pname
      @Select("select * from power where pname = #{pname}")
      Power selectpowerbyname(@Param("pname")String pname);
+     
+
+     //修改菜单
+     @Update("update  power set pname=#{pname} , url=#{url},fp_id=#{fp_id} where pid = #{pid}")
+     int updatapower(Power power);
      
      //插入菜单
      @Insert("INSERT INTO power (pname,url,fp_id)" +
