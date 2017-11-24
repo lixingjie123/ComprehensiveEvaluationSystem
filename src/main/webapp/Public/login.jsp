@@ -14,6 +14,7 @@
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
     <script type="text/javascript" src="../Js/jquery.form.js"></script>
+    <script type="text/javascript" src="../Js/prompt.alert.js"></script>
     <style type="text/css">
         body {
             padding-top: 40px;
@@ -72,7 +73,6 @@
     
     <form class="form-signin" method="post" action="/login" id="login">
         <h2 class="form-signin-heading">登录教师评教系统</h2>
-        身份： <select name="rid" id="rid" class="abc input-default"></select><br>
         账号：<input type="text" name="uid" class="input-block-level"><br>
         密码：<input type="password" name="pwd" class="input-block-level">
 
@@ -84,58 +84,17 @@
 </html>
 <script>
 $(function(){
-	$.ajax({
-        url: "/selectRoleOption",    //后台webservice里的方法名称
-        type: "get",
-        dataType: "json",
-        contentType: "application/json",
-        traditional: true,
-        success: function (data) {
 
-            var jsonObj =data;
-            var optionstring = "";
-            for (var j = 0; j < jsonObj.length; j++) {
-                optionstring += "<option value=\"" + jsonObj[j].rid + "\" >" + jsonObj[j].rname + "</option>";
-               
-            }
-            $("#rid").html("<option value='请选择'>----请选择----</option> "+optionstring);
-            $("#rid").val(0);
-        },
-        error: function (msg) {
-            alert("出错了！");
-        }
-    });
-	
-/* 	$("#rid").change(function() {
-		alert($("#rid").val());
-	}); */
 	
 	$("#loginBtn").click(function() {
 
             $("#login").ajaxSubmit(function(data){
                 if(data.p==0){
-                    alert(data.msg);
+                    prompt_alert("error",data.msg);
                 }else{
-                    alert(data.msg);
-                    window.location.href="../index.jsp";
+                    prompt_alert("success",data.msg,"../index.jsp");
                 }
             });
-	   /* alert($('#login').serialize());
-		$.ajax({
-	        url: "/login",    //后台webservice里的方法名称
-	        type: "post",
-	        dataType: "json",
-	        data:$('#login').serialize(),
-	        contentType: "application/json",
-	        traditional: true,
-	        success: function (data) {
-	        	alert("11");
-	        },
-	        error: function (msg) {
-	            alert("出错了！");
-	        }
-	    });*/
-		
 	});
 })
 

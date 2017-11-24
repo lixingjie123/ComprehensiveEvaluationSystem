@@ -22,7 +22,7 @@
         <!--<img src="/chinapost/Public/assets/img/top.png">-->
     </div>
 
-    <div class="dl-log">欢迎您，<span class="dl-log-user">root</span><a href="/chinapost/index.php?m=Public&a=logout" title="退出系统" class="dl-log-quit">[退出]</a>
+    <div class="dl-log">欢迎您，<span class="dl-log-user">${userinfo.uname}</span><a href="/chinapost/index.php?m=Public&a=logout" title="退出系统" class="dl-log-quit">[退出]</a>
     </div>
 </div>
 <div class="content">
@@ -45,12 +45,11 @@
 <script>
     $(function () {
         $.ajax({
-            url: "/selectPowerByRid?rid=1",    //后台webservice里的方法名称
+            url: "/selectPowerByRid?rid="+${userinfo.rid},    //后台webservice里的方法名称
             type:"GET",
             processData:false,
             contentType:false,
             success: function (data) {
-                alert(data);
                 var config = eval( data );
                 BUI.use('common/main', function () {
                     new PageUtil.MainPage({
