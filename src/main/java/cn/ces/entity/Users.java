@@ -29,14 +29,25 @@ public class Users extends BaseModel {
 	    @Column(name = "rid",type = MySqlTypeConstant.INT,length = 50)
 	    private Integer	rid;
 
-	    private Integer other_id;
 
-	public Integer getOther_id() {
-		return other_id;
+	    private String rname;
+
+	    private String other_name;
+
+	public String getRname() {
+		return rname;
 	}
 
-	public void setOther_id(Integer other_id) {
-		this.other_id = other_id;
+	public void setRname(String rname) {
+		this.rname = rname;
+	}
+
+	public String getOther_name() {
+		return other_name;
+	}
+
+	public void setOther_name(String other_name) {
+		this.other_name = other_name;
 	}
 
 	public Integer getUid() {

@@ -117,6 +117,9 @@ public class UserController {
         String originalFilename = file.getOriginalFilename();
         // 取扩展名，不要"."
         String extName = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
+      /*  try{
+
+        }catch (){}*/
 
         if (extName.equals("xls")) {
             // 根据指定的文件输入流导入Excel从而产生Workbook对象
@@ -133,8 +136,8 @@ public class UserController {
                 users.setPwd(row.getCell(2).getStringCellValue());
                 users.setSex(row.getCell(3).getStringCellValue());
                 users.setPhone(String.valueOf((int)row.getCell(4).getNumericCellValue()));
-                users.setRid((int)(row.getCell(5).getNumericCellValue()));
-                users.setOther_id((int)(row.getCell(6).getNumericCellValue()));
+                users.setRname(row.getCell(5).getStringCellValue());
+                users.setOther_name(row.getCell(6).getStringCellValue());
                 usersList.add(users);
             }
             msg = usersService.insertUsers(usersList);
@@ -163,7 +166,7 @@ public class UserController {
         // 在sheet里创建第二行
         HSSFRow row2 = sheet.createRow(1);
         // 创建单元格并设置单元格内容
-        row2.createCell(0).setCellValue("id");
+        row2.createCell(0).setCellValue("用户编号");
         row2.createCell(1).setCellValue("用户名");
         row2.createCell(2).setCellValue("密码");
         row2.createCell(3).setCellValue("性别");
@@ -173,13 +176,50 @@ public class UserController {
         for (int i = 0; i < usersList.size(); i++) {
             HSSFRow row = sheet.createRow(i + 2);
             Users users = usersList.get(i);
+            users.setRname(usersService.selectRnameByrid(users.getRid()));
             row.createCell(0).setCellValue(users.getUid());
             row.createCell(1).setCellValue(users.getUname());
             row.createCell(2).setCellValue(users.getPwd());
             row.createCell(3).setCellValue(users.getSex());
             row.createCell(4).setCellValue(users.getPhone());
-            row.createCell(5).setCellValue(users.getRid());
+            row.createCell(5).setCellValue(users.getRname());
         }
+
+        // 输出Excel文件
+        OutputStream output = response.getOutputStream();
+        response.reset();
+        response.setHeader("Content-disposition", "attachment; filename=details.xls");
+        response.setContentType("application/msexcel");
+        wkb.write(output);
+        output.close();
+    }
+
+    @GetMapping(value = "/onlondTemplate")
+    @ResponseBody
+    public void onlondTemplate(HttpServletResponse response) throws IOException{
+        List<Users> usersList = usersService.selectAllUsers();
+        // 创建HSSFWorkbook对象(excel的文档对象)
+        HSSFWorkbook wkb = new HSSFWorkbook();
+        // 建立新的sheet对象（excel的表单）
+        HSSFSheet sheet = wkb.createSheet("用户信息表");
+        // 在sheet里创建第一行，参数为行索引(excel的行)，可以是0～65535之间的任何一个
+        HSSFRow row1 = sheet.createRow(0);
+        // 创建单元格（excel的单元格，参数为列索引，可以是0～255之间的任何一个
+        HSSFCell cell = row1.createCell(0);
+        // 设置单元格内容
+        cell.setCellValue("用户信息表录入");
+        // 合并单元格CellRangeAddress构造参数依次表示起始行，截至行，起始列， 截至列
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 5));
+        // 在sheet里创建第二行
+        HSSFRow row2 = sheet.createRow(1);
+        // 创建单元格并设置单元格内容
+        row2.createCell(0).setCellValue("用户编号");
+        row2.createCell(1).setCellValue("用户名");
+        row2.createCell(2).setCellValue("密码");
+        row2.createCell(3).setCellValue("性别");
+        row2.createCell(4).setCellValue("电话");
+        row2.createCell(5).setCellValue("角色");
+        row2.createCell(6).setCellValue("系部/班级");
 
         // 输出Excel文件
         OutputStream output = response.getOutputStream();
