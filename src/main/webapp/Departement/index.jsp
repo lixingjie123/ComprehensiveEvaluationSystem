@@ -11,13 +11,14 @@
     <script type="text/javascript" src="../Js/bootstrap.js"></script>
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
+    <script type="text/javascript" src="../Js/prompt.alert.js"></script>
     <link href="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.css" rel="stylesheet"/>
 
     <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
 
     <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/locale/bootstrap-table-zh-CN.min.js"></script>
  
-
+ 
 <title>Insert title here</title>
 <style type="text/css">
 body {
@@ -68,13 +69,11 @@ body {
             url: "/selectDepartment?dept_name="+encodeURI(getUrlParam("dept_name")),
             dataType: "json",
             singleSelect: false,
-            height: 550,//高度调整
             locale:'zh-CN',//中文支持
             pagination: true,//是否开启分页（*）
             pageNumber:1,//初始化加载第一页，默认第一页
             pageSize: 5,//每页的记录行数（*）
             pageList: [5,10,11],//可供选择的每页的行数（*）
-
             sidePagination: "server", //服务端处理分页
             showColumns: true,//列选择按钮
             clickToSelect: true,
@@ -113,7 +112,7 @@ body {
                 align: 'center',
                 formatter:function(value,row,index){
                     var e = '<a href="#"  mce_href="#" onclick="edit(\''+ row.dept_id + '\')">编辑</a> ';
-                    var d ;
+                    var d;
                     if (row.fettle!=0){
                         d='<a href="#"  mce_href="#"   onclick="mode(\''+ row.dept_id + '\')">禁用系部</a> ';
                     }else {
@@ -130,13 +129,14 @@ body {
 		window.location.href = "add.jsp";
 	});
 	
+	
 	function del(id) {
 		if (confirm("确定要删除吗？")) {
 			var url = "index.html";
 			window.location.href = url;
 		}
 	}
-	
+
 	function edit(dept_id) {
 		var url = "edit.jsp?dept_id=" + dept_id;
 		window.location.href = url;
@@ -150,11 +150,10 @@ body {
 			processData : false,
 			contentType : false,
 			success : function(data) {
-				alert(data);
-				window.location.reload();
+				prompt_alert("success",data,"index.jsp");
 			},
 			error : function(e) {
-				alert("错误！！");
+				prompt_alert("error","错误！！");
 			}
 		})
 	}

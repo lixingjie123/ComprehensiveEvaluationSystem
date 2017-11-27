@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+<head> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
@@ -13,6 +13,7 @@
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
     <script type="text/javascript" src="../Js/jquery.form.js"></script>
+    <script type="text/javascript" src="../Js/prompt.alert.js"></script>
     
 <title>Insert title here</title>
     <style type="text/css">
@@ -50,7 +51,7 @@
     <tr>
         <td class="tableleft"></td>
         <td>
-            <button type="submit" class="btn btn-primary" type="button" id="addDepartmentFromBtn">保存</button> &nbsp;&nbsp;
+            <button class="btn btn-primary" type="button" id="addDepartmentBtn">保存</button> &nbsp;&nbsp;
             <button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
         </td>
     </tr>
@@ -59,12 +60,11 @@
 </body>
 </html>
 <script>
-$(function () {
-    $("#addDepartmentFromBtn").click(function () {
-        $("#addDepartmentFrom").ajaxSubmit(function (data) {
-            var url = "index.jsp";
-            window.location.href=url;
-        });
-    });
-});
+	$(function() {
+		$("#addDepartmentBtn").click(function() {
+			$("#addDepartmentFrom").ajaxSubmit(function(data) {
+				prompt_alert("success",data,"index.jsp");
+			});
+		});
+	});
 </script>
