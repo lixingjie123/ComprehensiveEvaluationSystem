@@ -17,6 +17,7 @@
         <link rel="stylesheet" type="text/css" href="../Css/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../Css/icon.css">
 	<link rel="stylesheet" type="text/css" href="../Css/demo.css">
+	<script type="text/javascript" src="../Js/prompt.alert.js"></script>
 	<script type="text/javascript" src="../Js/jquery.easyui.min.js"></script>
 
     <style type="text/css">
@@ -41,22 +42,15 @@
 </head>
 <body>
 <form  method="post" class="definewidth m20" id=formset>
-<input type="hidden" name="pid" value=""  id="pid"/>
+<input type="hidden" name="rid" value=""  id="rid"/>
 <table class="table table-bordered table-hover m10">
     <tr>
-        <td width="10%" class="tableleft">上级</td>
-        <td>
-            <input id="cc" value="菜单">  
-            
-        </td>
+        <td class="tableleft">问卷名称</td>
+        <td><input type="text" name="qname" id="qname"/></td>
     </tr>
     <tr>
-        <td class="tableleft">名称</td>
-        <td><input type="text" name="pname" id="panme"/></td>
-    </tr>
-    <tr>
-        <td class="tableleft">url</td>
-        <td><input type="text" name="url" id="url"/></td>
+        <td class="tableleft">指标</td>
+        <td><input id="cc" value="指标"> </td>
     </tr>
     <tr>
         <td class="tableleft"></td>
@@ -69,64 +63,66 @@
 </body>
 </html>
 <script>
-$('#cc').combotree({    
-    url: '/powertree?pname=',
-    checkbox:true,
-    multiple:false,
-    cascadeCheck:true,
-    required: true   
-});  
-    $(function () {       
+  var qid=getUrlParam("qid")
+  var qname=decodeURI(getUrlParam("qname"))
+
 		$('#backid').click(function(){
 				window.location.href="index.jsp";
 		 });
 		//原数据
-		$.ajax({  
-            url: "/querypowerbyid?pid="+getUrlParam("pid"),    
-            type: "get",  
-            dataType: "json",  
-            contentType: "application/json",  
-            traditional: true,  
-            success: function (data) {  
-                
-                    
-                    $("#panme").val(data.pname);
-                    $("#url").val(data.url);
-                    $("#pid").val(data.pid);
-                    var t = $('#cc').combotree('tree');
-                    t.tree("check",data.fp_id)
-                    
-                 
-            },  
-            error: function (msg) {  
-                alert("出错了！");  
-            }  
-        });
+		
+		$('#cc').combotree({    
+    url:'/indextreequestion?qid='+qid,
+    checkbox:true,
+    multiple:true,
+    cascadeCheck:true,
+    required: true,
+    
+});  
+$(function(){
+	  $("#qname").val(qname)
+
+
+		
 		//修改数据
 $('#seave').click(function(){
-			
+	 var t = $('#cc').combotree('tree');	// 获取树对象
+	 t.tree({
+		                         onCheck:function(node){                 //当点击 checkbox 时触发
+			     var  node1=$(tree).tree('getParent',node.target);          //得到父节点
+			     t.tree('check', node1.target);                                  
+			   }
+	 })
+	  var n = t.tree('getChecked');		// 获取选择的节点
+	  var idlist=0;
+	  for(var i=0;i<n.length;i++){
+		  idlist+=","+n[i].id;
+	  }
+			alert("dddddddddd")
 			$.ajax({
 				
-				type: "Post",
-				url:"/updatapower", 
-				data:$('#formset').serialize(), //要发送的是ajaxFrm表单中的数据
-				
+				type: "POST",
+				url:"/updataqusetion", 
+				data:{qname:encodeURI($("#qname").val()),
+					qid:qid,
+					idlist:idlist
+					}, //要发送的是ajaxFrm表单中的数据
 				error: function(request) {
 					prompt_alert("error","错误！！");
 				},
 				success: function(data) {
-					prompt_alert("success",data,"index.jsp");
+					 prompt_alert("success",data,"index.jsp");
 			
 				}
 				});
 	 });
-		
+})
 
-    });
-    
-    function getUrlParam(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-        if (r != null) return unescape(r[2]); return null; //返回参数值
-    }
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null) return unescape(r[2]); return null; //返回参数值
+}
+
+
 </script>
