@@ -16,6 +16,7 @@
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
     <script type="text/javascript" src="../Js/jquery.form.js"></script>
+    <script type="text/javascript" src="../Js/prompt.alert.js"></script>
 
     <style type="text/css">
         body {
@@ -42,17 +43,17 @@
 <form  method="post" class="definewidth m20" id=formset action="/updatepwd">
 <table class="table table-bordered table-hover m10">
     <tr>
-        <input type="hidden" name="uid" value="20000002" >
+        <input type="hidden" name="uid" value="${userinfo.uid}" >
         <td width="10%" class="tableleft">旧密码</td>
         <td>
-           <input type="text" name="opwd" id="opwd">*请输入旧密码
+           <input type="password" name="opwd" id="opwd">*请输入旧密码
         </td>
     </tr>
     
         <tr>
         <td width="10%" class="tableleft">新密码</td>
         <td>
-           <input type="text" name="npwd" id="npwd" >*请输入新密码
+           <input type="password" name="npwd" id="npwd" >*请输入新密码
         </td>
     </tr>
    
@@ -71,10 +72,8 @@
 $(function(){ 
 	$("#sava").click(function(){
 	   $("#formset").ajaxSubmit(function(data){
-		   alert(data);
+		   prompt_alert("warn",data,"modifypwd.jsp");
 	   });
-	}); 
-	
-
+	});
 })
 </script>
