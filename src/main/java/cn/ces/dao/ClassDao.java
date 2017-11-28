@@ -38,4 +38,7 @@ public interface ClassDao {
     @Insert("INSERT INTO class (clname,fettle) " +
             " VALUES (#{clname},#{fettle})")
     int insertClass(Class aClass);
+
+    @Select("select clid from class where clname = #{clname}")
+    Integer selectClidByClname(String clname);
 }

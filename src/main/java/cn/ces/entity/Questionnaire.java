@@ -25,8 +25,8 @@ public class Questionnaire extends BaseModel{
     @Column(name = "qname",type = MySqlTypeConstant.VARCHAR,length = 50)
     private String qname;
 
-    @Column(name = "type" ,type = MySqlTypeConstant.VARCHAR,length = 50)
-    private String type;
+    @Column(name = "fettle",type = MySqlTypeConstant.INT,length = 1)
+    private Integer fettle;
 
     private List<Indexs> indexList;
 
@@ -54,11 +54,13 @@ public class Questionnaire extends BaseModel{
         this.qname = qname;
     }
 
-    public String getType() {
-        return type;
-    }
+	public Integer getFettle() {
+		return fettle;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setFettle(Integer fettle) {
+		this.fettle = fettle;
+	}
+
+
 }

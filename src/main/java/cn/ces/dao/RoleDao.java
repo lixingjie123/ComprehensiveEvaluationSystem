@@ -45,4 +45,10 @@ public interface RoleDao {
     
 	@Insert("INSERT INTO rolepower (rid,pid) VALUES (1,1)")
     int insterpoaerrole();
+
+    @Select("select rid from role where rname = #{rname}")
+    Integer selectRidByName(@Param("rname")String rname);
+
+    @Select("select rname from role where rid = #{rid}")
+    String selectRnameByRid(@Param("rid")Integer rid);
 }

@@ -81,24 +81,37 @@ public class UsersService {
     public String insertUsers(List<Users> usersList){
         String msg ="添加成功";
         List<Users> usersList1 = new ArrayList<Users>();
-
         try {
-            for (int i = 0;usersList.size()>i;i++){
-            int t = 0;
-            Users users = usersList.get(i);
-            t = usersDao.insertUser(users);
-            if (t==0){
-                usersList1.add(users);
-            }else {
-                switch (users.getRid()) {
-                    case 1: teachersDao.insertTeachers(users.getUid(),users.getOther_id());break;
-                    case 0: studentDao.insertStudent(users.getUid(),users.getOther_id());break;
-                    case 2: leadersDao.insertLeader(users.getUid(),users.getOther_id());break;
+            for (int i = 0; usersList.size() > i; i++) {
+                int t = 0;
+                Users users = usersList.get(i);
+
+                users.setRid(roleDao.selectRidByName(users.getRname()));
+                t = usersDao.insertUser(users);
+                if (t == 0) {
+                    usersList1.add(users);
+                } else {
+                    int deptid;
+                    int clid;
+                    System.out.println(users.getOther_name());
+                    switch (users.getRid()) {
+                        case 1:
+                            deptid = departmentDao.selectDeptIdByDeptName(users.getOther_name());
+                            teachersDao.insertTeachers(users.getUid(), deptid);
+                            break;
+                        case 0:
+                            clid = classDao.selectClidByClname(users.getOther_name());
+                            studentDao.insertStudent(users.getUid(), clid);
+                            break;
+                        case 2:
+                            deptid = departmentDao.selectDeptIdByDeptName(users.getOther_name());
+                            leadersDao.insertLeader(users.getUid(), deptid);
+                            break;
+                    }
                 }
             }
-        }
         }catch (Exception e){
-            msg = e.getMessage();
+            msg = "数据存在重复或数据格式错误！";
         }
 
         return msg;
@@ -180,5 +193,9 @@ public class UsersService {
         }
         jsonMenu+="]}];";
         return jsonMenu;
+    }
+
+    public String selectRnameByrid(Integer rid){
+        return roleDao.selectRnameByRid(rid);
     }
 }

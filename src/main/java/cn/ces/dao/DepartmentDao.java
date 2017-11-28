@@ -37,4 +37,7 @@ public interface DepartmentDao {
     
     @Update("update department set dept_name = #{dept_name}, fettle = #{fettle} where dept_id = #{dept_id}")
     int updateDepartment(Department aDepartment);
+
+    @Select("select dept_id from department where dept_name = #{deptname}")
+    Integer selectDeptIdByDeptName(String deptname);
 }

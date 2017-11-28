@@ -51,8 +51,11 @@
             <button id="addUserBtn" type="button" class="btn btn-primary" >保存</button> &nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid"><a href="index.jsp">返回列表</a></button>
         </td>
     </tr>
+    <tr>
+        <td></td>
+        <td><button id="onlondTemplate" ><a href="/onlondTemplate">下载用户信息模板</a></button></td>
+    </tr>
 </table>
-
 </body>
 </html>
 <script>
@@ -64,8 +67,7 @@
             $("#addUsers").ajaxSubmit(function(data){
                 prompt_alert("success",data,"index.jsp")
             });
-        })
-
-    })
+        });
+    });
 
 </script>

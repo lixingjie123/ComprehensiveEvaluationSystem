@@ -30,6 +30,7 @@ public class IndexService {
     public List<Indexs> selectindextree(){
     	return id.selectindextree();
     }
+
     //插入指标
     public Boolean insterindex(Indexs index){
     	Boolean b = false;
@@ -54,9 +55,22 @@ public class IndexService {
     	}else b=false;
     	return b ;
     }
+    //修改指标
+    public Boolean  updateindexqid(Indexs index){
+    	Boolean b = false;
+    	if(id. updateindexqid(index)>0){
+    		b=true;
+    	}else b=false;
+    	return b ;
+    }
+   
     //通过id查询指标
     public Indexs selectindexbyid(int index_id){
     	return id.selectindexbyid(index_id);
+    }
+  //通过qid查询指标
+    public List<Indexs> selectindexbyqid(int qid){
+    	return id.selectindexbyqid(qid);
     }
 
 }

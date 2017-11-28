@@ -16,7 +16,7 @@ public interface IndexDao {
      @Select("select * from indexs where index_name like #{index_name}")
      List<Indexs> selectindex (@Param("index_name")String index_name);
      
-     @Select("select * from power")
+     @Select("select * from indexs")
      List<Indexs> selectindextree ();
      //查询所有菜单数量
      @Select("select count(*) from power where pname like #{pname}")
@@ -24,6 +24,9 @@ public interface IndexDao {
      //查询指标通过id
      @Select("select * from indexs where index_id = #{index_id}")
      Indexs selectindexbyid(@Param("index_id")int index_id);
+   //查询指标通过qid
+     @Select("select * from indexs where qid = #{qid}")
+     List<Indexs> selectindexbyqid(@Param("qid")int qid);
      //查询菜单通过pname
      @Select("select * from power where pname = #{pname}")
      Power selectpowerbyname(@Param("pname")String pname);
@@ -38,4 +41,7 @@ public interface IndexDao {
      
      @Update("update  indexs set index_name=#{index_name} , weight=#{weight},parent_id=#{parent_id} where index_id = #{index_id}")
 	 int updateindex(Indexs index);
+     
+     @Update("update  indexs set qid=#{qid} where index_id = #{index_id}")
+	 int updateindexqid(Indexs index);
 }
