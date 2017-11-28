@@ -14,6 +14,7 @@
     <script type="text/javascript" src="../Js/ckform.js"></script>
     <script type="text/javascript" src="../Js/common.js"></script>
     <script type="text/javascript" src="../Js/jquery.form.js"></script>
+    <script type="text/javascript" src="../Js/prompt.alert.js"></script>
     
 <title>Insert title here</title>
 <style type="text/css">
@@ -23,7 +24,7 @@
         .sidebar-nav {
             padding: 9px 0;
         }
-
+ 
         @media (max-width: 980px) {
             /* Enable use of floated navbar text */
             .navbar-text.pull-right {
@@ -74,8 +75,7 @@
 
         $("#updateDepartmentBtn").click(function () {
             $("#updateDepartmentFrom").ajaxSubmit(function (data) {
-                var url = "index.jsp";
-                window.location.href=url;
+            	prompt_alert("success",data,"index.jsp");
             });
         });
 
@@ -96,7 +96,7 @@
                 }
             },
             error:function(e){
-                alert("错误！！");
+            	prompt_alert("error","错误！！");
             }
         });
 
