@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.ces.service.LoginService;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -38,7 +43,12 @@ public class LoginController {
 	@ResponseBody
 	public String updatepwd(Integer uid,String npwd,String opwd){
 		return loginService.AquirieValue(uid, npwd, opwd);
-		
+	}
+
+	@GetMapping(value = "/quit")
+	public ModelAndView quit(SessionStatus status){
+		status.setComplete();
+		return new ModelAndView("Public/login.jsp");
 	}
 	
 	

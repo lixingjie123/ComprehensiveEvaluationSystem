@@ -90,6 +90,9 @@ body {
 <script>
 $(function(){
 
+    alert("111");
+    alert("${userinfo.uname}");
+    alert("2222");
 	
 	$("#loginBtn").click(function() {
 
