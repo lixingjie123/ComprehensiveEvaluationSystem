@@ -50,6 +50,6 @@ public class LoginController {
 		status.setComplete();
 		return new ModelAndView("Public/login.jsp");
 	}
-	
-	
+
+
 }
