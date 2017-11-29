@@ -54,7 +54,8 @@
     <tr>
         <td class="tableleft"></td>
         <td>
-            <button class="btn btn-primary" id="addClassFromBtn" type="button">保存</button> &nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
+            <button class="btn btn-primary" id="addClassFromBtn" type="button">保存</button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
         </td>
     </tr>
 </table>
@@ -69,5 +70,8 @@
 
             });
         });
+        $('#backid').click(function(){
+			window.location.href="index.jsp";
+	    });
     });
 </script>

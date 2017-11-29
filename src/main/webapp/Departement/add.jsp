@@ -66,5 +66,10 @@
 				prompt_alert("success",data,"index.jsp");
 			});
 		});
+		
+		$('#backid').click(function(){
+			window.location.href="index.jsp";
+	 });
 	});
+	
 </script>
