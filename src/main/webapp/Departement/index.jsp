@@ -129,13 +129,6 @@ body {
 		window.location.href = "add.jsp";
 	});
 	
-	
-	function del(id) {
-		if (confirm("确定要删除吗？")) {
-			var url = "index.html";
-			window.location.href = url;
-		}
-	}
 
 	function edit(dept_id) {
 		var url = "edit.jsp?dept_id=" + dept_id;
@@ -156,5 +149,12 @@ body {
 				prompt_alert("error","错误！！");
 			}
 		})
+	}
+	
+	function del(id) {
+		if (confirm("确定要删除吗？")) {
+			var url = "index.html";
+			window.location.href = url;
+		}
 	}
 </script>

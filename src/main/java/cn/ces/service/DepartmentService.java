@@ -25,7 +25,6 @@ public class DepartmentService {
         result.put("total",total);
         result.put("rows",rows);
         return result;
-	
 	}
 	
 	//根据系部id查询
@@ -47,7 +46,7 @@ public class DepartmentService {
         return msg;
     }
     
-    //修改班级状态
+    //修改系部状态
     public String updateDepartmentOfFettle(Integer dept_id){
         String msg = "启用成功";
         Integer fettle = 1;
