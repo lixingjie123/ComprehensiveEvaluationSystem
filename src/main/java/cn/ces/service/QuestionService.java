@@ -68,14 +68,14 @@ public class QuestionService {
     	Users u=us.selectUserByUid(uid);
     	List<Questionnaire> ql= new ArrayList<Questionnaire>();
     	if(qd.selectquestiontype()!=null){
-        if(u.getRid()==3){
+        if(u.getRid()==0){
         	ql.add(qd.selectquestiontype().get(0));
         }
-        if(u.getRid()==2){
+        if(u.getRid()==1){
         	ql.add(qd.selectquestiontype().get(1));
         	ql.add(qd.selectquestiontype().get(2));
         }
-        if(u.getRid()==1){
+        if(u.getRid()==2){
         	
         	ql.add(qd.selectquestiontype().get(3));
         }}

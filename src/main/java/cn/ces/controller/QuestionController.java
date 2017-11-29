@@ -1,16 +1,8 @@
 package cn.ces.controller;
 
-import cn.ces.entity.Course;
 import cn.ces.entity.Indexs;
-import cn.ces.entity.Power;
-import cn.ces.entity.Questionnaire;
-import cn.ces.entity.Role;
-import cn.ces.entity.Rolepower;
-import cn.ces.service.CourseService;
 import cn.ces.service.IndexService;
-import cn.ces.service.PowerService;
 import cn.ces.service.QuestionService;
-import cn.ces.service.RoleService;
 import cn.ces.tool.TreeNode;
 
 import net.sf.json.JSONArray;
@@ -23,10 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;

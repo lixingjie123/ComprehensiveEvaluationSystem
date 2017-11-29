@@ -49,7 +49,7 @@ public class EvaluationService {
     	Users u=us.selectUserByUid(uid);
     	
     	if(qd.selectquestiontype()!=null){
-        if(u.getRid()==3){
+        if(u.getRid()==0){
         	Students su = sd.selectStudent(uid);
         	int total=gd.selectcount();
         	List<GiveCourse> gc = gd.selectgivecoursebycid(su.getClid(),pageIndex, pageSiz);
@@ -64,13 +64,13 @@ public class EvaluationService {
         	 result.put("total",total);
  	        result.put("rows",gc);
         }
-        if(u.getRid()==2){
+        if(u.getRid()==1){
         	if(qid==2){
         		Teachers tu=td.selectTeachersbyid(uid);
         		int total=td.selectCount();
         		List<Teachers> tl=td.selectTeachersByDeptid(tu.getDept_id());
         		for(int j=tl.size()-1;j>=0;j--){
-        			if(tl.get(j).getTid()==uid){
+        			if(tl.get(j).getTid().equals(uid)){
         				tl.remove(j);
         			}
         		}
@@ -99,7 +99,7 @@ public class EvaluationService {
         	}
         	
         }
-        if(u.getRid()==1){
+        if(u.getRid()==2){
         	Leaders leaders = ld.selectLeadersByid(uid);
         	int total=td.selectCount();
         	List<Teachers> tl=td.selectTeachersByDeptid(leaders.getDept_id());
