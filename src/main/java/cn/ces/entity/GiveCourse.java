@@ -7,7 +7,17 @@ public class GiveCourse {
 
     private String clname;
     
-    private Integer cid;
+    private int type;
+    
+    public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	private Integer cid;
     
     private Integer clid;
     

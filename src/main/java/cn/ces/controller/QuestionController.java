@@ -93,10 +93,10 @@ public class QuestionController {
     //查询显示问卷
     @GetMapping(value = "/showquestion")
     @ResponseBody
-    public ModelAndView showquestion(int qid){
+    public ModelAndView showquestion(int qid,int tid){
     	ModelAndView modelAndView;
     	List<Indexs> ilist=is.selectindexbyqid(qid);
-    	modelAndView=new ModelAndView("forward:questions/show.jsp");
+    	modelAndView=new ModelAndView("forward:questions/show.jsp?tid="+tid);
     	modelAndView.addObject("ilist",ilist);
         return  modelAndView;
     }

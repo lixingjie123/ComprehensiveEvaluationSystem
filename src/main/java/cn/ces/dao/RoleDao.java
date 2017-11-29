@@ -40,6 +40,10 @@ public interface RoleDao {
            " VALUES (#{rname})")
     int insterrole(Role role);
     
+    @Insert("INSERT INTO role (rname,rid)" +
+            " VALUES (#{rname},#{rid})")
+     int insterrole1(Role role);
+    
     @Delete("delete from role where rid = #{rid}")
     int delectrolebyid(@Param("rid")int rid);
     

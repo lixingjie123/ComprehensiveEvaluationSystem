@@ -47,7 +47,7 @@ public class RoleController {
     	System.out.println(rname);
     	String p="%%";
     	
-      if(!rname.equals("null")){
+      if(!rname.equals("null")&&rname!=""){
     	 p="%"+rname+"%";} 
         return  roleService.selectallrole(offset, limit,p);
     }
@@ -127,14 +127,14 @@ public class RoleController {
     	while (toKenizer.hasMoreElements()) {
          ret[i++] = Integer.valueOf(toKenizer.nextToken());
     		}
-       if(roleService.insterrole(role)){
+       if(roleService.insterrole1(role)){
     	    msg = "添加角色成功";
        }else msg = "添加失败";
-       int rid=roleService.selectrolebyname(role.getRname()).getRid();
-       if(roleService.dispower(ret,rid)){
+       
+       if(roleService.dispower(ret,role.getRid())){
     	   msg = "添加成功";
        }else{
-    	   roleService.delectrole(rid);
+    	   roleService.delectrole(role.getRid());
     	   msg = "添加失败";
        }
         return msg;

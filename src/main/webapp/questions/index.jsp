@@ -170,6 +170,6 @@
 	}
 	function show(id){
 		
-		window.location.href="/showquestion?qid="+id;
+		window.location.href="/showquestion?qid="+id+"&tid=1";
 	}
 </script>

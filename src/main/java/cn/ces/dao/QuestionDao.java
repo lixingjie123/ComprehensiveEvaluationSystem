@@ -25,8 +25,8 @@ public interface QuestionDao {
     @Select("select * from Questionnaire where qid = #{qid}")
     Questionnaire selectQuestionnairebyid(@Param("qid")int qid);
     
-    @Select("select * from course where cname = #{cname}")
-    Role selectcoursebyname(@Param("cname")String cname);
+    @Select("select * from Questionnaire where fettle = 1")
+    List<Questionnaire> selectquestiontype();
     
     
     

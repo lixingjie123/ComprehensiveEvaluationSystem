@@ -57,6 +57,13 @@ public class RoleService {
     	}else b=false;
     	return b ;
     }
+    public Boolean insterrole1(Role role){
+    	Boolean b = false;
+    	if(rd.insterrole1(role)>0){
+    		b=true;
+    	}else b=false;
+    	return b ;
+    }
     //删除角色
     public Boolean delectrole(int rid){
     	Boolean b = false;

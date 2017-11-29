@@ -34,8 +34,18 @@ public class Teachers extends BaseModel{
     private Integer dept_id;
     
     private String uname;
+    
+    private Integer type;
 
-    private List<Score> scoreList;
+    public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	private List<Score> scoreList;
 
     public List<Score> getScoreList() {
         return scoreList;

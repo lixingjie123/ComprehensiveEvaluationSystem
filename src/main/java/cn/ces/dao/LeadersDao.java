@@ -19,6 +19,9 @@ public interface LeadersDao {
 
     @Select("select * from leaders where dept_id=#{deptId}")
     List<Leaders> selectLeadersByDept(@Param("deptId") Integer dept_id);
+    
+    @Select("select * from leaders where lid=#{lid}")
+    Leaders selectLeadersByid(@Param("lid") Integer lid);
 
     @Insert("INSERT INTO leaders (lid,dept_id) " +
             " VALUES (#{lid},#{deptId})")

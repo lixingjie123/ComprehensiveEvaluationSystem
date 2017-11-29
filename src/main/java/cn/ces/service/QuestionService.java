@@ -4,12 +4,16 @@ package cn.ces.service;
 
 import cn.ces.dao.CourseDao;
 import cn.ces.dao.QuestionDao;
+import cn.ces.dao.UsersDao;
 import cn.ces.entity.Course;
 import cn.ces.entity.Questionnaire;
 import cn.ces.entity.Role;
+import cn.ces.entity.Users;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,10 +22,12 @@ import java.util.Map;
 @Service
 public class QuestionService {
     private final QuestionDao qd;
+    private final UsersDao us;
     
     @Autowired
-    public QuestionService(QuestionDao qd) {
+    public QuestionService(QuestionDao qd,UsersDao us) {
         this.qd = qd;
+        this.us = us;
         
 
     }
@@ -57,7 +63,25 @@ public class QuestionService {
     	}else b=false;
     	return b ;
     }
-    
+    //list问卷
+    public List<Questionnaire> selectquestion(Integer uid){
+    	Users u=us.selectUserByUid(uid);
+    	List<Questionnaire> ql= new ArrayList<Questionnaire>();
+    	if(qd.selectquestiontype()!=null){
+        if(u.getRid()==3){
+        	ql.add(qd.selectquestiontype().get(0));
+        }
+        if(u.getRid()==2){
+        	ql.add(qd.selectquestiontype().get(1));
+        	ql.add(qd.selectquestiontype().get(2));
+        }
+        if(u.getRid()==1){
+        	
+        	ql.add(qd.selectquestiontype().get(3));
+        }}
+       
+    	return ql;
+    }
 
     
 }

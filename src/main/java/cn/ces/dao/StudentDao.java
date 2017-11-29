@@ -1,8 +1,14 @@
 package cn.ces.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import cn.ces.entity.Students;
+import cn.ces.entity.Teachers;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,4 +25,7 @@ public interface StudentDao {
 
     @Delete("delete from students where sid = #{sid}")
     int deleteStudent(Integer sid);
+    
+    @Select("select * from students where sid = #{sid}")
+    Students selectStudent(@Param("sid")Integer sid);
 }
