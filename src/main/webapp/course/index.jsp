@@ -71,7 +71,6 @@
             url: "/selectcourse?cname="+encodeURI(getUrlParam("cname")),
             dataType: "json",
             singleSelect: false,
-            height: 550,//高度调整
             locale:'zh-CN',//中文支持
             pagination: true,//是否开启分页（*）
             pageNumber:1,//初始化加载第一页，默认第一页
