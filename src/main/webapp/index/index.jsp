@@ -173,7 +173,7 @@
 	    				headerText: "指标名称",
 	    				dataField: "text",
 	    				headerAlign: "center",
-	    				width: "200"
+	    				width: "210"
 	    			},
 	    			{
 	    				headerText: "权重",
