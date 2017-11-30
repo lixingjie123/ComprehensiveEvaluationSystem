@@ -27,8 +27,10 @@ public interface QuestionDao {
     
     @Select("select * from Questionnaire where fettle = 1")
     List<Questionnaire> selectquestiontype();
-    
-    
+
+    //通过Qid查询问卷名称
+    @Select("SELECT qname from questionnaire where qid = #{qid}")
+    String findQnameByQid(Integer qid);
     
     @Insert("INSERT INTO course (cname)" +
            " VALUES (#{cname})")
