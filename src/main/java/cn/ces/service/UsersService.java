@@ -77,7 +77,7 @@ public class UsersService {
     }
 
 
-    //批量添加用户   并把未添加成功的用户返回
+    ///批量添加用户   并把未添加成功的用户返回
     public String insertUsers(List<Users> usersList){
         String msg ="添加成功";
         List<Users> usersList1 = new ArrayList<Users>();

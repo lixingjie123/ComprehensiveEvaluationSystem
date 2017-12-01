@@ -8,7 +8,8 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>远程教育考试平台_在线考试</title>
+<title></title>
+<title></title>
 <link href="../Css/main.css" rel="stylesheet" type="text/css" />
 <link href="../Css/iconfont.css" rel="stylesheet" type="text/css" />
 <link href="../Css/test.css" rel="stylesheet" type="text/css" />
@@ -139,7 +140,7 @@
 			$('#save').click(function() {
 				var sum=0;
 				var i=0;
-				alert(getUrlParam("uid"))
+
 				$(".indexs").each(function(){
 					var val=$(this).find("[name^='answer']:checked").val();
 					if(val==null){

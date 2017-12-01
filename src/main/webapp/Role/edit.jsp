@@ -77,7 +77,7 @@
     multiple:true,
     cascadeCheck:true,
     required: true   
-});  alert(rname)
+});
 $(function(){
 	  $("#rname").val(rname)
 
@@ -91,8 +91,8 @@ $('#seave').click(function(){
 	  for(var i=0;i<n.length;i++){
 		  idlist+=","+n[i].id;
 	  }
-	  alert($("#rname").val());
-			alert("dddddddddd")
+
+
 			$.ajax({
 				
 				type: "POST",
