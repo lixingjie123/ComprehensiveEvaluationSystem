@@ -47,7 +47,7 @@ public class RoleController {
     	System.out.println(rname);
     	String p="%%";
     	
-      if(!rname.equals("null")&&rname!=""){
+      if(!"null".equals(rname) &&rname!=""){
     	 p="%"+rname+"%";} 
         return  roleService.selectallrole(offset, limit,p);
     }
@@ -63,7 +63,7 @@ public class RoleController {
     	for(int i=0;i<powerlist.size();i++){
     		Boolean b=false;
     		for(int j=0;j<rolepowerlist.size();j++){
-    			if(powerlist.get(i).getPid()==rolepowerlist.get(j).getPid()){
+    			if(powerlist.get(i).getPid().equals(rolepowerlist.get(j).getPid())){
     				b=true;
     			}
     		}
@@ -90,7 +90,9 @@ public class RoleController {
     		}
        if(roleService.insterrole(role)){
     	    msg = "添加角色成功";
-       }else msg = "添加失败";
+       }else {
+           msg = "添加失败";
+       }
        int rid=roleService.selectrolebyname(role.getRname()).getRid();
        if(roleService.dispower(ret,rid)){
     	   msg = "添加成功";
@@ -108,7 +110,9 @@ public class RoleController {
         if(roleService.delectrole(rid)){
         	roleService.delectpower(rid);
      	    msg = "删除成功";
-        }else msg = "删除失败";
+        }else {
+            msg = "删除失败";
+        }
 
          return msg;
     	
@@ -129,7 +133,9 @@ public class RoleController {
     		}
        if(roleService.insterrole1(role)){
     	    msg = "添加角色成功";
-       }else msg = "添加失败";
+       }else {
+           msg = "添加失败";
+       }
        
        if(roleService.dispower(ret,role.getRid())){
     	   msg = "添加成功";

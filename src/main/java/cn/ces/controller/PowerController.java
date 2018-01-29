@@ -67,7 +67,9 @@ public class PowerController {
     	String msg; 
        if(powerService.insterpower(power)){
     	    msg = "添加成功";
-       }else msg = "添加失败";
+       }else {
+           msg = "添加失败";
+       }
 
         return msg;
     }
@@ -79,7 +81,9 @@ public class PowerController {
     	String msg; 
         if(powerService.delectpower(pid)){
      	    msg = "删除成功";
-        }else msg = "删除失败";
+        }else {
+            msg = "删除失败";
+        }
 
          return msg;
     	
@@ -105,7 +109,9 @@ public class PowerController {
     	Boolean b = powerService.updatapower(power);
        if(b){
     	    msg = "修改成功";
-       }else msg = "修改失败";
+       }else {
+           msg = "修改失败";
+       }
 
         return msg;
     }

@@ -61,8 +61,10 @@ public class UsersService {
     //按条件分页查询
     public Map<String,Object> selectUserByRidAndUname(int pageIndex, int pageSiz,String like_r,String like_un){
         Map<String,Object> result = new HashMap<String,Object>();
-        int total=usersDao.getRidAndUnameCount(like_r,like_un);//获取查询结果总数
-        List<Users> rows=usersDao.selectUserByRidAndUname(pageIndex,pageSiz,like_r,like_un);//获取查询结果
+        //获取查询结果总数
+        int total=usersDao.getRidAndUnameCount(like_r,like_un);
+        //获取查询结果
+        List<Users> rows=usersDao.selectUserByRidAndUname(pageIndex,pageSiz,like_r,like_un);
         result.put("total",total);
         result.put("rows",rows);
         return result;
@@ -107,6 +109,7 @@ public class UsersService {
                             deptid = departmentDao.selectDeptIdByDeptName(users.getOther_name());
                             leadersDao.insertLeader(users.getUid(), deptid);
                             break;
+                        default:
                     }
                 }
             }
@@ -126,6 +129,7 @@ public class UsersService {
                 case 1: teachersDao.deleteTeacher(uid);break;
                 case 0: studentDao.deleteStudent(uid);break;
                 case 2: leadersDao.deleteLeader(uid);break;
+                default:
             }
             usersDao.deleteUser(uid);
         }catch (Exception e){
@@ -177,21 +181,21 @@ public class UsersService {
         jsonMenu+="[";
         for (Power power: powerList) {
             if (power.getFp_id()==1){
-                jsonMenu+="{";
-                jsonMenu+="id:'"+power.getPid()+"',";
-                jsonMenu+="text:'"+power.getPname()+"',";
-                jsonMenu+="items: [";
+                jsonMenu += "{";
+                jsonMenu += "id:'"+power.getPid()+"',";
+                jsonMenu += "text:'"+power.getPname()+"',";
+                jsonMenu += "items: [";
                 for (Power p:powerList) {
-                    if (p.getFp_id()==power.getPid()){
-                        jsonMenu+="{id:'"+p.getPid()+"',";
-                        jsonMenu+="text:'"+p.getPname()+"',";
-                        jsonMenu+="href:' "+p.getUrl()+"'},";
+                    if (p.getFp_id().equals(power.getPid())){
+                        jsonMenu += "{id:'"+p.getPid()+"',";
+                        jsonMenu += "text:'"+p.getPname()+"',";
+                        jsonMenu += "href:' "+p.getUrl()+"'},";
                     }
                 }
-                jsonMenu+="]},";
+                jsonMenu += "]},";
             }
         }
-        jsonMenu+="]}];";
+        jsonMenu += "]}];";
         return jsonMenu;
     }
 

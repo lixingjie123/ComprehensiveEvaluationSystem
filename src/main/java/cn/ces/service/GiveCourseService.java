@@ -43,7 +43,9 @@ public class GiveCourseService {
     	Boolean b = false;
     	if(givecoursedao.insterinformation(information)>0){
     		b=true;
-    	}else b=false;
+    	}else {
+			b = false;
+		}
     	return b ;
     }
   //删除开课
@@ -51,7 +53,9 @@ public class GiveCourseService {
     	Boolean b = false;
     	if(givecoursedao.delectgivecoursebyid(info_id)>0){
     		b=true;
-    	}else b=false;
+    	}else {
+			b = false;
+		}
     	return b ;
     }
 

@@ -48,7 +48,7 @@ public class QuestionController {
     	System.out.println(qname);
     	String p="%%";
     	
-      if(!qname.equals("null")){
+      if(!"null".equals(qname)){
     	 p="%"+qname+"%";} 
         return  qs.selectallquestion(offset, limit,p);
     }
@@ -66,7 +66,7 @@ public class QuestionController {
     	for(int i=0;i<Indexlist.size();i++){
     		boolean b=false;
     		
-    			if(Indexlist.get(i).getQid()==qid){
+    			if(Indexlist.get(i).getQid().equals(qid)){
     				b=true;
     			
     		}
@@ -100,7 +100,9 @@ public class QuestionController {
     
        if(qs.stopgivecourse(qid)){
     	    msg = "成功";
-       }else msg = "失败";
+       }else {
+		   msg = "失败";
+	   }
 
        
         return msg;

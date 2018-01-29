@@ -49,7 +49,7 @@ public class CourseController {
     	System.out.println(cname);
     	String p="%%";
     	
-      if(!cname.equals("null")){
+      if(!"null".equals(cname)){
     	 p="%"+cname+"%";} 
         return  courseService.selectallcourse(offset, limit,p);
     }
@@ -71,7 +71,9 @@ public class CourseController {
     
        if(courseService.instercourse(course)){
     	    msg = "添加课程成功";
-       }else msg = "添加失败";
+       }else {
+           msg = "添加失败";
+       }
 
        
         return msg;
@@ -84,7 +86,9 @@ public class CourseController {
         if(courseService.delectcourse(cid)){
         	
      	    msg = "删除成功";
-        }else msg = "删除失败";
+        }else {
+            msg = "删除失败";
+        }
 
          return msg;
     	
@@ -100,7 +104,9 @@ public class CourseController {
     	
        if(courseService.instercourse(course)){
     	    msg = "修改课程成功";
-       }else msg = "修改失败";
+       }else {
+           msg = "修改失败";
+       }
       
    
         return msg;

@@ -36,7 +36,7 @@ public class DepartmentController {
 			e.printStackTrace();
 		}
 		String p = "%%";
-		if (!dept_name.equals("null")) {
+		if (!"null".equals(dept_name)) {
 			p = "%" + dept_name + "%";
 		}
 		return departmentService.selectDepartmentall(offset, limit, p);
@@ -56,7 +56,9 @@ public class DepartmentController {
 		return departmentService.AddDepartment(aDepartment);
 	}
 
-	// 修改状态
+	/***
+	 * 修改状态
+	 */
 	@GetMapping(value = "/updateDepartmentStatus", produces = "text/plain;charset=utf-8")
 	@ResponseBody
 	public String updateDepartmentStatus(Integer dept_id) {

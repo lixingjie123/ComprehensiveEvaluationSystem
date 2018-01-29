@@ -36,7 +36,9 @@ public class IndexService {
     	Boolean b = false;
     	if(id.insterindex(index)>0){
     		b=true;
-    	}else b=false;
+    	}else {
+            b = false;
+        }
     	return b ;
     }
     //删除指标
@@ -44,7 +46,9 @@ public class IndexService {
     	Boolean b = false;
     	if(id.delectindexbyid(index_id)>0){
     		b=true;
-    	}else b=false;
+    	}else {
+            b = false;
+        }
     	return b ;
     }
     //修改指标
@@ -52,7 +56,9 @@ public class IndexService {
     	Boolean b = false;
     	if(id.updateindex(index)>0){
     		b=true;
-    	}else b=false;
+    	}else {
+            b = false;
+        }
     	return b ;
     }
     //修改指标
@@ -60,7 +66,9 @@ public class IndexService {
     	Boolean b = false;
     	if(id. updateindexqid(index)>0){
     		b=true;
-    	}else b=false;
+    	}else {
+            b = false;
+        }
     	return b ;
     }
    

@@ -52,10 +52,10 @@ public class UserController {
     public Map<String,Object> selectUserByRidAndUname(int offset, int limit, String rid, String uname){
         String un = "%%";
         String r="%%";
-        if (!uname.equals(null)&&!uname.equals("")&&!uname.equals("null")){
+        if (!uname.equals(null)&&!"".equals(uname) &&!"null".equals(uname)){
             un = "%"+uname+"%";
         }
-        if (!rid.equals(null)&&!rid.equals("")&&!rid.equals("null")){
+        if (!rid.equals(null)&&!"".equals(rid) &&!"null".equals(rid)){
             r = "%"+rid+"%";
         }
         return  usersService.selectUserByRidAndUname(offset,limit,r,un);
@@ -117,11 +117,8 @@ public class UserController {
         String originalFilename = file.getOriginalFilename();
         // 取扩展名，不要"."
         String extName = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
-      /*  try{
 
-        }catch (){}*/
-
-        if (extName.equals("xls")) {
+        if ("xls".equals(extName)) {
             // 根据指定的文件输入流导入Excel从而产生Workbook对象
             HSSFWorkbook wkb = new HSSFWorkbook(inputStream);
             // 获取Excel文档中的第一个表单
@@ -168,10 +165,9 @@ public class UserController {
         // 创建单元格并设置单元格内容
         row2.createCell(0).setCellValue("用户编号");
         row2.createCell(1).setCellValue("用户名");
-        row2.createCell(2).setCellValue("密码");
-        row2.createCell(3).setCellValue("性别");
-        row2.createCell(4).setCellValue("电话");
-        row2.createCell(5).setCellValue("角色");
+        row2.createCell(2).setCellValue("性别");
+        row2.createCell(3).setCellValue("电话");
+        row2.createCell(4).setCellValue("角色");
         // 在sheet里创建数据行
         for (int i = 0; i < usersList.size(); i++) {
             HSSFRow row = sheet.createRow(i + 2);
@@ -179,10 +175,9 @@ public class UserController {
             users.setRname(usersService.selectRnameByrid(users.getRid()));
             row.createCell(0).setCellValue(users.getUid());
             row.createCell(1).setCellValue(users.getUname());
-            row.createCell(2).setCellValue(users.getPwd());
-            row.createCell(3).setCellValue(users.getSex());
-            row.createCell(4).setCellValue(users.getPhone());
-            row.createCell(5).setCellValue(users.getRname());
+            row.createCell(2).setCellValue(users.getSex());
+            row.createCell(3).setCellValue(users.getPhone());
+            row.createCell(4).setCellValue(users.getRname());
         }
 
         // 输出Excel文件
@@ -231,7 +226,11 @@ public class UserController {
         output.close();
     }
 
-    //通过用户角色查询权限菜单
+    /***
+     * 通过用户角色查询权限菜单
+     * @param rid
+     * @return
+     */
     @GetMapping(value = "/selectPowerByRid",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String selectPowerByRid(Integer rid){

@@ -45,7 +45,7 @@ public class IndexController {
 		}
 	String p="%%";
 	System.out.println(index_name);
-  if(!index_name.equals("null")&&index_name!=""){
+  if(!"".equals(index_name) &&index_name!=""){
 	 p="%"+index_name+"%";} 
     	List<Indexs> Indexlist=is.selectindex(p);
     	TreeNode tl1 = null;
@@ -68,7 +68,9 @@ public class IndexController {
     	String msg; 
        if(is.insterindex(index)){
     	    msg = "添加成功";
-       }else msg = "添加失败";
+       }else {
+           msg = "添加失败";
+       }
 
         return msg;
     }
@@ -80,7 +82,9 @@ public class IndexController {
     	String msg; 
         if(is.delectindex(index_id)){
      	    msg = "删除成功";
-        }else msg = "删除失败";
+        }else {
+            msg = "删除失败";
+        }
 
          return msg;
     	
@@ -106,7 +110,9 @@ public class IndexController {
     	Boolean b = is.updateindex(index);
        if(b){
     	    msg = "添加成功";
-       }else msg = "添加失败";
+       }else {
+           msg = "添加失败";
+       }
 
         return msg;
     }

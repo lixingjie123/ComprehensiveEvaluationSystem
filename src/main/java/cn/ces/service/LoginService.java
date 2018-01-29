@@ -23,6 +23,7 @@ public class LoginService {
         this.roleDao = roleDao;
     }
 
+    //登陆
     public Map<String, Object> loginService(Integer uid, String pwd) {
         String msg = "登录失败";
         int p = 0;

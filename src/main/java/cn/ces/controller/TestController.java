@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import java.math.BigDecimal;
 
 @Controller
 @SessionAttributes({"Test"})
@@ -38,5 +41,11 @@ public class TestController {
        Department departments = testService.selectDeptAll(1);
         map.addAttribute("tests",departments);
         return "demo";
+    }
+
+    @GetMapping(value = "/test3")
+    @ResponseBody
+    public double Test3(double b1){
+        return Math.round(b1*100)/100.0;
     }
 }

@@ -47,12 +47,16 @@ public class QuestionService {
     public Boolean stopgivecourse(Integer qid){
     	Boolean b = false;
     	Questionnaire q = qd.selectQuestionnairebyid(qid);
-    	if(q.getFettle()==1)
-    		q.setFettle(0);
-    	else q.setFettle(1);
+    	if(q.getFettle()==1) {
+            q.setFettle(0);
+        } else {
+            q.setFettle(1);
+        }
     	if(qd.upfetter(q)>0){
     		b=true;
-    	}else b=false;
+    	}else {
+            b = false;
+        }
     	return b ;
     }
     //修改问卷
@@ -60,7 +64,9 @@ public class QuestionService {
     	Boolean b = false;
     	if(qd.upquestion(qid,qname)>0){
     		b=true;
-    	}else b=false;
+    	}else {
+            b = false;
+        }
     	return b ;
     }
     //list问卷

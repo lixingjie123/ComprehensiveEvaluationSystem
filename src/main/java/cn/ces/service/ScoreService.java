@@ -16,6 +16,7 @@ import java.util.Map;
 @Service
 public class ScoreService {
 
+	private java.text.DecimalFormat   df   =new   java.text.DecimalFormat("#.00");
 
 	private final ScoreDao sd;
 	private final UsersDao usersDao;
@@ -32,22 +33,22 @@ public class ScoreService {
 	public Boolean seavescore(Score score) {
 	    boolean b=false;
 		if(sd.insertCourse(score)>0)
-
-		b=true;
-
+		{
+			b = true;
+		}
 		return b;
 
 	}
 
 	//计算某个老师总分
-	public double sumScore(Integer tid){
+	private double sumScore(Integer tid){
 		List<ScoreDto> scoreDtoList = sd.findScoreByTid(tid);
 		double sum = 0;
 		for (ScoreDto sdto: scoreDtoList) {
 			sum += sdto.getAvg();
 		}
-		sum = sum*100;
-		return sum;
+		sum = Math.round(sum*10000)/10000.0;
+		return sum*100;
 	}
 
 	//查询某个老师的得分详情
@@ -57,11 +58,11 @@ public class ScoreService {
 			for (int i = scoreList.size() - 1; i >= 0; i--){
 				Integer qid = scoreList.get(i).getQid();
 				double avg = scoreList.get(i).getAvg();
+				avg = Math.round(avg*100)/100.0;
 				scoreList.get(i).setQname(questionDao.findQnameByQid(qid));
 				scoreList.get(i).setAvg(avg*100);
 			}
 		}
-
 		return scoreList;
 	}
 

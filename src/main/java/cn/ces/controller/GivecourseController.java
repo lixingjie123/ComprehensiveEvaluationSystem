@@ -43,11 +43,11 @@ public class GivecourseController {
 		String c="%%";
 		String u="%%";
 		String cl="%%";
-	    if(!cname.equals("null")){
+	    if(!"null".equals(cname)){
 	    	 c="%"+cname+"%";} 
-	    if(!uname.equals("null")){
+	    if(!"null".equals(uname)){
 	    	 u="%"+uname+"%";} 
-	    if(!clname.equals("null")){
+	    if(!"null".equals(clname)){
 	    	 cl="%"+clname+"%";} 
 		Map<String, Object> gclist=gs.selectgivecourse(c,cl,u,offset, limit);
 		return  gclist;
@@ -61,7 +61,9 @@ public class GivecourseController {
 	    
 	       if(gs.instercourse(information)){
 	    	    msg = "添加课程成功";
-	       }else msg = "添加失败";
+	       }else {
+               msg = "添加失败";
+           }
 
 	       
 	        return msg;
@@ -74,7 +76,9 @@ public class GivecourseController {
 	        if(gs.delectgivecourse(info_id)){
 	        	
 	     	    msg = "删除成功";
-	        }else msg = "删除失败";
+	        }else {
+				msg = "删除失败";
+			}
 
 	         return msg;
 	    	
@@ -88,7 +92,9 @@ public class GivecourseController {
 	      gs.delectgivecourse(information.getInfo_id());
 	       if(gs.instercourse(information)){
 	    	    msg = "修改课程成功";
-	       }else msg = "修改失败";
+	       }else {
+			   msg = "修改失败";
+		   }
 
 	       
 	        return msg;

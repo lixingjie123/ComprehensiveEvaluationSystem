@@ -31,7 +31,9 @@ public class PowerService {
     	Boolean b = false;
     	if(pd.insterpower(power)>0){
     		b=true;
-    	}else b=false;
+    	}else {
+            b = false;
+        }
     	return b ;
     }
     //删除菜单
@@ -39,7 +41,9 @@ public class PowerService {
     	Boolean b = false;
     	if(pd.delectpowerbyid(pid)>0){
     		b=true;
-    	}else b=false;
+    	}else {
+            b = false;
+        }
     	return b ;
     }
     //通过id查询菜单
@@ -51,7 +55,9 @@ public class PowerService {
     	Boolean b = false;
     	if(pd.updatapower(p)>0){
     		b=true;
-    	}else b=false;
+    	}else {
+            b = false;
+        }
     	return b ;
     }
 

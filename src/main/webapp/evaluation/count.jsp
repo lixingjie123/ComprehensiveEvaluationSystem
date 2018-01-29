@@ -143,7 +143,7 @@
                 var myChert = echarts.init(document.getElementById("seeDetails"));
                 var option ={
                     title: {
-                        text: '评价详情：'+data.tname
+                        text: '评价详情：'+data.tname+'  工号：'+tid
                     },
                     color: ['#3398DB'],
                     tooltip : {

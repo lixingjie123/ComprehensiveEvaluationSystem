@@ -54,14 +54,18 @@ public class RoleService {
     	Boolean b = false;
     	if(rd.insterrole(role)>0){
     		b=true;
-    	}else b=false;
+    	}else {
+            b = false;
+        }
     	return b ;
     }
     public Boolean insterrole1(Role role){
     	Boolean b = false;
     	if(rd.insterrole1(role)>0){
     		b=true;
-    	}else b=false;
+    	}else {
+            b = false;
+        }
     	return b ;
     }
     //删除角色
@@ -69,7 +73,9 @@ public class RoleService {
     	Boolean b = false;
     	if(rd.delectrolebyid(rid)>0){
     		b=true;
-    	}else b=false;
+    	}else {
+            b = false;
+        }
     	return b ;
     }
     //删除角色菜单
@@ -77,7 +83,9 @@ public class RoleService {
     	Boolean b = false;
     	if(rpd.delectpowerbyid(rid)>0){
     		b=true;
-    	}else b=false;
+    	}else {
+            b = false;
+        }
     	return b ;
     }
    //名字查询角色

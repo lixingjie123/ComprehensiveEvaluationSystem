@@ -32,7 +32,7 @@ public class ClassController {
     @ResponseBody
     public Map<String ,Object> selectPageByClname(int offset, int limit, String clname){
         String cn = "%%";
-        if (!clname.equals(null)&&!clname.equals("")&&!clname.equals("null")){
+        if (!clname.equals(null)&&!"".equals(clname) &&!"null".equals(clname)){
             cn = "%"+clname+"%";
         }
         return classService.selectPageByClname(cn,offset,limit);
