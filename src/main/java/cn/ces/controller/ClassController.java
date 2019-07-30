@@ -38,7 +38,7 @@ public class ClassController {
         return classService.selectPageByClname(cn,offset,limit);
     }
 
-    @GetMapping(value = "/updateStatus",produces = "text/plain;charset=utf-8")
+
     @ResponseBody
     public String updateStatus(Integer clid){
         return classService.updateClssOfFettle(clid);

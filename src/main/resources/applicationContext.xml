@@ -21,8 +21,8 @@
     <bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
         <property name="driver" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://127.0.0.1:3306/tces?useUnicode=true&amp;characterEncoding=utf-8" />
-        <property name="username" value="group3" />
-        <property name="password" value="123456" />
+        <property name="username" value="root" />
+        <property name="password" value="root" />
         <!-- 事务是否自动提交 -->
         <property name="defaultAutoCommit" value="true"/>
     </bean>

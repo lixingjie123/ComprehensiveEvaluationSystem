@@ -20,8 +20,7 @@ var check_form = function (formname, opt) {
     if (opt['type'] == 'elem') {
         formobj = $(formname);
         formname = $('body');
-    }
-    else {
+    } else {
         formobj = $('input,textarea,select,button', formname);
     }
     formobj.each(function (i) {
@@ -52,8 +51,7 @@ var check_form = function (formname, opt) {
         if (obj_tag == 'TEXTAREA' && (jsmaxlen > 0 ? (jsvalue.length > jsmaxlen ? 1 : 0) : 0)) {
             jscheckerror = (jschecktitle ? jschecktitle : formobj_i.attr('name')) + " 不得超过 " + jsmaxlen + " 字";
             errflag = 1;
-        }
-        else if (jscheckrule) {
+        } else if (jscheckrule) {
             errflag = docheck(formobj_i, jscheckrule) ? errflag : 1;
         }
         if (errflag) {
@@ -96,6 +94,7 @@ var check_form = function (formname, opt) {
         return false;
     }
     return true;
+
     //校验主函数
     function docheck(el, jscheckrule) {
         var jscheckrule = jscheckrule || el.attr("jscheckrule");
@@ -129,8 +128,7 @@ var check_form = function (formname, opt) {
             str3 = escape(str2);
             if (str3.length > 3) {
                 nLen = nLen + 2;
-            }
-            else {
+            } else {
                 nLen = nLen + 1;
             }
         }
@@ -161,11 +159,10 @@ var check_form = function (formname, opt) {
             str = formobj.filter(':' + obj_type + '[name=' + objname + '][checked]').map(function () {
                 return this.value;
             }).get().join(',');
-        }
-        else {
+        } else {
             str = obj.val();
         }
-        str = str && typeof(str) == 'object' ? str.join(',') : str;
+        str = str && typeof (str) == 'object' ? str.join(',') : str;
         if (cannull == 0) {
             str = $.trim(str);
         }
@@ -291,25 +288,21 @@ var check_form = function (formname, opt) {
             if (p_arr[l] == 'en') {
                 c_rule += "a-zA-Z";
                 para_arr[l] = '字母';
-            }
-            else if (p_arr[l] == 'num') {
+            } else if (p_arr[l] == 'num') {
                 c_rule += "0-9";
                 para_arr[l] = '数字';
-            }
-            else if (p_arr[l] == 'fl') {
+            } else if (p_arr[l] == 'fl') {
                 c_rule += "0-9\\.0-9";
                 para_arr[l] = '小数';
-            }
-            else if (p_arr[l] == 'cn') {
+            } else if (p_arr[l] == 'cn') {
                 c_rule += "\\u4E00-\\u9FA5";
                 para_arr[l] = '中文';
-            }
-            else if (p_arr[l] == 'ul') {
+            } else if (p_arr[l] == 'ul') {
                 c_rule += "_";
                 para_arr[l] = '下划线';
             }
         }
-        if (c_rule == "")    return true;
+        if (c_rule == "") return true;
         else {
             var t_rule = "^[" + c_rule + "]*$";
             if (cf_regexp(obj, t_rule)) return true;
@@ -322,7 +315,7 @@ var check_form = function (formname, opt) {
     function cf_regexp(obj, rx) {
         var str = obj.val();
         if (str == "") return true;
-        if (rx == "")return true;
+        if (rx == "") return true;
         var r_exp = new RegExp(rx, "ig");
         if (r_exp.test(str)) return true;
         obj.data('jscheckerror', '含有非法字符');
@@ -338,8 +331,6 @@ var check_form = function (formname, opt) {
         obj.data('jscheckerror', '含有html字符');
         return false;
     }
-
-
 
     function get_param(str) {
         return eval('(' + str + ')');

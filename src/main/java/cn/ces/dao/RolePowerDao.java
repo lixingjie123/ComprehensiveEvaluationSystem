@@ -11,7 +11,7 @@ import cn.ces.entity.Rolepower;
 
 public interface RolePowerDao {
 	@Insert("INSERT INTO rolepower (rid,pid) VALUES (#{rid},#{pid})")
-	    int insterpoaerrole(@Param("rid")Integer rid,@Param("pid")Integer pid);
+	int insterpoaerrole(@Param("rid")Integer rid,@Param("pid")Integer pid);
 	@Select("select * from rolepower where rid=#{rid}")
     List<Rolepower> selectpoweroption(@Param("rid")Integer rid);
     @Delete("delete from rolepower where rid = #{rid}")

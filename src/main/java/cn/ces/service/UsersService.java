@@ -167,10 +167,14 @@ public class UsersService {
 
     //通过用户角色查询该用户的权限菜单
     public String  selectPowerByRid(Integer rid){
+        //根据用户权限(rid)获取pid列表
         List<Rolepower> rolepowerList = rolePowerDao.selectpoweroption(rid);
         List<Power> powerList = new ArrayList<Power>();
+        //遍历pid列表
         for (Rolepower rolepower: rolepowerList) {
+            //通过pid列表获取对应菜单
             Power power = powerDao.selectpowerbyid(rolepower.getPid());
+            //若不为空 添加进菜单列表
             if (power!=null){
                 powerList.add(power);
             }
@@ -179,6 +183,7 @@ public class UsersService {
                 "                        id: '1'," +
                 "                        menu: ";
         jsonMenu+="[";
+        //遍历菜单列表
         for (Power power: powerList) {
             if (power.getFp_id()==1){
                 jsonMenu += "{";
@@ -200,6 +205,6 @@ public class UsersService {
     }
 
     public String selectRnameByrid(Integer rid){
-        return roleDao.selectRnameByRid(rid);
+        return roleDao.selectRnameByRid(rid).toString();
     }
 }
