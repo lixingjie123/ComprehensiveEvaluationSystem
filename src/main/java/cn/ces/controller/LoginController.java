@@ -34,7 +34,9 @@ public class LoginController {
     @ResponseBody 
     public Map<String, Object> login(Users users, ModelMap map){
 		Map<String, Object> result = loginService.loginService(users.getUid(), users.getPwd());
-		map.put("userinfo",result.get("userinfo"));
+		if(result.get("userinfo")!=null){
+			map.put("userinfo",result.get("userinfo"));
+		}
 		return result;
 	}
 	

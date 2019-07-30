@@ -2,10 +2,8 @@ package cn.ces.service;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.velocity.app.event.ReferenceInsertionEventHandler.referenceInsertExecutor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.ces.dao.RoleDao;
 import cn.ces.dao.UsersDao;
@@ -28,22 +26,31 @@ public class LoginService {
         String msg = "登录失败";
         int p = 0;
         Map<String, Object> result = new HashMap<String, Object>();
-        Users users = usersDao.selectUserByUid(uid);
-        if (users != null) {
-            if (pwd.equals(users.getPwd())) {
-                msg = "登录成功";
-                p = 1;
+        try{
+            Users users = usersDao.selectUserByUid(uid);
+            if (users != null) {
+                if (pwd.equals(users.getPwd())) {
+                    msg = "登录成功";
+                    p = 1;
+                    Users users1 = new Users();
+                    users1.setUid(users.getUid());
+                    users1.setUname(users.getUname());
+                    users1.setRid(users.getRid());
+                    result.put("userinfo",users1);
+                } else {
+                    msg = "账号与密码不匹配";
+                }
             } else {
-                msg = "账号与密码不匹配";
+                msg = "该账号不存在";
             }
-        } else {
-            msg = "该账号不存在";
+
+        }catch (NullPointerException e ){
+            e.printStackTrace();
+            msg = "账号不存在";
+        } catch (Exception e){
+            e.printStackTrace();
+            msg = e.getMessage();
         }
-        Users users1 = new Users();
-        users1.setUid(users.getUid());
-        users1.setUname(users.getUname());
-        users1.setRid(users.getRid());
-        result.put("userinfo",users1);
         result.put("msg", msg);
         result.put("p", p);
         return result;
