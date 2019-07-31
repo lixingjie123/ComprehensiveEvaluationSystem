@@ -34,13 +34,11 @@ public class RoleService {
 
     }
 
-
    //分页查询角色
     public Map<String,Object> selectallrole(int pageIndex, int pageSiz,String rname){
         Map<String,Object> result = new HashMap<String,Object>();
         int total=rd.selectcount(rname);
         List<Role> rows=rd.selectrole(pageIndex,pageSiz,rname);
-        
         result.put("total",total);
         result.put("rows",rows);
         return result;
@@ -95,22 +93,22 @@ public class RoleService {
     //添加分配角色
     public Boolean dispower(int[] powerid,int rid){
     	int p = 0;
-    
-  
+
+
         	try {
         		for(int i=1;i<powerid.length;i++){
 				p=rpd.insterpoaerrole(rid,powerid[i]);
         		}
 			} catch (Exception e) {
-				
+
 				e.printStackTrace();
 				System.out.println(e.getMessage());
 			}
 
-    			
-    		
-    		
-    	
+
+
+
+
     	if(p>0){
     		return true;
     	}return false;

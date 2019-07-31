@@ -41,4 +41,9 @@ public class Role extends BaseModel{
     public void setRname(String rname) {
         this.rname = rname;
     }
+
+    @Override
+    public String toString() {
+        return "{" + rid + "," + rname + "}";
+    }
 }
