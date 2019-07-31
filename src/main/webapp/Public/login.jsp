@@ -92,7 +92,6 @@
 <script>
     $(function () {
 
-
         $("#loginBtn").click(function () {
 
             $("#login").ajaxSubmit(function (data) {
@@ -105,5 +104,4 @@
             });
         });
     })
-
 </script>

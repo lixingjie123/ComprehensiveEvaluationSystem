@@ -27,97 +27,87 @@ public class PowerController {
     private final PowerService powerService;
 
     @Autowired
-    public PowerController( PowerService powerService) {
+    public PowerController(PowerService powerService) {
         this.powerService = powerService;
     }
-  //显示菜单列表，模糊查询菜单,树形显示
-    
-    @PostMapping(value = "/powertree",produces = "text/plain;charset=utf-8")
-    @ResponseBody
-    public String powertree(String pname){
-   
-    	try {
-			pname = URLDecoder.decode(pname, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	String p="%%";
-	System.out.println(pname);
-  if(!pname.equals(null)&&pname!=""){
-	 p="%"+pname+"%";} 
-    	List<Power> powerlist=powerService.selectpower(p);
-    	TreeNode tl1 = null;
-    	String res = null;
-    	for(int i=0;i<powerlist.size();i++){
-			tl1=TreeNodeTool.setTreeNode(tl1, powerlist.get(i).getPid(), powerlist.get(i).getFp_id(), powerlist.get(i).getPname(), powerlist.get(i).getUrl(),false);
-		     JSONArray json = JSONArray.fromObject(tl1);
-			res= json.get(0).toString();
-			res = "[" + res + "]";
-		}
-    	
-    	
+    //显示菜单列表，模糊查询菜单,树形显示
 
-        return res ;
-    }
-    //插入菜单
-    @PostMapping(value = "/seavepower",produces = "text/plain;charset=utf-8")
+    @PostMapping(value = "/powertree", produces = "text/plain;charset=utf-8")
     @ResponseBody
-    public String seavepower(Power power){
-    	String msg; 
-       if(powerService.insterpower(power)){
-    	    msg = "添加成功";
-       }else {
-           msg = "添加失败";
-       }
+    public String powertree(String pname) {
+        try {
+            pname = URLDecoder.decode(pname, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        String p = "%%";
+        if (!pname.equals(null) && pname != "") {
+            p = "%" + pname + "%";
+        }
+        //从数据库获取数据
+        List<Power> powerlist = powerService.selectpower(p);
+        //将数据转化为json格式返回
+        String res = "";
+        JSONArray json = new JSONArray();
+        for (int i = 0; i < powerlist.size(); i++) {
+            TreeNode tl1 = null;
+            tl1 = TreeNodeTool.setTreeNode(tl1, powerlist.get(i).getPid(), powerlist.get(i).getFp_id(), powerlist.get(i).getPname(), powerlist.get(i).getUrl(), false);
+            json.add(tl1);
+        }
+        res = json.toString();
+        return res;
+    }
+
+    //插入菜单
+    @PostMapping(value = "/seavepower", produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String seavepower(Power power) {
+        String msg;
+        if (powerService.insterpower(power)) {
+            msg = "添加成功";
+        } else {
+            msg = "添加失败";
+        }
 
         return msg;
     }
-    
+
     //删除菜单
-    @GetMapping(value = "/delectpower",produces = "text/plain;charset=utf-8")
+    @GetMapping(value = "/delectpower", produces = "text/plain;charset=utf-8")
     @ResponseBody
-    public String delectpower(int pid){
-    	String msg; 
-        if(powerService.delectpower(pid)){
-     	    msg = "删除成功";
-        }else {
+    public String delectpower(int pid) {
+        String msg;
+        if (powerService.delectpower(pid)) {
+            msg = "删除成功";
+        } else {
             msg = "删除失败";
         }
 
-         return msg;
-    	
-    	
-    }
-    
-    @GetMapping(value = "/querypowerbyid")
-    @ResponseBody
-    public Power querypowerbyid(int pid){
-    	
-		
-    	Power p=powerService.selectposerbyid(pid);
-
-    	return p;
-    	
-    }
-  //修改菜单
-    @PostMapping(value = "/updatapower",produces = "text/plain;charset=utf-8")
-    @ResponseBody
-    public String updatapower(Power power){
-    	String msg; 
-
-    	Boolean b = powerService.updatapower(power);
-       if(b){
-    	    msg = "修改成功";
-       }else {
-           msg = "修改失败";
-       }
-
         return msg;
     }
-    
 
+    @GetMapping(value = "/querypowerbyid")
+    @ResponseBody
+    public Power querypowerbyid(int pid) {
 
+        Power p = powerService.selectposerbyid(pid);
 
-    
+        return p;
+    }
+
+    //修改菜单
+    @PostMapping(value = "/updatapower", produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String updatapower(Power power) {
+        String msg;
+
+        Boolean b = powerService.updatapower(power);
+        if (b) {
+            msg = "修改成功";
+        } else {
+            msg = "修改失败";
+        }
+        return msg;
+    }
 }

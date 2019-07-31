@@ -54,5 +54,4 @@ public class LoginController {
 		return new ModelAndView("Public/login.jsp");
 	}
 
-
 }

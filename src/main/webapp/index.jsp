@@ -46,8 +46,6 @@
 <script type="text/javascript" src="assets/js/bui-min.js"></script>
 <script type="text/javascript" src="assets/js/common/main-min.js"></script>
 <script type="text/javascript" src="assets/js/config-min.js"></script>
-<script type="text/javascript" src="Js/prompt.alert.js"></script>
-
 <script>
     $(function () {
         $.ajax({
@@ -68,7 +66,6 @@
             }
         });
     });
-
 </script>
 <div style="text-align:center;">
 

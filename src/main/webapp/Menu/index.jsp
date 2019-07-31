@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css"/>
     <link rel="stylesheet" type="text/css" href="../Css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="../Css/jquery.treegrid.css"/>
+    <link rel="stylesheet" type="text/css" href="../Css/TreeGrid.css"/>
     <script type="text/javascript" src="../Js/jquery.js"></script>
     <script type="text/javascript" src="../Js/jquery.sorted.js"></script>
     <script type="text/javascript" src="../Js/bootstrap.js"></script>
@@ -97,31 +97,31 @@
                         dataAlign: "center",
                         width: "20"
                     },
-                        {
-                            headerText: "菜单名称",
-                            dataField: "text",
-                            headerAlign: "center",
-                            width: "200"
-                        },
-                        {
-                            headerText: "Url",
-                            dataField: "attributes",
-                            headerAlign: "center",
-                            handler: "attributesUrl",
-                            dataAlign: "center",
-                        },
-                        {
-                            headerText: "操作",
-                            dataField: "id",
-                            headerAlign: "center",
-                            dataAlign: "center",
-                            width: "100",
-                            handler: "customLook",
-                        }],
+                    {
+                        headerText: "菜单名称",
+                        dataField: "text",
+                        headerAlign: "center",
+                        width: "200"
+                    },
+                    {
+                        headerText: "Url",
+                        dataField: "attributes",
+                        headerAlign: "center",
+                        handler: "attributesUrl",
+                        dataAlign: "center",
+                    },
+                    {
+                        headerText: "操作",
+                        dataField: "id",
+                        headerAlign: "center",
+                        dataAlign: "center",
+                        width: "100",
+                        handler: "customLook",
+                    }],
                     data: resot
                 };
                 var treeGrid = new TreeGrid(config);
-                treeGrid.show()
+                treeGrid.show();
             }
         });
     })
@@ -130,7 +130,7 @@
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
         var r = window.location.search.substr(1).match(reg);  //匹配目标参数
         if (r != null) return unescape(r[2]);
-        return null; //返回参数值
+        return ""; //返回参数值
     }
 
     function del(id) {

@@ -72,11 +72,9 @@ public class RoleController {
 			res= json.get(0).toString();
 			res = "[" + res + "]";
 		}
-    	
-    	
-
         return res ;
     }
+
     //添加角色
     @PostMapping(value = "/seaverole",produces = "text/plain;charset=utf-8")
     @ResponseBody
@@ -102,6 +100,7 @@ public class RoleController {
        }
         return msg;
     }
+
     //删除角色，并删除分配的菜单
     @GetMapping(value = "/delectrole",produces = "text/plain;charset=utf-8")
     @ResponseBody
@@ -113,11 +112,9 @@ public class RoleController {
         }else {
             msg = "删除失败";
         }
-
          return msg;
-    	
-    	
     }
+
     //修改角色，并修改菜单列表
     @PostMapping(value = "/updatarole",produces = "text/plain;charset=utf-8")
     @ResponseBody
@@ -144,9 +141,5 @@ public class RoleController {
     	   msg = "添加失败";
        }
         return msg;
-    
     }
-
-
-    
 }
