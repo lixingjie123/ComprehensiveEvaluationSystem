@@ -108,9 +108,11 @@
         $('#backid').click(function () {
             window.location.href = "index.jsp";
         });
+        //保存按钮点击事件
         $('#seave').click(function () {
             var t = $('#cc').combotree('tree');	// 获取树对象
             var n = t.tree('getSelected');		// 获取选择的节点
+            //输入合法性检测
             if(n==null){
                 prompt_alert("error","请选择上级菜单");
                 return;
@@ -128,35 +130,45 @@
                     url: $("#url").val(),
                     fp_id: n.id
                 }, //要发送的是ajaxFrm表单中的数据
-                error: function (data) {
+                error: function () {
                     prompt_alert("error", "添加失败");
                 },
                 success: function (data) {
-                    //insert rolepower data
-                    $.ajax({
-                        type:"post",
-                        url:"/saveRolePower",
-                        data:{
-                            rid:2,
-                            pid:data
-                        },
-                        error:function () {
-                            //del power
-                            $.ajax({
-                                type:"get",
-                                url:"/delectpower?pid=" + data,
-                                error:function(){
-                                    prompt_alert("error","unknown error");
-                                },
-                                success:function () {
-                                    prompt_alert("error", "添加失败");
-                                }
-                            })
-                        },
-                        success:function () {
-                            prompt_alert("success","添加成功","index.jsp");
-                        }
-                    })
+                    //返回值data为添加菜单的pid
+                    //为对应权限添加菜单
+                    var i = 0;
+                    var checkbox = $("#checkbox" + i);
+                    while(checkbox.length > 0){
+                        console.log("test");
+                        //发送添加请求
+                        $.ajax({
+                            type:"post",
+                            url:"/saveRolePower",
+                            data:{
+                                rid:i,
+                                pid:data
+                            },
+                            //添加失败
+                            error:function () {
+                                //del power
+                                $.ajax({
+                                    type:"get",
+                                    url:"/delectpower?pid=" + data,
+                                    error:function(){
+                                        prompt_alert("error","unknown error");
+                                        return;
+                                    },
+                                    success:function () {
+                                        prompt_alert("error", "添加失败");
+                                        return;
+                                    }
+                                })
+                            },
+                        });
+                        i++;
+                        checkbox = $("#checkbox" + i);
+                    }
+                    prompt_alert("success","添加成功","index.jsp");
                 }
             });
         });
