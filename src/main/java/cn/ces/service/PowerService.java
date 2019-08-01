@@ -27,14 +27,12 @@ public class PowerService {
     	return pd.selectpowertree();
     }
     //插入菜单
-    public Boolean insterpower(Power power){
-    	Boolean b = false;
+    public int insterpower(Power power){
+    	int b = -1;
     	if(pd.insterpower(power)>0){
-    		b=true;
-    	}else {
-            b = false;
-        }
-    	return b ;
+    		b = selectpower(power.getPname()).get(0).getPid();
+    	}
+    	return b;
     }
     //删除菜单
     public Boolean delectpower(int pid){

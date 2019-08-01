@@ -140,13 +140,23 @@
 
                 type: "get",
                 url: "/delectpower?pid=" + id,
-
                 error: function (request) {
                     prompt_alert("error", "错误！！");
                 },
                 success: function (data) {
-                    prompt_alert("success", data, "index.jsp");
-
+                    $.ajax({
+                        type:"post",
+                        url:"/delRPbyPid",
+                        data:{
+                            pid:id
+                        },
+                        error:function (data) {
+                            prompt_alert("error",data);
+                        },
+                        success:function (data) {
+                            prompt_alert("success", data, "index.jsp");
+                        }
+                    })
                 }
             });
         }

@@ -30,8 +30,8 @@ public class PowerController {
     public PowerController(PowerService powerService) {
         this.powerService = powerService;
     }
-    //显示菜单列表，模糊查询菜单,树形显示
 
+    //显示菜单列表，模糊查询菜单,树形显示
     @PostMapping(value = "/powertree", produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String powertree(String pname) {
@@ -63,13 +63,8 @@ public class PowerController {
     @PostMapping(value = "/seavepower", produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String seavepower(Power power) {
-        String msg;
-        if (powerService.insterpower(power)) {
-            msg = "添加成功";
-        } else {
-            msg = "添加失败";
-        }
-
+        int res = powerService.insterpower(power);
+        String msg = "" + res;
         return msg;
     }
 
@@ -83,7 +78,6 @@ public class PowerController {
         } else {
             msg = "删除失败";
         }
-
         return msg;
     }
 

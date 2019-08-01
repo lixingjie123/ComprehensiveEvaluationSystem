@@ -130,13 +130,9 @@
 		
 		if(confirm("确定要删除吗？"))
 		{
-		
                $.ajax({
-				
 				type: "get",
-				url:"/delectrole?rid="+id, 
-				
-				
+				url:"/delectrole?rid="+id,
 				error: function(request) {
 					 prompt_alert("error","错误！！");
 				},

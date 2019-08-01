@@ -3,7 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
-
 <head>
     <title></title>
     <meta charset="UTF-8">
@@ -38,14 +37,11 @@
                 padding-right: 5px;
             }
         }
-
-        #chooseRole{
-
-        }
     </style>
 </head>
 <body>
 <form method="post" class="definewidth m20" id=formset>
+
     <table class="table table-bordered table-hover m10">
         <tr>
             <td width="10%" class="tableleft">上级菜单</td>
@@ -95,11 +91,9 @@
             // var checkbox = "<input type='checkbox'/>" + result.rows.get();
             var list = result.rows;
             var checkbox = "";
-            console.log(list);
             for(var i = 0; i < list.length; i++){
                 checkbox += "&nbsp;<input type='checkbox' id='checkbox" + i + "'/>&nbsp;" + list[i].rname + "&nbsp;";
             }
-            console.log(checkbox);
             box.append(checkbox);
         }
     })
@@ -124,20 +118,45 @@
                 prompt_alert("error","请输入菜单名");
                 return;
             }
+            //发送保存请求
             $.ajax({
                 type: "POST",
                 url: "/seavepower",
                 data: {
                     pname: $("#pname").val(),
+                    rid:$("#chooseRole").val(),
                     url: $("#url").val(),
                     fp_id: n.id
                 }, //要发送的是ajaxFrm表单中的数据
-
-                error: function (request) {
-                    prompt_alert("error", "错误！！");
+                error: function (data) {
+                    prompt_alert("error", "添加失败");
                 },
                 success: function (data) {
-                    prompt_alert("success", data, "index.jsp");
+                    //insert rolepower data
+                    $.ajax({
+                        type:"post",
+                        url:"/saveRolePower",
+                        data:{
+                            rid:2,
+                            pid:data
+                        },
+                        error:function () {
+                            //del power
+                            $.ajax({
+                                type:"get",
+                                url:"/delectpower?pid=" + data,
+                                error:function(){
+                                    prompt_alert("error","unknown error");
+                                },
+                                success:function () {
+                                    prompt_alert("error", "添加失败");
+                                }
+                            })
+                        },
+                        success:function () {
+                            prompt_alert("success","添加成功","index.jsp");
+                        }
+                    })
                 }
             });
         });

@@ -25,8 +25,7 @@ public interface PowerDao {
      Power selectpowerbyid(@Param("pid")int pid);
      //查询菜单通过pname
      @Select("select * from power where pname = #{pname}")
-     Power selectpowerbyname(@Param("pname")String pname);
-     
+     Power selectpowerbyname(String pname);
 
      //修改菜单
      @Update("update  power set pname=#{pname} , url=#{url},fp_id=#{fp_id} where pid = #{pid}")
@@ -36,6 +35,7 @@ public interface PowerDao {
      @Insert("INSERT INTO power (pname,url,fp_id)" +
             " VALUES (#{pname},#{url},#{fp_id})")
      int insterpower(Power power);
+
      //删除菜单
      @Delete("delete from power where pid = #{pid}")
      int delectpowerbyid(@Param("pid")int pid);
