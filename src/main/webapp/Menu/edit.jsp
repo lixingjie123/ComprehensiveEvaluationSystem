@@ -126,7 +126,7 @@
         });
         //修改数据
         $('#seave').click(function () {
-
+            //修改power
             $.ajax({
                 type: "Post",
                 url: "/updatapower",
@@ -138,6 +138,30 @@
                     prompt_alert("success", data, "index.jsp");
                 }
             });
+            // var rids = new Array();
+            // var i = 0;
+            // while($("#checkbox" + i)>0){
+            //     if($("#checkbox" + i).is(":checked")){
+            //         rids[i] = i;
+            //     }else{
+            //         rids[i] = -1;
+            //     }
+            // }
+            // //修改role power
+            // $.ajax({
+            //     type:"post",
+            //     url:"/updataRolePower",
+            //     data: {
+            //         pid:$("#pid").val,
+            //         rids:rids,
+            //     },
+            //     error:function (data) {
+            //         prompt_alert("error",data);
+            //     },
+            //     success:function (data) {
+            //         prompt_alert("success",data,"index.jsp");
+            //     },
+            // })
         });
     });
 

@@ -139,32 +139,34 @@
                     var i = 0;
                     var checkbox = $("#checkbox" + i);
                     while(checkbox.length > 0){
-                        console.log("test");
-                        //发送添加请求
-                        $.ajax({
-                            type:"post",
-                            url:"/saveRolePower",
-                            data:{
-                                rid:i,
-                                pid:data
-                            },
-                            //添加失败
-                            error:function () {
-                                //del power
-                                $.ajax({
-                                    type:"get",
-                                    url:"/delectpower?pid=" + data,
-                                    error:function(){
-                                        prompt_alert("error","unknown error");
-                                        return;
-                                    },
-                                    success:function () {
-                                        prompt_alert("error", "添加失败");
-                                        return;
-                                    }
-                                })
-                            },
-                        });
+                        //若选中
+                        if (checkbox.is(":checked")){
+                            //发送添加请求
+                            $.ajax({
+                                type:"post",
+                                url:"/saveRolePower",
+                                data:{
+                                    rid:i,
+                                    pid:data
+                                },
+                                //添加失败
+                                error:function () {
+                                    //del power
+                                    $.ajax({
+                                        type:"get",
+                                        url:"/delectpower?pid=" + data,
+                                        error:function(){
+                                            prompt_alert("error","unknown error");
+                                            return;
+                                        },
+                                        success:function () {
+                                            prompt_alert("error", "添加失败");
+                                            return;
+                                        }
+                                    })
+                                },
+                            });
+                        }
                         i++;
                         checkbox = $("#checkbox" + i);
                     }

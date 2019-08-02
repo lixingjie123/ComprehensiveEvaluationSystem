@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.swing.*;
+import java.util.List;
+
 @Controller
 public class RolePowerController {
 
@@ -29,6 +32,30 @@ public class RolePowerController {
         return msg;
     }
 
+    //更新数据
+    @PostMapping(value = "/updataRolePower", produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String updataRolePower(int rid, int[] pids){
+        String res = "修改失败";
+        for(int i = 0; i < pids.length; i++){
+//            if(pids[i] >= 0){
+//                //选中的
+//                if(!rolePowerService.searchRid(pids[i])){
+//                    Rolepower rolepower = new Rolepower();
+//                    rolepower.setPid(pids[i]);
+//                    rolepower.setRid(rid);
+//                    rolePowerService.insterRolePower(rolepower);
+//                }
+//            }else{
+//                //未选中的
+//                if(rolePowerService.searchRid(pids[i])){
+//                    rolePowerService.delRPbyRid(rid,pids[i]);
+//                }
+//            }
+        }
+        return res;
+    }
+
     //删除role power
     @PostMapping(value = "/delRPbyPid", produces = "text/plain;charset=utf-8")
     @ResponseBody
@@ -39,4 +66,13 @@ public class RolePowerController {
         }
         return msg;
     }
+
+    //根据pid查找rid
+    @PostMapping(value = "/selectRidByPid", produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public List<Rolepower> selectRidByPid(int rid){
+        List<Rolepower> list = rolePowerService.selectPidByRid(rid);
+        return list;
+    }
+
 }
