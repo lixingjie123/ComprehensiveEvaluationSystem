@@ -87,33 +87,34 @@ public class UsersService {
             for (int i = 0; usersList.size() > i; i++) {
                 int t = 0;
                 Users users = usersList.get(i);
-
                 users.setRid(roleDao.selectRidByName(users.getRname()));
                 t = usersDao.insertUser(users);
                 if (t == 0) {
                     usersList1.add(users);
                 } else {
-                    int deptid;
-                    int clid;
-                    System.out.println(users.getOther_name());
-                    switch (users.getRid()) {
-                        case 1:
-                            deptid = departmentDao.selectDeptIdByDeptName(users.getOther_name());
-                            teachersDao.insertTeachers(users.getUid(), deptid);
-                            break;
-                        case 0:
-                            clid = classDao.selectClidByClname(users.getOther_name());
-                            studentDao.insertStudent(users.getUid(), clid);
-                            break;
-                        case 2:
-                            deptid = departmentDao.selectDeptIdByDeptName(users.getOther_name());
-                            leadersDao.insertLeader(users.getUid(), deptid);
-                            break;
-                        default:
-                    }
+                    //尚未实现的功能
+//                    int deptid;
+//                    int clid;
+//                    System.out.println(users.getOther_name());
+//                    switch (users.getRid()) {
+//                        case 1:
+//                            deptid = departmentDao.selectDeptIdByDeptName(users.getOther_name());
+//                            teachersDao.insertTeachers(users.getUid(), deptid);
+//                            break;
+//                        case 0:
+//                            clid = classDao.selectClidByClname(users.getOther_name());
+//                            studentDao.insertStudent(users.getUid(), clid);
+//                            break;
+//                        case 2:
+//                            deptid = departmentDao.selectDeptIdByDeptName(users.getOther_name());
+//                            leadersDao.insertLeader(users.getUid(), deptid);
+//                            break;
+//                        default:
+//                    }
                 }
             }
         }catch (Exception e){
+            System.out.println(e.getMessage());
             msg = "数据存在重复或数据格式错误！";
         }
 

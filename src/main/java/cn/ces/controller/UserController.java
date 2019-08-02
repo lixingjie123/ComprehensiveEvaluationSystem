@@ -134,7 +134,7 @@ public class UserController {
                 users.setSex(row.getCell(3).getStringCellValue());
                 users.setPhone(String.valueOf((int)row.getCell(4).getNumericCellValue()));
                 users.setRname(row.getCell(5).getStringCellValue());
-                users.setOther_name(row.getCell(6).getStringCellValue());
+//                users.setOther_name(row.getCell(6).getStringCellValue());
                 usersList.add(users);
             }
             msg = usersService.insertUsers(usersList);

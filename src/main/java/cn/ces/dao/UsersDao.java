@@ -33,8 +33,7 @@ public interface UsersDao {
     @Select("select count(*) from users  where rid like #{like_r} and uname like #{like_un}")
     int getRidAndUnameCount(@Param("like_r")String r,@Param("like_un")String un);
 
-    @Insert("INSERT INTO users (uid,uname,pwd,sex,phone,rid) " +
-            " VALUES (#{uid},#{uname},#{pwd},#{sex},#{phone},#{rid})")
+    @Insert("INSERT INTO users (uid,uname,pwd,sex,phone,rid) VALUES (#{uid},#{uname},#{pwd},#{sex},#{phone},#{rid})")
     int insertUser(Users users);
 
     @Delete("delete from users where uid = #{uid}")
