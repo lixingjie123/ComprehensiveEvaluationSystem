@@ -50,14 +50,12 @@
     <a href="/onlondUser">下载用户信息</a>
 </button>
 <br>
-<table class="table table-bordered table-hover definewidth m10"
-       id="table">
+<table class="table table-bordered table-hover definewidth m10" id="table">
 </table>
 </body>
 </html>
 <script>
     $(function () {
-
         $.ajax({
             url: "/selectRoleOption",    //后台webservice里的方法名称
             type: "get",
@@ -65,7 +63,6 @@
             contentType: "application/json",
             traditional: true,
             success: function (data) {
-
                 var jsonObj =data;
                 var optionstring = "";
                 for (var j = 0; j < jsonObj.length; j++) {
@@ -75,10 +72,8 @@
                     }else {
                         optionstring += "<option value=\"" + jsonObj[j].rid + "\" >" + jsonObj[j].rname + "</option>";
                     }
-
                 }
                 $("#role").html("<option selected = \"selected\" value=''>----请选择----</option> "+optionstring);
-
             },
             error: function (msg) {
                 prompt_alert("error","出错了！");
@@ -86,11 +81,9 @@
         });
 
         $('#addnew').click(function(){
-
             window.location.href="add.html";
         });
         var $table = $('#table');
-
 
         /*接收后台JSON对象*/
         $table.bootstrapTable({
@@ -151,23 +144,19 @@
                     field: 'uid',
                     align: 'center',
                     formatter:function(value,row,index){
-                        var e = '<a href="#"  mce_href="#" onclick="edit(\''+ row.uid + '\')">编辑</a> ';
-                        var d = '<a href="#"  mce_href="#" onclick="del(\''+ row.uid +'\')">删除</a> ';
+                        var e = '<a href="#header"  mce_href="#" onclick="edit(\''+ row.uid + '\')">编辑</a> ';
+                        var d = '<a href="#header"  mce_href="#" onclick="del(\''+ row.uid +'\')">删除</a> ';
                         return e+d;
                     }
                 }
             ]
         });
-
-
     });
-
 
     function edit(uid) {
         var url = "edit.html?uid="+uid;
         window.location.href=url;
     }
-
 
     function getUrlParam(uid) {
         var reg = new RegExp("(^|&)" + uid + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -177,11 +166,8 @@
 
     function del(uid)
     {
-
-
         if(confirm("确定要删除吗？"))
         {
-
             $.ajax({
                 url:"/deleteUser?uid="+uid,
                 type:"GET",
@@ -189,14 +175,11 @@
                 contentType:false,
                 success:function(data){
                     prompt_alert("success",data,"index.jsp");
-
                 },
                 error:function(e){
                     prompt_alert("error","错误！！");
                 }
             })
-
         }
-
     }
 </script>

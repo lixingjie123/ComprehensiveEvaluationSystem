@@ -48,7 +48,8 @@
     <tr>
         <td class="tableleft"></td>
         <td>
-            <button id="addUserBtn" type="button" class="btn btn-primary" >保存</button> &nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid"><a href="index.jsp">返回列表</a></button>
+            <button id="addUserBtn" type="button" class="btn btn-primary" >保存</button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-success" name="backid" id="backid"><a href="index.jsp">返回列表</a></button>
         </td>
     </tr>
     <tr>
@@ -65,7 +66,7 @@
         $("#addUserBtn").click(function () {
 
             $("#addUsers").ajaxSubmit(function(data){
-                prompt_alert("success",data,"index.jsp")
+                prompt_alert("success",data,"index.jsp");
             });
         });
     });

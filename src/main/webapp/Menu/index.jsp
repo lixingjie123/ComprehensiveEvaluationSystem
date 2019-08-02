@@ -122,6 +122,7 @@
                 };
                 var treeGrid = new TreeGrid(config);
                 treeGrid.show();
+                $("a").attr("href","#header");
             }
         });
     })
@@ -137,7 +138,6 @@
 
         if (confirm("确定要删除吗？")) {
             $.ajax({
-
                 type: "get",
                 url: "/delectpower?pid=" + id,
                 error: function (request) {
